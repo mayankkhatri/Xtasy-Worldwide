@@ -130,11 +130,14 @@ document.addEventListener('DOMContentLoaded', () => {
             state.featuredX += (state.mouseX - state.featuredX) * 0.25;
             state.featuredY += (state.mouseY - state.featuredY) * 0.25;
 
-            // Use cached rect if available, fallback safely
-            const rect = state.featuredRect || dom.featuredSection.getBoundingClientRect();
+            // Use cached offset if available, fallback safely
+            const offset = state.featuredOffset || {
+                left: dom.featuredSection.getBoundingClientRect().left + window.scrollX,
+                top: dom.featuredSection.getBoundingClientRect().top + window.scrollY
+            };
             
-            const sectionLeft = rect.left + window.scrollX;
-            const sectionTop = rect.top + window.scrollY;
+            const sectionLeft = offset.left;
+            const sectionTop = offset.top;
 
             // Blob is 600x600 (center offset handled by CSS translate usually, but here manually calc'd)
             const relativeX = (state.featuredX + window.scrollX) - sectionLeft - 300; 
@@ -217,9 +220,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateRects() {
         if (dom.featuredSection) {
-            state.featuredRect = dom.featuredSection.getBoundingClientRect();
-            // Adjust rect.top by scrollY for absolute positioning calculations later if needed
-            // But getBoundingClientRect is relative to viewport, so we use it + scrollY in the loop
+            const rect = dom.featuredSection.getBoundingClientRect();
+            state.featuredOffset = { // Store absolute document position
+                left: rect.left + window.scrollX,
+                top: rect.top + window.scrollY
+            };
         }
         if (document.querySelector('.hero-section')) {
             state.heroRect = document.querySelector('.hero-section').getBoundingClientRect();

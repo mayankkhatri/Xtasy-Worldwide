@@ -124,11 +124,84 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // --- Animated Underline Observer ---
+    const underlinePath = document.querySelector('.hand-underline');
+    if (underlinePath) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    underlinePath.classList.add('draw-active');
+                    observer.unobserve(entry.target); // Run once
+                }
+            });
+        }, { threshold: 1.0 }); // Wait until fully visible
+
+        observer.observe(underlinePath);
+    }
+
+    // --- "Why Choose Us" Text Replacement Animation ---
+    const whyTitleAnim = document.querySelector('.why-title');
+    if (whyTitleAnim) {
+        const whyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Add class to container to start CSS animations
+                    const animContainer = entry.target.querySelector('.anim-container');
+                    if (animContainer) {
+                        animContainer.classList.add('anim-active');
+                    }
+                    whyObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.8 }); // Trigger when 80% visible
+        whyObserver.observe(whyTitleAnim);
+    }
 });
 
 
 
-window.onload = function() {
+    window.onload = function() {
         // Reset the form fields when the page loads
-        document.getElementById("form").reset();
+        document.getElementById("form")?.reset();
     };
+
+    // --- Hero Video Progressive Loading ---
+    window.addEventListener('load', () => {
+        const heroWrapper = document.getElementById('hero-featured-wrapper');
+        const heroThumb = document.getElementById('hero-thumb');
+
+        if (heroWrapper) {
+            // Delay slightly to confirm "stable" load
+            setTimeout(() => {
+                const video = document.createElement('video');
+                video.src = 'assets/hero-featured/Chamcourt Demo.mp4';
+                video.className = 'project-video';
+                video.autoplay = true;
+                video.muted = true;
+                video.loop = true;
+                video.playsInline = true;
+                video.setAttribute('disablePictureInPicture', '');
+                video.controls = false; 
+
+                // Wait for enough data to play smoothly
+                video.addEventListener('canplaythrough', () => {
+                     // Ensure explicit play attempt
+                     const playPromise = video.play();
+                     
+                     if (playPromise !== undefined) {
+                         playPromise.then(_ => {
+                             video.classList.add('visible');
+                             // Optional: Hide/Remove image after transition to save memory? 
+                             // Keeping it is safer for fallback or if video fails later.
+                         })
+                         .catch(error => {
+                             console.log("Video autoplay prevented or failed:", error);
+                         });
+                     }
+                });
+                
+                heroWrapper.appendChild(video);
+            }, 2000); // 2s delay after full load to ensure stability
+        }
+    });

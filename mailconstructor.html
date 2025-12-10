@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xtasy Mail Constructor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --panel-bg: #111111;
+            --border-color: #222222;
+            --accent-color: #389CFF;
+            --text-primary: #ffffff;
+            --text-secondary: #999999;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Sidebar - Controls */
+        .sidebar {
+            width: 400px;
+            background-color: var(--panel-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .header {
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            background: linear-gradient(90deg, #FFFFFF, #999999);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-group label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"] {
+            background-color: #0a0a0a;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(56, 156, 255, 0.1);
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2684e0;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .editor-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        textarea {
+            flex: 1;
+            background-color: #0a0a0a;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            color: #cccccc;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            resize: none;
+            white-space: pre;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        /* Main Preview Area */
+        .preview-area {
+            flex: 1;
+            background-color: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            position: relative;
+        }
+
+        .preview-container {
+            width: 100%;
+            max-width: 650px; /* Slightly wider than mail width to show padding */
+            height: 100%;
+            background-color: white; /* In case the email doesn't set it */
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #050505; /* Use the email's bg */
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 1000;
+            border: 1px solid #444;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            width: 90%;
+            height: 90%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 50px 100px -10px rgba(0,0,0,0.6);
+            overflow: hidden;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #161616;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        #modalEditor {
+            flex: 1;
+            width: 100%;
+            border: none;
+            background-color: #0d0d0d;
+            padding: 30px;
+            color: #cccccc;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            resize: none;
+            box-sizing: border-box;
+        }
+
+        #modalEditor:focus {
+            outline: none;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s ease, background 0.2s ease;
+        }
+
+        .icon-btn:hover {
+            color: var(--accent-color);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="header">
+            <h1>Mail Constructor</h1>
+            <p>Generate Xtasy Media client emails instantly.</p>
+        </div>
+
+        <div class="input-group">
+            <label for="clientName">Client First Name</label>
+            <input type="text" id="clientName" placeholder="e.g., Bob" value="Bob">
+        </div>
+
+        <div class="input-group">
+            <label for="firmName">Firm / Brand Name</label>
+            <input type="text" id="firmName" placeholder="e.g., California Attorney Group" value="California Attorney Group">
+        </div>
+
+        <div class="actions">
+            <button class="btn-primary" onclick="generateMail()">Regenerate</button>
+            <button class="btn-secondary" onclick="copyCode()">Copy Code</button>
+        </div>
+
+        <div class="editor-section">
+            <div class="section-title">
+                <span>Code Editor</span>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 11px; opacity: 0.7;">Live edits update preview</span>
+                    <button class="icon-btn" onclick="openModal()" title="Expand Editor">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                    </button>
+                </div>
+            </div>
+            <textarea id="codeEditor" spellcheck="false"></textarea>
+        </div>
+    </div>
+
+    <div class="preview-area">
+        <div class="preview-container">
+            <iframe id="previewFrame"></iframe>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">HTML Code Copied to Clipboard!</div>
+
+    <div id="editorModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Full Screen Editor</h2>
+                <div class="modal-actions">
+                     <button class="btn-primary" onclick="closeModal()">Done</button>
+                </div>
+            </div>
+            <textarea id="modalEditor" spellcheck="false"></textarea>
+        </div>
+    </div>
+
+    <!-- 
+        Store the raw template in a non-executable script tag. 
+        This prevents browser parsing issues with double body/html tags.
+    -->
+    <script type="text/plain" id="emailTemplate">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xtasy Media Proposal</title>
+<!-- Google Fonts for consistency if the email client supports them -->
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+    /* Client-specific resets */
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; }
+
+    /* Reset */
+    img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+    table { border-collapse: collapse !important; }
+    body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+
+    /* iOS Blue Links */
+    a[x-apple-data-detectors] {
+        color: inherit !important;
+        text-decoration: none !important;
+        font-size: inherit !important;
+        font-family: inherit !important;
+        font-weight: inherit !important;
+        line-height: inherit !important;
+    }
+
+    /* Hover effects */
+    .btn-primary:hover {
+        background-color: #389CFF !important;
+        box-shadow: 0 0 20px rgba(56, 156, 255, 0.5) !important;
+        transform: translateY(-2px) !important;
+    }
+</style>
+</head>
+<body style="background-color: #050505; margin: 0; padding: 0; font-family: 'Inter', Helvetica, Arial, sans-serif;">
+
+  <!-- Main Background -->
+  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #050505;">
+    <tr>
+      <td align="center" style="padding: 40px 10px;">
+        
+        <!-- Logo Header -->
+        <table border="0" cellpadding="0" cellspacing="0" width="600" style="max-width: 600px; width: 100%;">
+            <tr>
+                <td align="center" style="padding-bottom: 30px;">
+                     <!-- Using the logo from the site icons (assuming relative path works for local preview, but for email usually requires absolute URL. I will use a text fallback or absolute path if provided, here using the relative as per context) -->
+                    <a href="https://xtasy.in" style="text-decoration: none;">
+                        <img src="https://xtasy.in/assets/site%20icons/Logo.png" alt="Xtasy" width="50" style="display: block; border: 0; font-family: 'Outfit', Arial, sans-serif; color: #ffffff; font-size: 24px; font-weight: bold;">
+                    </a>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Content Container -->
+        <table border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #111111; max-width: 600px; width: 100%; border-radius: 20px; border: 1px solid #222222; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+          
+            <!-- Hero Banner / Top Image -->
+            <tr>
+                <td style="padding: 50px 40px 10px 40px;">
+                    <h1 style="margin: 0 0 20px 0; color: #ffffff; font-family: 'Outfit', Helvetica, Arial, sans-serif; font-size: 28px; font-weight: 700; background: linear-gradient(90deg, #FFFFFF, #999999); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">
+                        Hi {{CLIENT_NAME}},
+                    </h1>
+                </td>
+            </tr>
+
+            <!-- Main Body -->
+            <tr>
+                <td style="padding: 0 40px 40px 40px; color: #cccccc; font-size: 16px; line-height: 1.7; font-weight: 300;">
+                    
+                    
+
+                    <p style="margin-bottom: 24px;">
+                        I recently visited <span style="color: #ffffff; font-weight: 500;">{{FIRM_NAME}}’s</span> website and, to be honest, I was <span style="color: #389CFF; font-weight: 700;">surprised</span>. The site currently lacks the authority and polish that a firm of your stature deserves. <span style="color: #ffffff; font-weight: 600;">Just like how a beautifully designed physical space leaves a lasting impression on guests, a well-crafted website shapes how clients perceive your competence, quality, and professionalism.</span> Unfortunately, your current online presence is likely <span style="color: #FF4D4D; font-weight: 700; background: rgba(255, 77, 77, 0.1); padding: 2px 6px; border-radius: 4px;">underselling</span> the true value of your business.
+                    </p>
+
+                    <p style="margin-bottom: 30px;">
+                        My goal with this Email is not to criticise your business or your team. Web design is a complex blend of art, psychology, and engineering — and unfortunately, most agencies charge thousands of dollars for results that are mediocre at best. They vanish after handing over the project, and revisions magically turn into “extra charges.”
+                    </p>
+
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #1a1a1a; border-left: 4px solid #389CFF; border-radius: 0 8px 8px 0; margin-bottom: 24px;">
+                        <tr>
+                            <td style="padding: 20px;">
+                                <p style="margin: 0; color: #cccccc; font-size: 16px; line-height: 1.6;">
+                                    But I want to make you aware of the fact that there exist better, <span style="color: #389CFF; font-weight: 700;">WAY BETTER</span> alternatives.
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <p style="margin-bottom: 24px;">
+                        Like do you know <span style="color: #FFD700; font-weight: 700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);">There are agencies in India producing world-class work — absolute digital masterpieces — at a fraction of the cost</span>, simply because of the currency difference. These teams work with precision, speed, and passion. They don’t disappear. They don’t nickel-and-dime you for revisions. You ask, and you hear: <span style="color: #389CFF; font-weight: 700;">“Yes Sir! On it. Immediately.”</span> Also, No monthly retainers! Just a flat price for the whole thing.
+                    </p>
+
+                    <p style="margin-bottom: 24px;">
+                        And it just so happens that you’re reading an email from the director of one such agency. Not “one of many.” <span style="color: #ffffff; font-weight: 700;">One of the best.</span> The name of the firm: <span style="color: #389CFF; font-weight: 800; font-size: 18px; text-shadow: 0 0 15px rgba(56, 156, 255, 0.6); margin-left: 2px;">Xtasy Media.</span>
+                    </p>
+
+                    <p style="margin-bottom: 35px;">
+                        Yes — our websites are pure xtasy for the eyes! You don’t have to take my word for it. Take a look at our own website and some of our projects: 
+                        <a href="https://xtasy.in" style="color: #389CFF; font-weight: 600; text-decoration: none; border-bottom: 1px dashed #389CFF;">xtasy.in</a>
+                    </p>
+
+                    <p style="margin-bottom: 24px;">
+                        Over the last 8 years, we’ve worked with clients from <span style="color: #ffffff; font-weight: 500;">25+ countries</span>, earned multiple global recognitions, and maintained a streak of <span style="color: #ffffff; font-weight: 500;">zero negative feedback</span> — something we take immense pride in.
+                    </p>
+
+                    <!-- Offer Box -->
+                    <table border="0" cellspacing="0" cellpadding="0" width="100%" style="margin-bottom: 35px;">
+                        <tr>
+                            <td align="center" style="padding: 30px 25px; border: 1px solid rgba(255, 215, 0, 0.3); background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(0,0,0,0)); border-radius: 12px;">
+                                <p style="margin: 0 0 10px 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #B0B0B0;">Here’s my offer, simple and unapologetically bold:</p>
+                                <p style="margin: 0; font-size: 26px; font-weight: 400; font-family: Georgia, serif; font-style: italic; color: #ffffff;">
+                                    I give you <span style="color: #FFD700; font-weight: 700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);">gold</span> at the price of <span style="color: #A0C4E4; font-weight: 700; text-shadow: 0 0 10px rgba(160, 196, 228, 0.4);">steel</span>.
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <p style="margin-bottom: 24px;">
+                        Because gold — <span style="color: #FFD700; font-weight: 700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);">true talent</span> — is simply more affordable on this side of the world.
+                    </p>
+                    
+                    <p style="margin-bottom: 24px;">
+                        And I genuinely see a lot of potential in {{FIRM_NAME}}.
+                    </p>
+
+                    <p style="margin-bottom: 20px;">
+                        Your business deserves a digital presence that <span style="font-style: italic; color: #fff;">matches</span> that potential.
+                    </p>
+
+                    <p style="margin-bottom: 20px;">
+                        If you’re open to it, I’d love to connect on a quick call and show you:
+                    </p>
+
+                    <table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 30px;">
+                        <tr>
+                            <td style="padding-bottom: 8px;">
+                                <span style="color: #389CFF; margin-right: 10px;">&#10003;</span> what your website <span style="font-style: italic; color: #fff;">could</span> look like,
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom: 8px;">
+                                <span style="color: #389CFF; margin-right: 10px;">&#10003;</span> how fast we can transform it, and
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom: 8px;">
+                                <span style="color: #389CFF; margin-right: 10px;">&#10003;</span> the shockingly reasonable price it would cost.
+                            </td>
+                        </tr>
+                    </table>
+
+                    <p style="margin-bottom: 20px;">
+                        You’re going to love both the vision and the numbers.
+                    </p>
+
+                    <p style="margin-bottom: 40px; font-weight: 600; color: #ffffff;">
+                        So tell me — <span style="color: #ffffff;">when are you free for a short discovery call?</span>
+                    </p>
+
+                    <!-- Main CTA Button -->
+                    <table border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 40px;">
+                        <tr>
+                            <td align="left" style="border-radius: 50px;">
+                                <a href="https://xtasy.in" target="_blank" class="btn-primary" style="display: inline-block; padding: 14px 40px; color: #ffffff; background-color: rgba(56, 156, 255, 0.1); border: 1px solid #389CFF; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 16px; font-family: 'Outfit', sans-serif; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(56, 156, 255, 0.25);">
+                                    Visit Xtasy.in
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- Signature -->
+                    <div style="border-top: 1px solid #333333; padding-top: 30px;">
+                        <p style="margin: 0 0 5px 0; font-size: 16px; color: #cccccc;">Mayank</p>
+                        <p style="margin: 0 0 15px 0; color: #666666; font-size: 14px;">Director, Xtasy Media</p>
+                        <p style="margin: 0; font-size: 14px;">
+                            <a href="https://xtasy.in" style="color: #389CFF; text-decoration: none; font-weight: 600;">Portfolio: xtasy.in</a>
+                            <span style="color: #888888;">(hoping to soon feature {{FIRM_NAME}}’s website on it )</span>
+                        </p>
+                    </div>
+
+                </td>
+            </tr>
+        </table>
+        
+        <!-- Footer -->
+        <table border="0" cellpadding="0" cellspacing="0" width="600" style="max-width: 600px; width: 100%; margin-top: 20px;">
+            <tr>
+                <td align="center" style="color: #444444; font-size: 12px; font-family: 'Inter', Helvetica, Arial, sans-serif;">
+                    &copy; 2024 Xtasy Media. All rights reserved.<br>
+                    <a href="https://xtasy.in" style="color: #444444; text-decoration: underline;">Unsubscribe</a>
+                </td>
+            </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
+</script>
+
+    <script>
+        const clientNameInput = document.getElementById('clientName');
+        const firmNameInput = document.getElementById('firmName');
+        const codeEditor = document.getElementById('codeEditor');
+        const previewFrame = document.getElementById('previewFrame');
+        
+        // Grab the raw text from the template script
+        const BASE_TEMPLATE = document.getElementById('emailTemplate').textContent.trim();
+
+        function generateMail() {
+            const clientName = clientNameInput.value || "Client";
+            const firmName = firmNameInput.value || "Brand";
+
+            let mailCode = BASE_TEMPLATE;
+            
+            // Replace placeholders
+            mailCode = mailCode.split('{{CLIENT_NAME}}').join(clientName);
+            mailCode = mailCode.split('{{FIRM_NAME}}').join(firmName);
+
+            // Update Editor
+            codeEditor.value = mailCode;
+            
+            // Update Preview
+            updatePreview(mailCode);
+        }
+
+        function updatePreview(code) {
+            const doc = previewFrame.contentDocument || previewFrame.contentWindow.document;
+            doc.open();
+            doc.write(code);
+            doc.close();
+        }
+
+        const editorModal = document.getElementById('editorModal');
+        const modalEditor = document.getElementById('modalEditor');
+
+        function openModal() {
+            modalEditor.value = codeEditor.value;
+            editorModal.classList.add('show');
+        }
+
+        function closeModal() {
+            codeEditor.value = modalEditor.value;
+            updatePreview(modalEditor.value);
+            editorModal.classList.remove('show');
+        }
+
+        function copyCode() {
+            codeEditor.select();
+            document.execCommand('copy'); 
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(codeEditor.value);
+            }
+
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Listeners
+        codeEditor.addEventListener('input', function() {
+            updatePreview(this.value);
+        });
+
+        clientNameInput.addEventListener('input', generateMail);
+        firmNameInput.addEventListener('input', generateMail);
+
+        // Initial generation
+        generateMail();
+    </script>
+</body>
+</html>
