@@ -1,660 +1,1843 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Xtasy Mail Constructor</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        :root {
-            --bg-color: #050505;
-            --panel-bg: #111111;
-            --border-color: #222222;
-            --accent-color: #389CFF;
-            --text-primary: #ffffff;
-            --text-secondary: #999999;
-        }
+      :root {
+        --bg-color: #050505;
+        --panel-bg: #111111;
+        --border-color: #222222;
+        --accent-color: #389cff;
+        --text-primary: #ffffff;
+        --text-secondary: #999999;
+      }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            height: 100vh;
-            display: flex;
-            overflow: hidden;
-        }
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg-color);
+        color: var(--text-primary);
+        font-family: "Inter", sans-serif;
+        height: 100vh;
+        display: flex;
+        overflow: hidden;
+      }
 
-        /* Sidebar - Controls */
-        .sidebar {
-            width: 400px;
-            background-color: var(--panel-bg);
-            border-right: 1px solid var(--border-color);
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            overflow-y: auto;
-            flex-shrink: 0;
-        }
+      /* Sidebar - Controls */
+      .sidebar {
+        width: 400px;
+        background-color: var(--panel-bg);
+        border-right: 1px solid var(--border-color);
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        overflow-y: auto;
+        flex-shrink: 0;
+      }
 
-        .header {
-            margin-bottom: 10px;
-        }
+      .header {
+        margin-bottom: 5px;
+      }
 
-        .header h1 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            margin: 0 0 8px 0;
-            background: linear-gradient(90deg, #FFFFFF, #999999);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+      .header h1 {
+        font-family: "Outfit", sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        margin: 0 0 8px 0;
+        background: linear-gradient(90deg, #ffffff, #999999);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
 
-        .header p {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin: 0;
-        }
+      .header p {
+        color: var(--text-secondary);
+        font-size: 14px;
+        margin: 0;
+      }
 
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+      .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
 
-        .input-group label {
-            font-family: 'Outfit', sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+      .input-group label {
+        font-family: "Outfit", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
 
-        input[type="text"] {
-            background-color: #0a0a0a;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 12px 16px;
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            transition: all 0.2s ease;
-        }
+      input[type="text"],
+      input[type="number"] {
+        background-color: #0a0a0a;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 10px 14px;
+        color: var(--text-primary);
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        transition: all 0.2s ease;
+      }
 
-        input[type="text"]:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(56, 156, 255, 0.1);
-        }
+      input[type="text"]:focus,
+      input[type="number"]:focus {
+        outline: none;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(56, 156, 255, 0.1);
+      }
 
-        .actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 10px;
-        }
+      /* Score Inputs Grid */
+      .scores-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        background: #161616;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #222;
+      }
 
-        button {
-            padding: 12px;
-            border-radius: 8px;
-            border: none;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 10px;
+      }
 
-        .btn-primary {
-            background-color: var(--accent-color);
-            color: white;
-        }
+      button {
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        font-family: "Outfit", sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
 
-        .btn-primary:hover {
-            background-color: #2684e0;
-            transform: translateY(-1px);
-        }
+      .btn-primary {
+        background-color: var(--accent-color);
+        color: white;
+      }
 
-        .btn-secondary {
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
+      .btn-primary:hover {
+        background-color: #2684e0;
+        transform: translateY(-1px);
+      }
 
-        .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
+      .btn-secondary {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+      }
 
-        .editor-section {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            flex: 1;
-        }
+      .btn-secondary:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
 
-        .section-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+      .editor-section {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        flex: 1;
+      }
 
-        textarea {
-            flex: 1;
-            background-color: #0a0a0a;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 16px;
-            color: #cccccc;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 13px;
-            line-height: 1.5;
-            resize: none;
-            white-space: pre;
-        }
+      .section-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-        textarea:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
+      textarea {
+        flex: 1;
+        background-color: #0a0a0a;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 16px;
+        color: #cccccc;
+        font-family: "Consolas", "Monaco", monospace;
+        font-size: 12px;
+        line-height: 1.5;
+        resize: none;
+        white-space: pre;
+      }
 
-        /* Main Preview Area */
-        .preview-area {
-            flex: 1;
-            background-color: #1a1a1a;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px;
-            position: relative;
-        }
+      textarea:focus {
+        outline: none;
+        border-color: var(--accent-color);
+      }
 
-        .preview-container {
-            width: 100%;
-            max-width: 650px; /* Slightly wider than mail width to show padding */
-            height: 100%;
-            background-color: white; /* In case the email doesn't set it */
-            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
-            border-radius: 4px;
-            overflow: hidden;
-        }
+      /* Main Preview Area */
+      .preview-area {
+        flex: 1;
+        background-color: #1a1a1a;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px;
+        position: relative;
+      }
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background-color: #050505; /* Use the email's bg */
-        }
+      .preview-container {
+        width: 100%;
+        max-width: 650px; /* Slightly wider than mail width */
+        height: 100%;
+        background-color: white;
+        box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        overflow: hidden;
+      }
 
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #333;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            z-index: 1000;
-            border: 1px solid #444;
-        }
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
 
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
+      .toast {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: #333;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        transform: translateY(100px);
+        opacity: 0;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        border: 1px solid #444;
+      }
 
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            z-index: 2000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-        }
-
-        .modal-overlay.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .modal-content {
-            background-color: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            width: 90%;
-            height: 90%;
-            max-width: 1200px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 50px 100px -10px rgba(0,0,0,0.6);
-            overflow: hidden;
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
-        }
-
-        .modal-overlay.show .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            padding: 20px 30px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #161616;
-        }
-
-        .modal-header h2 {
-            margin: 0;
-            font-family: 'Outfit', sans-serif;
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        #modalEditor {
-            flex: 1;
-            width: 100%;
-            border: none;
-            background-color: #0d0d0d;
-            padding: 30px;
-            color: #cccccc;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 14px;
-            line-height: 1.6;
-            resize: none;
-            box-sizing: border-box;
-        }
-
-        #modalEditor:focus {
-            outline: none;
-        }
-
-        .icon-btn {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            padding: 4px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: color 0.2s ease, background 0.2s ease;
-        }
-
-        .icon-btn:hover {
-            color: var(--accent-color);
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="sidebar">
-        <div class="header">
-            <h1>Mail Constructor</h1>
-            <p>Generate Xtasy Media client emails instantly.</p>
-        </div>
+      <div class="header">
+        <h1>Mail Constructor</h1>
+        <p>Xtasy Media • Premium Outreach Tool</p>
+      </div>
 
-        <div class="input-group">
-            <label for="clientName">Client First Name</label>
-            <input type="text" id="clientName" placeholder="e.g., Bob" value="Bob">
-        </div>
+      <div class="input-group">
+        <label for="clientName">Client Name</label>
+        <input
+          type="text"
+          id="clientName"
+          placeholder="e.g., Bob"
+          value="Bob"
+        />
+      </div>
 
-        <div class="input-group">
-            <label for="firmName">Firm / Brand Name</label>
-            <input type="text" id="firmName" placeholder="e.g., California Attorney Group" value="California Attorney Group">
-        </div>
+      <div class="input-group">
+        <label for="firmName">Brand / Company</label>
+        <input
+          type="text"
+          id="firmName"
+          placeholder="e.g., California Attorneys"
+          value="California Attorneys"
+        />
+      </div>
 
-        <div class="actions">
-            <button class="btn-primary" onclick="generateMail()">Regenerate</button>
-            <button class="btn-secondary" onclick="copyCode()">Copy Code</button>
-        </div>
+      <div class="input-group">
+        <label for="compName">Competitor URL/Name</label>
+        <input
+          type="text"
+          id="compName"
+          placeholder="e.g., competitorsite.com"
+          value="competitioncompany.com"
+        />
+      </div>
 
-        <div class="editor-section">
-            <div class="section-title">
-                <span>Code Editor</span>
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 11px; opacity: 0.7;">Live edits update preview</span>
-                    <button class="icon-btn" onclick="openModal()" title="Expand Editor">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
-                    </button>
-                </div>
-            </div>
-            <textarea id="codeEditor" spellcheck="false"></textarea>
+      <div class="input-group">
+        <label for="nicheName">Niche / Industry</label>
+        <input
+          type="text"
+          id="nicheName"
+          placeholder="e.g., law firm"
+          value="law firm"
+        />
+      </div>
+
+      <div class="input-group">
+        <label>Client Scores (Bad Stats)</label>
+        <div class="scores-grid">
+          <div class="input-group">
+            <label for="scoreLoad" style="font-size: 10px">Loading</label>
+            <input type="number" id="scoreLoad" value="4" min="0" max="10" />
+          </div>
+          <div class="input-group">
+            <label for="scoreDesign" style="font-size: 10px">Design</label>
+            <input type="number" id="scoreDesign" value="3" min="0" max="10" />
+          </div>
+          <div class="input-group">
+            <label for="scoreConvert" style="font-size: 10px">Convert</label>
+            <input type="number" id="scoreConvert" value="5" min="0" max="10" />
+          </div>
+          <div class="input-group">
+            <label for="scoreRank" style="font-size: 10px">Ranking</label>
+            <input type="number" id="scoreRank" value="3" min="0" max="10" />
+          </div>
         </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-primary" onclick="generateMail()">Regenerate</button>
+        <button class="btn-secondary" onclick="copyCode()">Copy Code</button>
+      </div>
+
+      <div class="editor-section">
+        <div class="section-title">
+          <span>HTML Output</span>
+        </div>
+        <textarea id="codeEditor" spellcheck="false"></textarea>
+      </div>
     </div>
 
     <div class="preview-area">
-        <div class="preview-container">
-            <iframe id="previewFrame"></iframe>
-        </div>
+      <div class="preview-container">
+        <iframe id="previewFrame"></iframe>
+      </div>
     </div>
 
     <div id="toast" class="toast">HTML Code Copied to Clipboard!</div>
 
-    <div id="editorModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Full Screen Editor</h2>
-                <div class="modal-actions">
-                     <button class="btn-primary" onclick="closeModal()">Done</button>
-                </div>
-            </div>
-            <textarea id="modalEditor" spellcheck="false"></textarea>
-        </div>
-    </div>
-
-    <!-- 
-        Store the raw template in a non-executable script tag. 
-        This prevents browser parsing issues with double body/html tags.
-    -->
     <script type="text/plain" id="emailTemplate">
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xtasy Media Proposal</title>
-<!-- Google Fonts for consistency if the email client supports them -->
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-    /* Client-specific resets */
-    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
-    img { -ms-interpolation-mode: bicubic; }
+            <!DOCTYPE html>
+            <html lang="en">
+              <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Website Analysis</title>
+                <meta name="color-scheme" content="light dark" />
+                <meta name="supported-color-schemes" content="light dark" />
+                <!-- Importing a nice font - Inter for a clean, modern look.
+                     Note: Some email clients will fallback to Arial/Sans-Serif, which is fine. -->
+                <link
+                  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+                  rel="stylesheet"
+                />
+                <style>
+                  /* Base Resets */
+                  body,
+                  html {
+                    margin: 0;
+                    padding: 0;
+                    font-family: "Inter", Helvetica, Arial, sans-serif;
+                    background-color: #f4f4f4; /* Light grey background for the window, email body is white */
+                    color: #1a1a1a;
+                    line-height: 1.6;
+                  }
 
-    /* Reset */
-    img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
-    table { border-collapse: collapse !important; }
-    body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+                  /* Container */
+                  .email-container {
+                    max-width: 600px;
+                    margin: 40px auto;
+                    background-color: #ffffff;
+                    border-radius: 12px;
+                    overflow: hidden;
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+                  }
 
-    /* iOS Blue Links */
-    a[x-apple-data-detectors] {
-        color: inherit !important;
-        text-decoration: none !important;
-        font-size: inherit !important;
-        font-family: inherit !important;
-        font-weight: inherit !important;
-        line-height: inherit !important;
-    }
+                  /* Content Padding */
+                  .content {
+                    padding: 40px;
+                  }
 
-    /* Hover effects */
-    .btn-primary:hover {
-        background-color: #389CFF !important;
-        box-shadow: 0 0 20px rgba(56, 156, 255, 0.5) !important;
-        transform: translateY(-2px) !important;
-    }
-</style>
-</head>
-<body style="background-color: #050505; margin: 0; padding: 0; font-family: 'Inter', Helvetica, Arial, sans-serif;">
+                  /* Typography */
+                  h1 {
+                    font-size: 24px;
+                    font-weight: 700;
+                    margin: 0 0 20px 0;
+                    color: #000000;
+                  }
 
-  <!-- Main Background -->
-  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #050505;">
-    <tr>
-      <td align="center" style="padding: 40px 10px;">
-        
-        <!-- Logo Header -->
-        <table border="0" cellpadding="0" cellspacing="0" width="600" style="max-width: 600px; width: 100%;">
-            <tr>
-                <td align="center" style="padding-bottom: 30px;">
-                     <!-- Using the logo from the site icons (assuming relative path works for local preview, but for email usually requires absolute URL. I will use a text fallback or absolute path if provided, here using the relative as per context) -->
-                    <a href="https://xtasy.in" style="text-decoration: none;">
-                        <img src="https://xtasy.in/assets/site%20icons/Logo.png" alt="Xtasy" width="50" style="display: block; border: 0; font-family: 'Outfit', Arial, sans-serif; color: #ffffff; font-size: 24px; font-weight: bold;">
-                    </a>
-                </td>
-            </tr>
-        </table>
+                  p {
+                    font-size: 16px;
+                    color: #4a4a4a;
+                    margin: 0 0 24px 0;
+                  }
 
-        <!-- Content Container -->
-        <table border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #111111; max-width: 600px; width: 100%; border-radius: 20px; border: 1px solid #222222; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
-          
-            <!-- Hero Banner / Top Image -->
-            <tr>
-                <td style="padding: 50px 40px 10px 40px;">
-                    <h1 style="margin: 0 0 20px 0; color: #ffffff; font-family: 'Outfit', Helvetica, Arial, sans-serif; font-size: 28px; font-weight: 700; background: linear-gradient(90deg, #FFFFFF, #999999); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">
-                        Hi {{CLIENT_NAME}},
-                    </h1>
-                </td>
-            </tr>
+                  .highlight-text {
+                    font-weight: 600;
+                    color: #000000;
+                  }
 
-            <!-- Main Body -->
-            <tr>
-                <td style="padding: 0 40px 40px 40px; color: #cccccc; font-size: 16px; line-height: 1.7; font-weight: 300;">
-                    
-                    
+                  /* Progress Bar Grid */
+                  .metrics-grid {
+                    display: table;
+                    width: 100%;
+                    margin: 30px 0;
+                    border-collapse: collapse;
+                  }
 
-                    <p style="margin-bottom: 24px;">
-                        I recently visited <span style="color: #ffffff; font-weight: 500;">{{FIRM_NAME}}’s</span> website and, to be honest, I was <span style="color: #389CFF; font-weight: 700;">surprised</span>. The site currently lacks the authority and polish that a firm of your stature deserves. <span style="color: #ffffff; font-weight: 600;">Just like how a beautifully designed physical space leaves a lasting impression on guests, a well-crafted website shapes how clients perceive your competence, quality, and professionalism.</span> Unfortunately, your current online presence is likely <span style="color: #FF4D4D; font-weight: 700; background: rgba(255, 77, 77, 0.1); padding: 2px 6px; border-radius: 4px;">underselling</span> the true value of your business.
+                  .metric-item {
+                    display: table-cell;
+                    text-align: center;
+                    vertical-align: top;
+                    width: 25%; /* 4 items */
+                    padding: 10px;
+                  }
+
+                  /* Linear Progress CSS */
+                  .score-display {
+                      text-align: center;
+                      padding: 5px;
+                  }
+                  .score-val {
+                      display: block;
+                      font-weight: 800;
+                      font-size: 18px;
+                      line-height: 1;
+                      margin-bottom: 5px;
+                  }
+                  .linear-track {
+                      background-color: #eeeeee;
+                      height: 8px;
+                      border-radius: 4px;
+                      width: 80px; /* Fixed width */
+                      margin: 0 auto; /* Center it */
+                      overflow: hidden;
+                  }
+                  .linear-fill {
+                      height: 100%;
+                      border-radius: 4px;
+                  }
+
+                  /* Colors - Light Mode (Darker for better contrast on white) */
+                  .fill-red { background-color: #d32f2f; }
+                  .fill-orange { background-color: #e65100; }
+                  .fill-green { background-color: #2e7d32; }
+
+                  /* Text Colors - Light Mode (Darker for better contrast) */
+                  .text-red { color: #d32f2f; }
+                  .text-orange { color: #e65100; }
+                  .text-green { color: #2e7d32; }
+
+                  /* Competitor Section */
+                  .competitor-section {
+                    margin-top: 50px;
+                    padding-top: 30px;
+                    border-top: 1px dashed #eaeaea;
+                  }
+
+                  .competitor-name {
+                    font-size: 22px;
+                    font-weight: 800;
+                    text-align: center;
+                    margin: 20px 0 30px 0;
+                    color: #000000;
+                    letter-spacing: -0.5px;
+                  }
+
+                  /* Competitor Colors (Uniform Green      /* Client Colors (Urgent/Warning) */
+                  .score-low {
+                      background-color: #ffcccc; /* Fallback: Pale Red */
+                      background-image: conic-gradient(#ff4d4d 40%, #f0f0f0 0%);
+                  }
+                  .score-med {
+                      background-color: #ffe0b2; /* Fallback: Pale Orange */
+                      background-image: conic-gradient(#ffa500 50%, #f0f0f0 0%);
+                  }
+                  .score-bad {
+                      background-color: #ffcdd2; /* Fallback: Light Red */
+                      background-image: conic-gradient(#ff4d4d 30%, #f0f0f0 0%);
+                  }
+
+                  /* Competitor/High Scores (Green) */
+                  .score-high-1,
+                  .score-high-2,
+                  .score-high-3,
+                  .score-high-4 {
+                      background-color: #c8e6c9; /* Fallback: Pale Green */
+                      background-image: conic-gradient(#00c853 90%, #f0f0f0 0%);
+                  }
+
+                  /* Specific Gradient Overrides for modern browsers */
+                  .score-high-2 { background-image: conic-gradient(#00c853 85%, #f0f0f0 0%); }
+                  .score-high-3 { background-image: conic-gradient(#00c853 95%, #f0f0f0 0%); }
+
+                  /* Competitor Text Colors - All Green (Darker) */
+                  .score-text-high-1,
+                  .score-text-high-2,
+                  .score-text-high-3,
+                  .score-text-high-4 {
+                    color: #2e7d32;
+                    font-weight: 700;
+                  }
+
+                  /* Row Layout Styles for Client Metrics */
+                  .metrics-rows {
+                    margin: 30px 0;
+                  }
+
+                  .metric-row-table {
+                    margin-bottom: 30px;
+                  }
+
+                  .metric-col-left {
+                    vertical-align: middle;
+                    text-align: center;
+                    padding-right: 20px;
+                  }
+
+                  .metric-col-right {
+                    vertical-align: middle;
+                    text-align: left;
+                  }
+
+                  .metric-title {
+                    font-size: 18px;
+                    font-weight: 800;
+                    margin: 0 0 8px 0;
+                    line-height: 1.2;
+                  }
+
+                  /* Title Colors - Darker for readability */
+                  .score-text-low {
+                    color: #c62828;
+                  }
+                  .score-text-bad {
+                    color: #b71c1c;
+                  }
+                  .score-text-med {
+                    color: #e65100;
+                  }
+
+                  .metric-desc {
+                    font-size: 14px;
+                    color: #555555;
+                    margin: 0;
+                    line-height: 1.5;
+                  }
+
+                  /* Reset margins for p inside the row */
+                  .metric-col-right p {
+                    margin: 0;
+                  }
+
+                  .impact-problem {
+                    margin-top: 35px;
+                    text-align: left;
+                    font-size: 18px;
+                    line-height: 1.6;
+                    color: #000;
+                    font-weight: 600;
+                    padding: 20px 20px 10px 20px; /* Reduced bottom padding */
+                    background-color: #fafafa;
+                    border-left: 4px solid #c62828; /* Red Border */
+                  }
+
+                  .impact-solution {
+                    margin-top: 0; /* Connects to the top one */
+                    text-align: left;
+                    font-size: 18px;
+                    line-height: 1.6;
+                    color: #000;
+                    font-weight: 600;
+                    padding: 5px 20px 20px 20px; /* Reduced top padding */
+                    background-color: #fafafa;
+                    border-left: 4px solid #2e7d32; /* Green Border */
+                  }
+
+                  .underselling {
+                    color: #c62828; /* Failure Red */
+                    font-weight: 800;
+                    text-decoration: underline;
+                  }
+
+                  /* Empathy/Understanding Section */
+                  .empathy-section {
+                    margin-top: 30px;
+                    padding: 5px;
+
+                    /* Removed background/border as requested for a cleaner look */
+                  }
+
+                  .empathy-text {
+                    text-align: left;
+                    font-size: 16px;
+                    color: #37474f;
+                    line-height: 1.7;
+                    margin: 0;
+                    /* "Humble" serif font could work here, but sticking to sans for consistency, using color/weight instead */
+                  }
+
+                  .empathy-highlight-soft {
+                    color: #2e7d32; /* Soft Green - Reassuring */
+                    font-weight: 700;
+                  }
+
+                  .empathy-highlight-bold {
+                    color: #000;
+                    font-weight: 400;
+                  }
+
+                  .empathy-highlight-pain {
+                    font-weight: 800;
+                    color: #455a64;
+                    font-style: italic;
+                  }
+
+                  /* Responsive */
+                  @media only screen and (max-width: 600px) {
+                    .email-container {
+                      width: 100% !important;
+                      border-radius: 0 !important;
+                    }
+                    .content {
+                      padding: 20px !important;
+                    }
+                    .metric-item {
+                      display: inline-block;
+                      width: 45%;
+                      margin-bottom: 20px;
+                    }
+
+                    /* Stack rows on very small screens if needed, but side-by-side usually works for circle+text */
+                    .metric-col-left {
+                      width: 80px !important;
+                      padding-right: 15px !important;
+                    }
+                  }
+
+                  /* Opportunity Section */
+                  .opportunity-section {
+                    margin-top: 40px;
+                    text-align: center;
+                    padding: 0 10px;
+                    border-top: 1px solid #eeeeee; /* Subtle divider */
+                    padding-top: 40px;
+                  }
+                  .opportunity-text {
+                    font-size: 20px;
+                    color: #1a1a1a;
+                    line-height: 1.5;
+                    font-weight: 500;
+                  }
+                  .way-better {
+                    display: inline-block;
+                    font-weight: 900;
+                    color: #389cff; /* Xtasy Brand Blue */
+                    text-transform: uppercase;
+                    font-size: 24px;
+                    margin: 0 5px;
+                  }
+
+                  /* Pitch Section */
+                  .pitch-section {
+                    margin-top: 30px;
+                    padding-top: 30px;
+                    border-top: 1px solid #eeeeee; /* The requested "line" */
+                    text-align: left; /* Plain simple text usually reads best left-aligned */
+                  }
+
+                  .pitch-text {
+                    font-size: 16px;
+                    color: #333;
+                    line-height: 1.8;
+                    margin-bottom: 0;
+                  }
+
+                  .emphasis-bold {
+                    font-weight: 700;
+                    color: #000;
+                  }
+
+                  .emphasis-highlight {
+                    background-color: #e3f2fd; /* Very subtle blue highlight matching brand */
+                    color: #000;
+                    font-weight: 700;
+                    padding: 0 3px;
+                  }
+
+                  /* Price Infographic (Text/Symbol Based) */
+                  .price-infographic {
+                    margin-top: 40px;
+                    background-color: #f8f9fa;
+                    border-radius: 12px;
+                    padding: 30px 20px;
+                    border: 1px dashed #ddd;
+                  }
+
+                  .price-title {
+                    text-align: center;
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    color: #666;
+                    margin-bottom: 20px;
+                    font-weight: 700;
+                  }
+
+                  .chart-row {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 15px;
+                  }
+
+                  .chart-label {
+                    width: 30%;
+                    font-size: 15px; /* Bigger */
+                    font-weight: 800;
+                    color: #222;
+                    text-align: right;
+                    padding-right: 15px;
+                  }
+
+                  .chart-bar-area {
+                    flex-grow: 1;
+                    font-family: "Courier New", Courier, monospace;
+                    font-weight: 800; /* Extra Bold */
+                    letter-spacing: -2px; /* Tighter for dense look */
+                    white-space: nowrap;
+                    overflow: hidden;
+                  }
+
+                  /* US Agency: Expensive/Bloated */
+                  .bar-us {
+                    color: #e53935; /* Darker Grey for visibility */
+                    font-size: 20px; /* Much Bigger */
+                  }
+
+                  /* India/Xtasy: Smart/Optimized */
+                  .bar-in {
+                    color: #2e7d32; /* Success Green */
+                    font-size: 20px; /* Much Bigger */
+                  }
+
+                  .chart-value {
+                    width: 25%;
+                    font-size: 16px; /* Bigger */
+                    color: #444;
+                    padding-left: 10px;
+                    font-weight: 700;
+                  }
+
+                  /* Agency Reveal (Simple but Elegant) */
+                  .reveal-simple {
+                    margin-top: 40px;
+                    padding-top: 30px;
+                    border-top: 1px solid #eeeeee;
+                    text-align: left;
+                    color: #333;
+                    font-size: 16px;
+                    line-height: 1.8; /* Better readability */
+                  }
+
+                  .reveal-simple p {
+                    margin-bottom: 25px; /* More breathing room */
+                  }
+
+                  .xtasy-highlight {
+                    color: #389cff;
+                    font-weight: 800;
+                  }
+
+                  .reveal-link {
+                    color: #389cff;
+                    font-weight: 700;
+                    text-decoration: underline;
+                  }
+
+                  /* Making the intro feel personal */
+                  .founder-voice {
+                    font-style: italic;
+                    color: #555;
+                  }
+
+                  /* Social Proof Stats */
+                  .stats-container {
+                    display: none; /* Hiding the old one just in case */
+                  }
+
+                  /* Specs Infographic (Text Based) */
+                  .specs-infographic {
+                    margin-top: 15px;
+                    background-color: #f8f9fa;
+                    border: 1px solid #e0e0e0;
+                    border-left: 4px solid #333; /* Tech/Terminal feel */
+                    border-radius: 4px;
+                    padding: 20px;
+                    font-family: "Courier New", Courier, monospace;
+                    text-align: left;
+                    color: #333;
+                  }
+
+                  .specs-header {
+                    font-size: 12px;
+                    font-weight: 700;
+                    color: #999;
+                    margin-bottom: 15px;
+                    letter-spacing: 1px;
+                    text-transform: uppercase;
+                    border-bottom: 1px dashed #ccc;
+                    padding-bottom: 5px;
+                  }
+
+                  .spec-row {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+                    font-size: 14px;
+                    line-height: 1.5;
+                  }
+
+                  .spec-label {
+                    font-weight: 700;
+                    color: #555;
+                    width: 40%;
+                  }
+
+                  .spec-value {
+                    font-weight: 700;
+                    color: #000;
+                    width: 60%;
+                    text-align: right;
+                  }
+
+                  .spec-highlight {
+                    background-color: #000;
+                    color: #fff;
+                    padding: 0 4px;
+                  }
+
+                  .spec-green {
+                    color: #2e7d32;
+                    font-weight: 800;
+                  }
+
+                  /* Core Offer Section (Premium) */
+                  .core-offer-section {
+                      margin-top: 50px;
+                      padding-top: 20px;
+                      border-top: 1px solid #eeeeee;
+                      text-align: center;
+                  }
+
+                  .offer-card {
+                      background: #ffffff;
+                      border: 1px solid #eaeaea;
+                      border-radius: 16px;
+                      padding: 40px 20px;
+                      box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Premium float */
+                      margin: 20px auto;
+                      max-width: 90%;
+                  }
+
+                  .offer-intro {
+                      font-size: 16px;
+                      color: #555;
+                      margin-bottom: 30px;
+                      font-weight: 500;
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                  }
+
+                  .offer-headline {
+                      font-size: 32px;
+                      line-height: 1.2;
+                      font-weight: 900;
+                      color: #222;
+                      text-transform: uppercase;
+                  }
+
+                  /* Gold Text - Simplified */
+                  .text-gold {
+                      font-size: 52px;
+                      display: block;
+                      margin: 5px 0;
+                      color: #D4AF37; /* Solid Gold */
+                      /* Removed gradients/clipping for compatibility */
+                      text-shadow: none;
+                  }
+
+                  /* Steel Text - Simplified */
+                  .text-steel {
+                      font-size: 42px;
+                      display: block;
+                      margin: 5px 0;
+                      color: #546E7A; /* Solid Steel Blue */
+                      /* Removed gradients/clipping for compatibility */
+                      font-weight: 800;
+                      opacity: 1;
+                  }
+
+                  .offer-divider {
+                      font-size: 14px;
+                      color: #999;
+                      font-weight: 600;
+                      letter-spacing: 2px;
+                      margin: 10px 0;
+                      display: block;
+                  }
+
+                  @media only screen and (max-width: 600px) {
+                    .chart-row {
+                      flex-wrap: wrap;
+                    }
+                    .chart-label {
+                      width: 100%;
+                      text-align: left;
+                      margin-bottom: 5px;
+                    }
+                    .chart-bar-area {
+                      width: 80%;
+                    }
+                    .chart-value {
+                      width: 20%;
+                      text-align: right;
+                    }
+
+                    .stats-container { flex-direction: column; gap: 20px; }
+
+                    .text-gold { font-size: 38px; }
+                    .text-steel { font-size: 32px; }
+                  }
+
+                  /* Value Logic Infographic */
+                  .value-logic-container {
+                    margin-top: 40px;
+                    background-color: #ffffff;
+                    border: 1px solid #eaeaea;
+                    border-radius: 12px;
+                    padding: 30px 20px;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+                    text-align: left;
+                  }
+
+                  .logic-header {
+                    text-align: center;
+                    font-size: 12px;
+                    font-weight: 800;
+                    color: #999;
+                    letter-spacing: 1.5px;
+                    text-transform: uppercase;
+                    margin-bottom: 25px;
+                    border-bottom: 2px solid #f5f5f5;
+                    padding-bottom: 15px;
+                    display: block;
+                  }
+
+                  .logic-step {
+                    display: table;
+                    width: 100%;
+                    margin-bottom: 0;
+                    position: relative;
+                    z-index: 2;
+                  }
+
+                  .logic-icon-cell {
+                    display: table-cell;
+                    vertical-align: middle;
+                    width: 50px;
+                    padding-right: 15px;
+                  }
+
+                  .logic-icon-box {
+                    width: 48px;
+                    height: 48px;
+                    background-color: #f5f7fa;
+                    border-radius: 50%;
+                    text-align: center;
+                    line-height: 48px; /* Vertical Center */
+                    font-size: 22px;
+                    border: 2px solid #fff;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+                    display: block;
+                  }
+
+                  .logic-text-cell {
+                    display: table-cell;
+                    vertical-align: middle;
+                  }
+
+                  .logic-title {
+                    font-size: 16px;
+                    font-weight: 800;
+                    color: #222;
+                    margin: 0 0 4px 0;
+                    line-height: 1.2;
+                  }
+
+                  .logic-desc {
+                    font-size: 14px;
+                    color: #666;
+                    margin: 0;
+                    line-height: 1.4;
+                  }
+
+                  .logic-arrow-row {
+                    text-align: left;
+                    padding-left: 21px; /* Center under the 48px icon + borders */
+                    margin: -5px 0;
+                    position: relative;
+                    z-index: 1;
+                    color: #ddd;
+                    font-weight: 700;
+                    font-size: 18px;
+                    line-height: 1;
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                  }
+
+                  /* Step Specific Colors */
+                  .icon-search { background-color: #e3f2fd; color: #1565C0; }
+                  .icon-web { background-color: #fafafa; color: #333; }
+                  .icon-trust { background-color: #e8f5e9; color: #2e7d32; }
+                  .icon-cash { background-color: #fff8e1; color: #f57f17; border-color: #ffb300; }
+
+                  .highlight-cash { color: #f57f17; font-weight: 800; }
+
+                  /* Bonus/Ads Infographic */
+                  .bonus-infographic {
+                    margin-top: 25px;
+                    background-color: #fff8e1; /* Light Gold/Yellow */
+                    border: 2px dashed #ffb300; /* Gold Border */
+                    border-radius: 12px;
+                    padding: 20px;
+                    text-align: center;
+                    position: relative;
+                  }
+
+                  .bonus-badge {
+                    display: inline-block;
+                    background-color: #ffb300;
+                    color: #000;
+                    font-size: 11px;
+                    font-weight: 800;
+                    text-transform: uppercase;
+                    padding: 4px 8px;
+                    border-radius: 4px;
+                    margin-bottom: 15px;
+                    letter-spacing: 1px;
+                  }
+
+                  .bonus-title {
+                    font-size: 20px;
+                    font-weight: 900;
+                    color: #000;
+                    margin-bottom: 5px;
+                    line-height: 1.2;
+                  }
+
+                  .bonus-text {
+                    font-size: 15px;
+                    color: #444;
+                    line-height: 1.5;
+                    margin: 0;
+                  }
+
+                  .bonus-highlight-text {
+                      font-weight: 800;
+                      color: #e65100;
+                  }
+
+                  /* Dark Mode Overrides for Value Logic */
+                  @media (prefers-color-scheme: dark) {
+                      .value-logic-container {
+                          background-color: #1e1e1e !important;
+                          border-color: #333 !important;
+                      }
+                      .logic-header {
+                          color: #777 !important;
+                          border-bottom-color: #333 !important;
+                      }
+                      .logic-icon-box {
+                          background-color: #2c2c2c !important;
+                          border-color: #444 !important;
+                          color: #ddd !important;
+                      }
+                      .logic-title { color: #eeeeee !important; }
+                      .logic-desc { color: #aaaaaa !important; }
+                      .logic-arrow-row { color: #444 !important; }
+
+                      /* Specific Dark Icons */
+                      .icon-search { background-color: #1a2733 !important; color: #64b5f6 !important; }
+                      .icon-web { background-color: #333 !important; color: #eeeeee !important; }
+                      .icon-trust { background-color: #1b3320 !important; color: #69f0ae !important; }
+                      .icon-cash { background-color: #332b1a !important; color: #ffd54f !important; border-color: #ff6f00 !important; }
+
+                      .highlight-cash { color: #ffd54f !important; }
+                  }
+
+                  [data-ogsc] .value-logic-container { background-color: #1e1e1e !important; border-color: #333 !important; }
+                  [data-ogsc] .logic-title { color: #eeeeee !important; }
+                  [data-ogsc] .logic-desc { color: #aaaaaa !important; }
+                  [data-ogsc] .icon-search { background-color: #1a2733 !important; color: #64b5f6 !important; }
+                  [data-ogsc] .icon-web { background-color: #333 !important; color: #eeeeee !important; }
+                  [data-ogsc] .icon-trust { background-color: #1b3320 !important; color: #69f0ae !important; }
+                  [data-ogsc] .icon-cash { background-color: #332b1a !important; color: #ffd54f !important; }
+                  [data-ogsc] .highlight-cash { color: #ffd54f !important; }
+
+                  /* Closing Section */
+                  .closing-section {
+                      margin-top: 40px;
+                      text-align: left;
+                      color: #333;
+                      font-size: 16px;
+                      line-height: 1.6;
+                  }
+
+                  .closing-text-block {
+                      margin-bottom: 25px;
+                  }
+
+                  .checklist-ul {
+                      list-style: none;
+                      padding: 0;
+                      margin: 25px 0 25px 10px;
+                  }
+
+                  .checklist-li {
+                      margin-bottom: 12px;
+                      font-weight: 600;
+                      color: #222;
+                      display: flex;
+                      align-items: flex-start;
+                  }
+
+                  .check-mark {
+                      color: #2e7d32; /* Success Green */
+                      margin-right: 10px;
+                      font-weight: 800;
+                      font-size: 18px;
+                      line-height: 1; /* Align with text */
+                  }
+
+                  .text-strong {
+                      color: #000000;
+                      font-style: normal;
+                      font-weight: 700;
+                  }
+
+                  .closing-question {
+                      font-weight: 700;
+                      font-size: 18px;
+                      color: #000;
+                      margin-top: 30px;
+                      margin-bottom: 20px;
+                  }
+
+                  /* Final CTA Button (Simple & Clean) */
+                  .final-visit-btn {
+                      display: table;
+                      margin: 40px auto;
+                      background-color: #1565C0; /* Solid Brand Blue */
+                      color: #ffffff !important;
+                      text-align: center;
+                      padding: 15px 40px;
+                      border-radius: 50px; /* Pill shape */
+                      text-decoration: none;
+
+                      font-weight: 700;
+                      font-size: 18px;
+                      text-transform: none; /* Removed Uppercase for cleaner look */
+                      letter-spacing: normal;
+
+                      /* Removed complex shadows/borders */
+                      box-shadow: none;
+                      border: none;
+
+                      transition: background-color 0.2s ease;
+                  }
+
+                  .final-visit-btn:hover {
+                      background-color: #0d47a1; /* Slightly darker on hover */
+                      transform: none;
+                      box-shadow: none;
+                  }
+
+                  /* Signature Section */
+                  .signature-section {
+                      margin-top: 40px;
+                      padding-top: 30px;
+                      border-top: 1px solid #eeeeee;
+                      text-align: left;
+                      font-size: 16px;
+                      color: #333;
+                      line-height: 1.5;
+                  }
+                  .sig-name { font-weight: 700; color: #000; display: block; margin-bottom: 2px; }
+                  .sig-title { color: #555; display: block; margin-bottom: 10px; font-style: italic; }
+                  .sig-link { color: #389CFF; font-weight: 600; text-decoration: none; }
+
+                  /* Email Footer (Outside Card) */
+                  .email-footer {
+                      text-align: center;
+                      margin: 30px auto;
+                      padding-top: 20px;
+                      font-size: 12px;
+                      color: #999999;
+                      font-family: 'Inter', sans-serif;
+                  }
+                  .footer-link { color: #999999; text-decoration: underline; }
+
+                  /* DARK MODE OVERRIDES */
+                  @media (prefers-color-scheme: dark) {
+                      /* Base Backgrounds */
+                      body, html { background-color: #121212 !important; color: #e0e0e0 !important; }
+                      .body-bg { background-color: #121212 !important; }
+
+                      /* Main Container */
+                      .email-container {
+                          background-color: #1e1e1e !important;
+                          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+                      }
+
+                      /* Bonus Infographic Dark Mode */
+                      .bonus-infographic {
+                          background-color: #332b1a !important;
+                          border-color: #ff6f00 !important;
+                      }
+                      .bonus-badge {
+                          background-color: #ffca28 !important;
+                      }
+                      .bonus-title { color: #ffffff !important; }
+                      .bonus-text { color: #cccccc !important; }
+                      .bonus-highlight-text { color: #ffab40 !important; }
+
+                      /* Text Colors - General */
+                      h1, .highlight-text, .competitor-name, .offer-headline { color: #ffffff !important; }
+                      p, .metric-desc, .empathy-text, .pitch-text, .closing-text-block, .spec-label, .offer-intro { color: #cccccc !important; }
+                      .founder-voice { color: #bbbbbb !important; }
+
+                      /* Tracks & Progress */
+                      .linear-track { background-color: #333333 !important; }
+                      /* Keep fills as they are, they pop nicely on dark */
+
+                      /* Competitor & Sections */
+                      .competitor-section, .pitch-section, .closure-section, .signature-section, .opportunity-section, .reveal-simple {
+                          border-color: #333333 !important;
+                      }
+
+                      /* Impact Boxes */
+                      .impact-problem, .impact-solution {
+                        background-color: #2a2a2a !important;
+                        color: #eeeeee !important;
+                      }
+
+                      /* Cards & Infographics */
+                      .price-infographic, .specs-infographic, .offer-card {
+                          background-color: #252525 !important;
+                          border-color: #444444 !important;
+                          color: #dddddd !important;
+                      }
+
+                      .metrics-grid td, .chart-label, .spec-value, .sig-name, .checklist-li, .emphasis-bold {
+                           color: #eeeeee !important;
+                      }
+
+                      .price-title, .specs-header { color: #aaaaaa !important; }
+                      .chart-value { color: #cccccc !important; }
+
+                      /* Specific Text Overrides */
+                      .empathy-highlight-pain { color: #cfd8dc !important; }
+                      .empathy-highlight-bold { color: #ffffff !important; }
+                      /* Accents - Pastel/Light for Dark Mode */
+                      /* Green */
+                      .text-green, .score-text-high-1, .score-text-high-2, .score-text-high-3, .score-text-high-4, .spec-green, .check-mark, .empathy-highlight-soft, .bar-in {
+                          color: #69F0AE !important;
+                      }
+                      .fill-green { background-color: #69F0AE !important; }
+                      .impact-solution { border-left-color: #69F0AE !important; }
+
+                      /* Red */
+                      .text-red, .score-text-low, .score-text-bad, .underselling, .bar-us, .impact-problem {
+                          color: #ef9a9a !important;
+                          border-left-color: #ef9a9a !important; /* For impact-problem border */
+                      }
+                      .fill-red { background-color: #ef9a9a !important; }
+
+                      /* Orange */
+                      .text-orange, .score-text-med { color: #ffcc80 !important; }
+                      .fill-orange { background-color: #ffcc80 !important; }
+
+                      /* Blue */
+                      .way-better, .xtasy-highlight, .reveal-link, .sig-link, .final-visit-btn {
+                          color: #64b5f6 !important;
+                      }
+                      .final-visit-btn {
+                           background: #1565c0 !important; /* Darker blue button background */
+                           background-color: #1565c0 !important;
+                      }
+
+                      /* Text Fixes */
+                      .text-strong { color: #ffffff !important; }
+                      .underselling { text-decoration-color: #ef9a9a !important; }
+
+                      .highlight-text { color: #ffffff !important; }
+
+
+                      /* Gold/Steel Text - Ensure visibility */
+                      .text-gold {
+                         color: #ffd54f !important; /* Lighter Gold for Dark Mode */
+                         text-shadow: none !important;
+                      }
+                      .text-steel {
+                         color: #90a4ae !important; /* Lighter Steel for Dark Mode */
+                      }
+
+                      /* Buttons */
+                      .final-visit-btn {
+                          background-color: #1565C0 !important;
+                          border: none !important;
+                          color: #ffffff !important;
+                      }
+                  }
+
+                  /* OUTLOOK DARK MODE (Duplicate of above with data-ogsc prefix) */
+                  [data-ogsc] body, [data-ogsc] html { background-color: #121212 !important; color: #e0e0e0 !important; }
+                  [data-ogsc] .body-bg { background-color: #121212 !important; }
+                  [data-ogsc] .email-container { background-color: #1e1e1e !important; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important; }
+                  [data-ogsc] .bonus-infographic { background-color: #332b1a !important; border-color: #ff6f00 !important; }
+                  [data-ogsc] .bonus-badge { background-color: #ffca28 !important; }
+                  [data-ogsc] .bonus-title { color: #ffffff !important; }
+                  [data-ogsc] .bonus-text { color: #cccccc !important; }
+                  [data-ogsc] .bonus-highlight-text { color: #ffab40 !important; }
+                  [data-ogsc] h1, [data-ogsc] .highlight-text, [data-ogsc] .competitor-name, [data-ogsc] .offer-headline { color: #ffffff !important; }
+                  [data-ogsc] p, [data-ogsc] .metric-desc, [data-ogsc] .empathy-text, [data-ogsc] .pitch-text, [data-ogsc] .closing-text-block, [data-ogsc] .spec-label, [data-ogsc] .offer-intro { color: #cccccc !important; }
+                  [data-ogsc] .founder-voice { color: #bbbbbb !important; }
+                  [data-ogsc] .linear-track { background-color: #333333 !important; }
+                  [data-ogsc] .competitor-section, [data-ogsc] .pitch-section, [data-ogsc] .closure-section, [data-ogsc] .signature-section, [data-ogsc] .opportunity-section, [data-ogsc] .reveal-simple { border-color: #333333 !important; }
+                  [data-ogsc] .impact-problem, [data-ogsc] .impact-solution { background-color: #2a2a2a !important; color: #eeeeee !important; }
+                  [data-ogsc] .price-infographic, [data-ogsc] .specs-infographic, [data-ogsc] .offer-card { background-color: #252525 !important; border-color: #444444 !important; color: #dddddd !important; }
+                  [data-ogsc] .metrics-grid td, [data-ogsc] .chart-label, [data-ogsc] .spec-value, [data-ogsc] .sig-name, [data-ogsc] .checklist-li, [data-ogsc] .emphasis-bold { color: #eeeeee !important; }
+                  [data-ogsc] .price-title, [data-ogsc] .specs-header { color: #aaaaaa !important; }
+                  [data-ogsc] .chart-value { color: #cccccc !important; }
+                  [data-ogsc] .empathy-highlight-pain { color: #cfd8dc !important; }
+                  [data-ogsc] .empathy-highlight-bold { color: #ffffff !important; }
+                  [data-ogsc] .emphasis-highlight { background-color: #37474f !important; color: #ffffff !important; }
+                  [data-ogsc] .final-visit-btn { border-color: #1e1e1e !important; }
+
+                  /* Specific Outlook Color Overrides */
+                  [data-ogsc] .text-green, [data-ogsc] .score-text-high-1, [data-ogsc] .score-text-high-2, [data-ogsc] .score-text-high-3, [data-ogsc] .score-text-high-4, [data-ogsc] .spec-green, [data-ogsc] .check-mark, [data-ogsc] .empathy-highlight-soft, [data-ogsc] .bar-in { color: #69F0AE !important; }
+                  [data-ogsc] .fill-green { background-color: #69F0AE !important; }
+                  [data-ogsc] .text-red, [data-ogsc] .score-text-low, [data-ogsc] .score-text-bad, [data-ogsc] .underselling, [data-ogsc] .bar-us, [data-ogsc] .impact-problem { color: #ef9a9a !important; border-left-color: #ef9a9a !important; }
+                  [data-ogsc] .fill-red { background-color: #ef9a9a !important; }
+                  [data-ogsc] .text-orange, [data-ogsc] .score-text-med { color: #ffcc80 !important; }
+                  [data-ogsc] .fill-orange { background-color: #ffcc80 !important; }
+                  [data-ogsc] .way-better, [data-ogsc] .xtasy-highlight, [data-ogsc] .reveal-link, [data-ogsc] .sig-link, [data-ogsc] .final-visit-btn { color: #64b5f6 !important; }
+                  [data-ogsc] .impact-solution { border-left-color: #69F0AE !important; }
+                  [data-ogsc] .text-strong { color: #ffffff !important; }
+                  [data-ogsc] .text-gold { color: #ffd54f !important; text-shadow: none !important; }
+                  [data-ogsc] .text-steel { color: #90a4ae !important; }
+                  [data-ogsc] .final-visit-btn { background-color: #1565C0 !important; border: none !important; color: #ffffff !important; }
+                </style>
+              </head>
+              <body style="margin: 0; padding: 0; background-color: #f4f4f4;">
+                <!-- Wrapper Table for background support in Zoho/Gmail -->
+                <table class="body-bg" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#f4f4f4">
+                  <tr>
+                    <td align="center" style="padding: 20px 0;">
+                      <div class="email-container">
+                  <div class="content">
+                    <!-- Header Greeting -->
+                    <h1>Hi, {{CLIENT_NAME}}</h1>
+
+                    <!-- Intro Text -->
+                    <p>
+                      I recently visited
+                      <span class="highlight-text">{{FIRM_NAME}}</span> website and, to be
+                      honest, <strong class="empathy-bold">I was surprised.</strong> Just take a look at this:
                     </p>
 
-                    <p style="margin-bottom: 30px;">
-                        My goal with this Email is not to criticise your business or your team. Web design is a complex blend of art, psychology, and engineering — and unfortunately, most agencies charge thousands of dollars for results that are mediocre at best. They vanish after handing over the project, and revisions magically turn into “extra charges.”
-                    </p>
-
-                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #1a1a1a; border-left: 4px solid #389CFF; border-radius: 0 8px 8px 0; margin-bottom: 24px;">
+                    <!-- Client Stats (Bad) - Row Layout -->
+                    <div class="metrics-rows">
+                      <!-- Loading Time Row ({{SCORE_LOADING}}/10 - Red) -->
+                      <table class="metric-row-table" width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td style="padding: 20px;">
-                                <p style="margin: 0; color: #cccccc; font-size: 16px; line-height: 1.6;">
-                                    But I want to make you aware of the fact that there exist better, <span style="color: #389CFF; font-weight: 700;">WAY BETTER</span> alternatives.
-                                </p>
-                            </td>
+                          <td class="metric-col-left" width="100">
+                            <div class="score-display">
+                              <span class="score-val text-red">{{SCORE_LOADING}}/10</span>
+                              <div class="linear-track"><div class="linear-fill fill-red" style="width: {{SCORE_LOADING}}0%"></div></div>
+                            </div>
+                          </td>
+                          <td class="metric-col-right">
+                            <h2 class="metric-title score-text-low">Loading Time</h2>
+                            <p class="metric-desc"><span style="font-weight: 600;">The "Back" button is your most clicked feature.</span> I hope your clients like suspense, because they are waiting 10 seconds for a headline.</p>
+                          </td>
                         </tr>
-                    </table>
+                      </table>
 
-                    <p style="margin-bottom: 24px;">
-                        Like do you know <span style="color: #FFD700; font-weight: 700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);">There are agencies in India producing world-class work — absolute digital masterpieces — at a fraction of the cost</span>, simply because of the currency difference. These teams work with precision, speed, and passion. They don’t disappear. They don’t nickel-and-dime you for revisions. You ask, and you hear: <span style="color: #389CFF; font-weight: 700;">“Yes Sir! On it. Immediately.”</span> Also, No monthly retainers! Just a flat price for the whole thing.
-                    </p>
-
-                    <p style="margin-bottom: 24px;">
-                        And it just so happens that you’re reading an email from the director of one such agency. Not “one of many.” <span style="color: #ffffff; font-weight: 700;">One of the best.</span> The name of the firm: <span style="color: #389CFF; font-weight: 800; font-size: 18px; text-shadow: 0 0 15px rgba(56, 156, 255, 0.6); margin-left: 2px;">Xtasy Media.</span>
-                    </p>
-
-                    <p style="margin-bottom: 35px;">
-                        Yes — our websites are pure xtasy for the eyes! You don’t have to take my word for it. Take a look at our own website and some of our projects: 
-                        <a href="https://xtasy.in" style="color: #389CFF; font-weight: 600; text-decoration: none; border-bottom: 1px dashed #389CFF;">xtasy.in</a>
-                    </p>
-
-                    <p style="margin-bottom: 24px;">
-                        Over the last 8 years, we’ve worked with clients from <span style="color: #ffffff; font-weight: 500;">25+ countries</span>, earned multiple global recognitions, and maintained a streak of <span style="color: #ffffff; font-weight: 500;">zero negative feedback</span> — something we take immense pride in.
-                    </p>
-
-                    <!-- Offer Box -->
-                    <table border="0" cellspacing="0" cellpadding="0" width="100%" style="margin-bottom: 35px;">
+                      <!-- Design Appeal Row ({{SCORE_DESIGN}}/10 - Red) -->
+                      <table class="metric-row-table" width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td align="center" style="padding: 30px 25px; border: 1px solid rgba(255, 215, 0, 0.3); background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(0,0,0,0)); border-radius: 12px;">
-                                <p style="margin: 0 0 10px 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #B0B0B0;">Here’s my offer, simple and unapologetically bold:</p>
-                                <p style="margin: 0; font-size: 26px; font-weight: 400; font-family: Georgia, serif; font-style: italic; color: #ffffff;">
-                                    I give you <span style="color: #FFD700; font-weight: 700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);">gold</span> at the price of <span style="color: #A0C4E4; font-weight: 700; text-shadow: 0 0 10px rgba(160, 196, 228, 0.4);">steel</span>.
-                                </p>
-                            </td>
+                          <td class="metric-col-left" width="100">
+                           <div class="score-display">
+                              <span class="score-val text-red">{{SCORE_RANKING}}/10</span>
+                              <div class="linear-track"><div class="linear-fill fill-red" style="width: {{SCORE_RANKING}}0%"></div></div>
+                            </div>
+                          </td>
+                          <td class="metric-col-right">
+                            <h2 class="metric-title score-text-bad">Design & Aesthetics</h2>
+                            <p class="metric-desc"><span style="font-weight: 600;">It screams "budget option."</span> You are asking for premium rates, but your design is negotiating them down before you even get on the call.</p>
+                          </td>
                         </tr>
-                    </table>
+                      </table>
 
-                    <p style="margin-bottom: 24px;">
-                        Because gold — <span style="color: #FFD700; font-weight: 700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);">true talent</span> — is simply more affordable on this side of the world.
-                    </p>
-                    
-                    <p style="margin-bottom: 24px;">
-                        And I genuinely see a lot of potential in {{FIRM_NAME}}.
+                      <!-- Convertability Row ({{SCORE_CONVERT}}/10 - Orange) -->
+                      <table class="metric-row-table" width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td class="metric-col-left" width="100">
+                            <div class="score-display">
+                              <span class="score-val text-orange">{{SCORE_CONVERT}}/10</span>
+                              <div class="linear-track"><div class="linear-fill fill-orange" style="width: {{SCORE_CONVERT}}0%"></div></div>
+                            </div>
+                          </td>
+                          <td class="metric-col-right">
+                            <h2 class="metric-title score-text-med">Convertability</h2>
+                            <p class="metric-desc"><span style="font-weight: 600;">You’ve been friend-zoned by your own traffic.</span> People visit, look around, and leave without spending a dime. You are attracting "browsers," not "buyers."</p>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <!-- Search Ranking Row ({{SCORE_RANKING}}/10 - Red) -->
+                      <table class="metric-row-table" width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td class="metric-col-left" width="100">
+                            <div class="score-display">
+                              <span class="score-val text-red">{{SCORE_RANKING}}/10</span>
+                              <div class="linear-track"><div class="linear-fill fill-red" style="width: {{SCORE_RANKING}}0%"></div></div>
+                            </div>
+                          </td>
+                          <td class="metric-col-right">
+                            <h2 class="metric-title score-text-bad">Search Ranking</h2>
+                            <p class="metric-desc"><span style="font-weight: 600;">You’re playing hide and seek (and winning).</span> Your competitors are feasting on Page 1 leads. You are buried in the digital graveyard where no one looks.</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+
+                    <!-- Competition Intro -->
+                    <div class="competitor-section">
+                      <p>
+                        Take a look at the web analytics of a top {{NICHE_NAME}} in your area:
+                      </p>
+
+                      <!-- Competitor Name -->
+                      <div class="competitor-name">{{COMPETITOR_NAME}}</div>
+
+                      <!-- Competitor Stats (Good) - Keep Grid/Column Layout -->
+                      <!-- Competitor Stats (Good) - Using Simple Table for reliability -->
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin: 30px 0;">
+                        <tr>
+                          <!-- Loading -->
+                          <td align="center" width="25%" valign="top" style="padding: 5px;">
+                            <div class="score-display">
+                              <span class="score-val text-green">9/10</span>
+                              <div class="linear-track"><div class="linear-fill fill-green" style="width: 90%"></div></div>
+                            </div>
+                            <span class="metric-label" style="font-weight:700; color:#00c853; margin-top:8px; display:block;">Loading Time</span>
+                          </td>
+                          <!-- Design -->
+                          <td align="center" width="25%" valign="top" style="padding: 5px;">
+                            <div class="score-display">
+                              <span class="score-val text-green">8.5/10</span>
+                              <div class="linear-track"><div class="linear-fill fill-green" style="width: 85%"></div></div>
+                            </div>
+                            <span class="metric-label" style="font-weight:700; color:#00c853; margin-top:8px; display:block;">Design Appeal</span>
+                          </td>
+                          <!-- Convert -->
+                          <td align="center" width="25%" valign="top" style="padding: 5px;">
+                             <div class="score-display">
+                              <span class="score-val text-green">9.5/10</span>
+                              <div class="linear-track"><div class="linear-fill fill-green" style="width: 95%"></div></div>
+                            </div>
+                            <span class="metric-label" style="font-weight:700; color:#00c853; margin-top:8px; display:block;">Convertability</span>
+                          </td>
+                          <!-- Ranking -->
+                          <td align="center" width="25%" valign="top" style="padding: 5px;">
+                             <div class="score-display">
+                              <span class="score-val text-green">9/10</span>
+                              <div class="linear-track"><div class="linear-fill fill-green" style="width: 90%"></div></div>
+                            </div>
+                            <span class="metric-label" style="font-weight:700; color:#00c853; margin-top:8px; display:block;">Ranking</span>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <!-- Impact Statement Split -->
+                      <div class="impact-problem">
+                        <p style="margin: 0">
+                          Unfortunately, your current online presence is likely
+                          <span class="underselling">underselling</span> the true value of
+                          your business.
+                        </p>
+                      </div>
+                      <div class="impact-solution">
+                        <p style="margin: 0">
+                          <span class="empathy-highlight-pain">The good news?</span>
+                          <span class="empathy-highlight-soft"
+                            >This is a solvable problem.</span
+                          >
+                          I see clear ways to bring the design up to your actual standard.
+                          I’m just writing to see <strong class="underselling" style="color: #2e7d32;">if fixing that is currently on your radar?</strong>
+                        </p>
+                      </div>
+            <!-- Empathy Section -->
+                <div class="empathy-section">
+                  <p class="empathy-text">
+                    <span class="empathy-highlight-soft">
+                      My goal with this Email is not to criticise your business or
+                      your team</span
+                    >. Web design is a
+                    <span class="empathy-highlight-bold"
+                      >complex blend of art, psychology, and engineering</span
+                    >
+                    — and unfortunately, most agencies charge
+                    <strong>thousands of dollars</strong> for results that are
+                    <span class="empathy-highlight-pain">mediocre at best</span>. They
+                    <span class="empathy-highlight-pain">vanish</span> after handing
+                    over the project, and revisions magically turn into
+                    <strong>“extra charges.”</strong>
+                  </p>
+                </div>
+
+                <!-- Opportunity Section -->
+                <div class="opportunity-section">
+                  <p class="opportunity-text">
+                    But I want to make you aware of the fact that there exist better,
+                    <span class="way-better">WAY BETTER</span> alternatives.
+                  </p>
+                </div>
+
+                <!-- Pitch Section -->
+                <div class="pitch-section">
+                  <p class="pitch-text">
+                    Like do you know There are
+                    <strong>agencies in India</strong>
+                    producing
+                    <strong class="emphasis-bold">world-class work</strong> — absolute
+                    digital masterpieces — at a
+                    <strong class="emphasis-bold">fraction of the cost</strong>,
+                    simply because of the
+                    <span class="emphasis-bold">currency difference.</span> These
+                    teams work with precision, speed, and passion. They don’t
+                    disappear. They don’t nickel-and-dime you for revisions. You ask,
+                    and you hear:
+                    <span class="emphasis-highlight"
+                      >“Yes Sir! On it. Immediately.”</span
+                    >
+                    Also,
+                    <strong class="emphasis-bold">No monthly retainers!</strong> Just
+                    a <strong class="emphasis-bold">flat price</strong> for the whole
+                    thing.
+                  </p>
+
+                  <!-- Text-Based Price Infographic -->
+                  <div class="price-infographic">
+                    <div class="price-title">Estimated Cost Comparison</div>
+
+                    <!-- US Agency Row -->
+                    <div class="chart-row">
+                      <div class="chart-label">Standard Agency</div>
+                      <div class="chart-bar-area bar-us">$$$$$$$$$$$$$$$$$$</div>
+                      <div class="chart-value">$15k+</div>
+                    </div>
+
+                    <!-- India Agency Row -->
+                    <div class="chart-row">
+                      <div class="chart-label">Indian Expertise</div>
+                      <div class="chart-bar-area bar-in">$$$$</div>
+                      <div class="chart-value">&lt;$1.5k flat</div>
+                    </div>
+                  </div>
+
+                <!-- Agency Reveal Section (Refined) -->
+                <div class="reveal-simple">
+                    <p class="founder-voice">
+                        And it just so happens that you’re reading an email from the director of one such agency. Not “one of many.” <strong class="text-strong">One of the best.</strong> The name of the firm: <strong class="xtasy-highlight" style="font-style: normal;">Xtasy Media</strong>.
                     </p>
 
-                    <p style="margin-bottom: 20px;">
-                        Your business deserves a digital presence that <span style="font-style: italic; color: #fff;">matches</span> that potential.
+                    <p>
+                        Yes — our websites are <strong class="xtasy-highlight">pure xtasy for the eyes!</strong> You don’t have to take my word for it. Take a look at our own website and some of our projects: <a href="https://xtasy.in" class="reveal-link">xtasy.in</a>
                     </p>
 
-                    <p style="margin-bottom: 20px;">
+                    <!-- Agency Specs Infographic -->
+                    <div class="specs-infographic">
+                        <div class="specs-header">AGENCY_METRICS_LOG</div>
+
+                        <div class="spec-row">
+                            <span class="spec-label">> ESTABLISHED:</span>
+                            <span class="spec-value">2016 [8 Years XP]</span>
+                        </div>
+
+                        <div class="spec-row">
+                            <span class="spec-label">> GLOBAL_REACH:</span>
+                            <span class="spec-value">25+ Countries</span>
+                        </div>
+
+                        <div class="spec-row">
+                            <span class="spec-label">> Projects:</span>
+                            <span class="spec-value">100+ Delivered</span>
+                        </div>
+
+                        <div class="spec-row">
+                            <span class="spec-label">> On-time:</span>
+                            <span class="spec-value">99.9%</span>
+                        </div>
+
+                        <div class="spec-row">
+                            <span class="spec-label">> Downvotes:</span>
+                            <span class="spec-value spec-green">0.00% (NONE)</span>
+                        </div>
+
+                        <div class="spec-row" style="margin-top: 15px; border-top: 1px dashed #ccc; padding-top: 10px;">
+                            <span class="spec-label">STATUS:</span>
+                            <span class="spec-value"><span class="spec-highlight">VERIFIED_EXCELLENT</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Value Logic Infographic -->
+                <div class="value-logic-container">
+                  <div class="logic-header">The Business Growth Formula</div>
+
+                  <!-- Step 1 -->
+                  <div class="logic-step">
+                    <div class="logic-icon-cell">
+                       <div class="logic-icon-box icon-search">&#128269;</div>
+                    </div>
+                    <div class="logic-text-cell">
+                      <h3 class="logic-title">Traffic Source</h3>
+                      <p class="logic-desc">A potential client searches for help on Google.</p>
+                    </div>
+                  </div>
+
+                  <div class="logic-arrow-row">↓</div>
+
+                  <!-- Step 2 -->
+                  <div class="logic-step">
+                     <div class="logic-icon-cell">
+                        <div class="logic-icon-box icon-web">&#128187;</div>
+                     </div>
+                     <div class="logic-text-cell">
+                       <h3 class="logic-title">Your Website</h3>
+                       <p class="logic-desc">They land on your site. The "First Impression."</p>
+                     </div>
+                  </div>
+
+                  <div class="logic-arrow-row">↓</div>
+
+                  <!-- Step 3 -->
+                  <div class="logic-step">
+                     <div class="logic-icon-cell">
+                        <div class="logic-icon-box icon-trust">&#128173;</div>
+                     </div>
+                     <div class="logic-text-cell">
+                       <h3 class="logic-title">Instant Trust</h3>
+                       <p class="logic-desc">Premium design proves you are an <span style="text-decoration: underline;">Authority</span>.</p>
+                     </div>
+                  </div>
+
+                  <div class="logic-arrow-row">↓</div>
+
+                  <!-- Step 4 -->
+                  <div class="logic-step">
+                     <div class="logic-icon-cell">
+                        <div class="logic-icon-box icon-cash">&#128176;</div>
+                     </div>
+                     <div class="logic-text-cell">
+                       <h3 class="logic-title highlight-cash">Conversion</h3>
+                       <p class="logic-desc">They stop browsing and <span class="highlight-cash">Call You</span>.</p>
+                     </div>
+                  </div>
+                </div>
+
+                <!-- Core Offer Section (Premium) -->
+                <div class="core-offer-section">
+                    <div class="offer-card">
+                        <p class="offer-intro" style="text-align: left;">
+                            Here’s my offer, simple and unapologetically bold:
+                        </p>
+
+                        <div class="offer-headline">
+                            I give you
+                            <span class="text-gold">GOLD</span>
+                            <span class="offer-divider">AT THE PRICE OF</span>
+                            <span class="text-steel">STEEL</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Closing Section -->
+                <div class="closing-section">
+                    <p class="closing-text-block">
+                        Because gold — <strong style="color:#BF953F;">true talent</strong> — is simply more affordable on this side of the world.
+                    </p>
+
+                    <p class="closing-text-block">
+                        And I genuinely see a lot of potential in <strong style="color: #389CFF;">{{FIRM_NAME}}</strong>. Your business deserves a digital presence that matches that potential.
+                    </p>
+
+                    <p class="closing-text-block">
                         If you’re open to it, I’d love to connect on a quick call and show you:
                     </p>
 
-                    <table border="0" cellpadding="0" cellspacing="0" style="margin-bottom: 30px;">
-                        <tr>
-                            <td style="padding-bottom: 8px;">
-                                <span style="color: #389CFF; margin-right: 10px;">&#10003;</span> what your website <span style="font-style: italic; color: #fff;">could</span> look like,
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding-bottom: 8px;">
-                                <span style="color: #389CFF; margin-right: 10px;">&#10003;</span> how fast we can transform it, and
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding-bottom: 8px;">
-                                <span style="color: #389CFF; margin-right: 10px;">&#10003;</span> the shockingly reasonable price it would cost.
-                            </td>
-                        </tr>
-                    </table>
+                    <ul class="checklist-ul">
+                        <li class="checklist-li"><span class="check-mark">✓</span> what your website could look like,</li>
+                            <li class="checklist-li"><span class="check-mark">✓</span> How we can integrate Ai for better conversions,</li>
+                        <li class="checklist-li"><span class="check-mark">✓</span> how fast we can transform it,</li>
+                        <li class="checklist-li"><span class="check-mark">✓</span> the shockingly reasonable price it would cost.</li>
+                    </ul>
 
-                    <p style="margin-bottom: 20px;">
+                    <p class="closing-text-block">
                         You’re going to love both the vision and the numbers.
                     </p>
 
-                    <p style="margin-bottom: 40px; font-weight: 600; color: #ffffff;">
-                        So tell me — <span style="color: #ffffff;">when are you free for a short discovery call?</span>
+                    <p class="closing-question">
+                        So tell me — when are you free for a short discovery call?
                     </p>
 
-                    <!-- Main CTA Button -->
-                    <table border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 40px;">
-                        <tr>
-                            <td align="left" style="border-radius: 50px;">
-                                <a href="https://xtasy.in" target="_blank" class="btn-primary" style="display: inline-block; padding: 14px 40px; color: #ffffff; background-color: rgba(56, 156, 255, 0.1); border: 1px solid #389CFF; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 16px; font-family: 'Outfit', sans-serif; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(56, 156, 255, 0.25);">
-                                    Visit Xtasy.in
-                                </a>
-                            </td>
-                        </tr>
-                    </table>
+                    <a href="https://xtasy.in" class="final-visit-btn">&#10132; Want to see our portfolio?</a>
 
-                    <!-- Signature -->
-                    <div style="border-top: 1px solid #333333; padding-top: 30px;">
-                        <p style="margin: 0 0 5px 0; font-size: 16px; color: #cccccc;">Mayank</p>
-                        <p style="margin: 0 0 15px 0; color: #666666; font-size: 14px;">Director, Xtasy Media</p>
-                        <p style="margin: 0; font-size: 14px;">
-                            <a href="https://xtasy.in" style="color: #389CFF; text-decoration: none; font-weight: 600;">Portfolio: xtasy.in</a>
-                            <span style="color: #888888;">(hoping to soon feature {{FIRM_NAME}}’s website on it )</span>
+                    <!-- Bonus Ads Infographic -->
+                    <div class="bonus-infographic">
+                        <div class="bonus-badge">Limited Time Bonus</div>
+                        <div class="bonus-title">1 MONTH FREE ADS</div>
+                        <p class="bonus-text">
+                            We will run ads for the company <span class="bonus-highlight-text">FREE for one month</span>.
+                            <br>
+                            (Something other agencies charge extra $5K+)
                         </p>
                     </div>
 
-                </td>
+                    <!-- Signature Section -->
+                    <div class="signature-section">
+                        <span class="sig-name">Mayank</span>
+                        <span class="sig-title">Director, Xtasy Media</span>
+                        <p style="margin: 5px 0 0 0;">
+                            Portfolio: <a href="https://xtasy.in" class="sig-link">xtasy.in</a> (hoping to soon feature <span style="color: #389CFF;">{{FIRM_NAME}}</span>’s website on it )
+                        </p>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Email Footer -->
+            <div class="email-footer">
+                <p>© 2024 Xtasy Media. All rights reserved.</p>
+                <p><a href="https://xtasy.in" class="footer-link">Unsubscribe</a></p>
+            </div>
+              </td>
             </tr>
-        </table>
-        
-        <!-- Footer -->
-        <table border="0" cellpadding="0" cellspacing="0" width="600" style="max-width: 600px; width: 100%; margin-top: 20px;">
-            <tr>
-                <td align="center" style="color: #444444; font-size: 12px; font-family: 'Inter', Helvetica, Arial, sans-serif;">
-                    &copy; 2024 Xtasy Media. All rights reserved.<br>
-                    <a href="https://xtasy.in" style="color: #444444; text-decoration: underline;">Unsubscribe</a>
-                </td>
-            </tr>
-        </table>
+          </table>
+        </body>
+      </html>
 
-      </td>
-    </tr>
-  </table>
 
-</body>
-</html>
-</script>
+                <script>
+                  // Inputs
+                  const clientNameInput = document.getElementById("clientName");
+                  const firmNameInput = document.getElementById("firmName");
+                  const compNameInput = document.getElementById("compName");
+                  const nicheNameInput = document.getElementById("nicheName");
 
-    <script>
-        const clientNameInput = document.getElementById('clientName');
-        const firmNameInput = document.getElementById('firmName');
-        const codeEditor = document.getElementById('codeEditor');
-        const previewFrame = document.getElementById('previewFrame');
-        
-        // Grab the raw text from the template script
-        const BASE_TEMPLATE = document.getElementById('emailTemplate').textContent.trim();
+                  const scoreLoad = document.getElementById("scoreLoad");
+                  const scoreDesign = document.getElementById("scoreDesign");
+                  const scoreConvert = document.getElementById("scoreConvert");
+                  const scoreRank = document.getElementById("scoreRank");
 
-        function generateMail() {
-            const clientName = clientNameInput.value || "Client";
-            const firmName = firmNameInput.value || "Brand";
+                  const codeEditor = document.getElementById("codeEditor");
+                  const previewFrame = document.getElementById("previewFrame");
 
-            let mailCode = BASE_TEMPLATE;
-            
-            // Replace placeholders
-            mailCode = mailCode.split('{{CLIENT_NAME}}').join(clientName);
-            mailCode = mailCode.split('{{FIRM_NAME}}').join(firmName);
+                  function generateMail() {
+                    // Get raw template (it's inside the script tag)
+                    let rawLines = document.getElementById("emailTemplate").innerHTML;
 
-            // Update Editor
-            codeEditor.value = mailCode;
-            
-            // Update Preview
-            updatePreview(mailCode);
-        }
+                    // Basic cleanup if browser adds tags
+                    // The template will be injected as raw text, but let's just grab textContent
+                    let mailCode = document.getElementById("emailTemplate").textContent;
 
-        function updatePreview(code) {
-            const doc = previewFrame.contentDocument || previewFrame.contentWindow.document;
-            doc.open();
-            doc.write(code);
-            doc.close();
-        }
+                    // Values
+                    const client = clientNameInput.value;
+                    const firm = firmNameInput.value || "Company";
+                    const comp = compNameInput.value || "competitor.com";
+                    const niche = nicheNameInput.value || "law firm";
 
-        const editorModal = document.getElementById('editorModal');
-        const modalEditor = document.getElementById('modalEditor');
+                    const sLoad = scoreLoad.value || "4";
+                    const sDesign = scoreDesign.value || "3";
+                    const sConvert = scoreConvert.value || "5";
+                    const sRank = scoreRank.value || "3";
 
-        function openModal() {
-            modalEditor.value = codeEditor.value;
-            editorModal.classList.add('show');
-        }
+                    // Replacements
+                    mailCode = mailCode.replace(/{{CLIENT_NAME}}/g, client);
+                    mailCode = mailCode.replace(/{{FIRM_NAME}}/g, firm);
+                    mailCode = mailCode.replace(/{{COMPETITOR_NAME}}/g, comp);
+                    mailCode = mailCode.replace(/{{NICHE_NAME}}/g, niche);
 
-        function closeModal() {
-            codeEditor.value = modalEditor.value;
-            updatePreview(modalEditor.value);
-            editorModal.classList.remove('show');
-        }
+                    mailCode = mailCode.replace(/{{SCORE_LOADING}}/g, sLoad);
+                    mailCode = mailCode.replace(/{{SCORE_DESIGN}}/g, sDesign);
+                    mailCode = mailCode.replace(/{{SCORE_CONVERT}}/g, sConvert);
+                    mailCode = mailCode.replace(/{{SCORE_RANKING}}/g, sRank);
 
-        function copyCode() {
-            codeEditor.select();
-            document.execCommand('copy'); 
-            
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(codeEditor.value);
-            }
+                    // Update Editor
+                    codeEditor.value = mailCode.trim();
 
-            const toast = document.getElementById('toast');
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
-        }
+                    // Update Preview
+                    updatePreview(mailCode);
+                  }
 
-        // Listeners
-        codeEditor.addEventListener('input', function() {
-            updatePreview(this.value);
-        });
+                  function updatePreview(code) {
+                    const doc =
+                      previewFrame.contentDocument || previewFrame.contentWindow.document;
+                    doc.open();
+                    doc.write(code);
+                    doc.close();
+                  }
 
-        clientNameInput.addEventListener('input', generateMail);
-        firmNameInput.addEventListener('input', generateMail);
+                  function copyCode() {
+                    codeEditor.select();
+                    document.execCommand("copy");
 
-        // Initial generation
-        generateMail();
+                    const toast = document.getElementById("toast");
+                    toast.classList.add("show");
+                    setTimeout(() => {
+                      toast.classList.remove("show");
+                    }, 3000);
+                  }
+
+                  // Event Listeners
+                  const inputs = [
+                    clientNameInput,
+                    firmNameInput,
+                    compNameInput,
+                    nicheNameInput,
+                    scoreLoad,
+                    scoreDesign,
+                    scoreConvert,
+                    scoreRank,
+                  ];
+                  inputs.forEach((input) => input.addEventListener("input", generateMail));
+
+                  // Init
+                  // Generate mail immediately so the preview is populated on load
+                  generateMail();
     </script>
-</body>
+  </body>
 </html>
