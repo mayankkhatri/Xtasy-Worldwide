@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Google tag (gtag.js) -->
@@ -280,7 +280,9 @@
         box-shadow: 0 2px 5px rgba(0, 122, 255, 0.3);
       }
       #ampm-controls {
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
       }
       #ampm-controls.hidden {
         opacity: 0;
@@ -313,7 +315,9 @@
         aspect-ratio: 1 / 1;
         background-color: var(--clock-bg);
         border-radius: 50%;
-        box-shadow: 0 10px 30px var(--shadow-color), 0 0 0 10px var(--clock-bg);
+        box-shadow:
+          0 10px 30px var(--shadow-color),
+          0 0 0 10px var(--clock-bg);
         border: 1px solid var(--border-color);
         /* FIX #1: Added vendor prefix for Safari compatibility */
         -webkit-user-select: none;
@@ -429,7 +433,8 @@
            - Shadow: black/dark opacity
            - Ring: matches the clock background or slightly distinct to create the "outline"
         */
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6),
+        box-shadow:
+          0 12px 30px rgba(0, 0, 0, 0.6),
           /* Deeper black drop shadow */ 0 0 0 10px #252527; /* A solid ring slightly lighter than #1c1c1e for subtle outline */
 
         border: 1px solid #3a3a3c; /* crisper border than before */
@@ -801,7 +806,9 @@
         text-anchor: middle;
         dominant-baseline: middle;
         opacity: 0.5;
-        transition: opacity 0.2s, fill 0.2s;
+        transition:
+          opacity 0.2s,
+          fill 0.2s;
       }
       #format-toggle-group:hover .format-toggle-text {
         opacity: 1;
@@ -811,7 +818,9 @@
         stroke: rgba(0, 0, 0, 0.1);
         stroke-width: 1px;
         cursor: pointer;
-        transition: filter 0.2s, fill 0.2s;
+        transition:
+          filter 0.2s,
+          fill 0.2s;
       }
       .task-pie-slice:hover {
         filter: brightness(1.1);
@@ -895,7 +904,9 @@
         place-items: center;
         opacity: 0;
         visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
+        transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
         z-index: 1000;
       }
       .modal-overlay.visible {
@@ -979,7 +990,9 @@
         height: 30px;
         border-radius: 50%;
         cursor: pointer;
-        transition: transform 0.2s, box-shadow 0.2s;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
         border: 3px solid transparent;
       }
       .color-option:hover {
@@ -1174,7 +1187,9 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+        transition:
+          transform 0.1s ease-in-out,
+          box-shadow 0.1s ease-in-out;
       }
       .task-block:hover {
         transform: translateY(-2px);
@@ -1233,12 +1248,16 @@
         /* Initial state for transition */
         opacity: 0;
         transform: translateY(20px);
-        transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+        transition:
+          opacity 0.4s ease,
+          transform 0.4s ease,
+          visibility 0.4s;
         visibility: hidden;
         user-select: none;
         -webkit-user-select: none;
 
-        transition: max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+        transition:
+          max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
           box-shadow 0.3s ease;
 
         max-height: 40vh;
@@ -1412,7 +1431,9 @@
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        transition: background-color 0.2s, color 0.2s;
+        transition:
+          background-color 0.2s,
+          color 0.2s;
       }
       .task-list-close-btn:hover {
         background-color: #f0f0f0;
@@ -1687,7 +1708,9 @@
         align-items: center;
         justify-content: center;
         color: #8e8e93;
-        transition: color 0.2s ease, transform 0.2s ease;
+        transition:
+          color 0.2s ease,
+          transform 0.2s ease;
       }
       .subtask-time-btn:hover {
         color: #007aff;
@@ -1772,7 +1795,9 @@
         align-items: center;
         justify-content: center;
         color: #c7c7cc; /* A muted default color */
-        transition: color 0.2s ease, transform 0.2s ease;
+        transition:
+          color 0.2s ease,
+          transform 0.2s ease;
         margin-left: 4px;
       }
       .subtask-delete-btn:hover {
@@ -1811,7 +1836,8 @@
         opacity: 0;
         transform: translateY(20px);
         animation: fadeInWidget 0.4s 0.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
           "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji",
           "Segoe UI Symbol"; /* Notion-like font stack */
       }
@@ -2115,7 +2141,9 @@
         align-items: center;
         justify-content: center;
         opacity: 0;
-        transition: opacity 0.2s, background-color 0.2s;
+        transition:
+          opacity 0.2s,
+          background-color 0.2s;
       }
       .task-tab:hover .task-tab-close-btn {
         opacity: 0.6;
@@ -2534,7 +2562,8 @@
         width: 260px;
         max-height: 300px;
         overflow-y: auto;
-        box-shadow: 0 4px 20px rgba(15, 15, 15, 0.1),
+        box-shadow:
+          0 4px 20px rgba(15, 15, 15, 0.1),
           0 0 0 1px rgba(15, 15, 15, 0.05);
         border-radius: 6px;
         padding: 6px 0;
@@ -2610,7 +2639,10 @@
         gap: 0.5rem;
         opacity: 0;
         visibility: hidden;
-        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease,
+          visibility 0.3s ease;
         z-index: 10;
       }
       .jump-to-today-btn.visible {
@@ -2672,8 +2704,9 @@
         flex-direction: column;
         max-height: 50vh;
         overflow: hidden;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
-          Arial, sans-serif;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+          sans-serif;
         opacity: 0;
         transform: translateY(-20px);
         animation: fadeInDownWidget 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -3000,8 +3033,9 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
-          Arial, sans-serif;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+          sans-serif;
         /* Animation properties */
         opacity: 0;
         transform: translateY(-20px);
@@ -3321,8 +3355,9 @@
         flex-direction: column;
         max-height: 60vh;
         overflow: hidden;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
-          Arial, sans-serif;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+          sans-serif;
 
         opacity: 0;
         transform: translateY(-20px);
@@ -3375,7 +3410,9 @@
         bottom: 1px;
         background-color: white;
         transition: 0.4s;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.1); /* Drop shadow for knob */
+        box-shadow:
+          0 2px 4px rgba(0, 0, 0, 0.2),
+          0 0 1px rgba(0, 0, 0, 0.1); /* Drop shadow for knob */
       }
       /* Checked State */
       input:checked + .slider {
@@ -3929,7 +3966,9 @@
         align-items: center;
         opacity: 0;
         visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
+        transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
       }
       .modal-overlay.visible {
         opacity: 1;
@@ -3980,7 +4019,9 @@
         font-size: 0.95rem;
         font-weight: 500;
         cursor: pointer;
-        transition: background-color 0.2s, transform 0.1s;
+        transition:
+          background-color 0.2s,
+          transform 0.1s;
       }
       .modal-btn:active {
         transform: scale(0.96);
@@ -4139,7 +4180,9 @@
             justify-content: center;
             padding: 8px;
             border-radius: 50%;
-            transition: color 0.2s, background-color 0.2s;
+            transition:
+              color 0.2s,
+              background-color 0.2s;
           "
         >
           <svg
@@ -4170,7 +4213,9 @@
             justify-content: center;
             padding: 8px;
             border-radius: 50%;
-            transition: color 0.2s, background-color 0.2s;
+            transition:
+              color 0.2s,
+              background-color 0.2s;
           "
         >
           <svg
@@ -5430,7 +5475,9 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out,
+        transition:
+          opacity 0.2s ease-in-out,
+          transform 0.2s ease-in-out,
           visibility 0.2s;
         backdrop-filter: blur(20px);
         visibility: visible;
@@ -5562,7 +5609,9 @@
         overflow: visible;
       }
       .bar-rect {
-        transition: height 0.3s, y 0.3s;
+        transition:
+          height 0.3s,
+          y 0.3s;
         rx: 4;
       }
       .bar-rect:hover {
@@ -5686,7 +5735,7 @@
         const ampmControls = document.getElementById("ampm-controls");
         const viewModeControls = document.getElementById("view-mode-controls");
         const blocksViewContainer = document.getElementById(
-          "blocks-view-container"
+          "blocks-view-container",
         );
         const yesterdayBlock = document.getElementById("yesterday-block");
         const todayBlock = document.getElementById("today-block");
@@ -5703,10 +5752,10 @@
         const taskStartTimeInput = document.getElementById("task-start-time");
         const taskEndTimeInput = document.getElementById("task-end-time");
         const taskCompletedCheckbox = document.getElementById(
-          "task-completed-checkbox"
+          "task-completed-checkbox",
         );
         const taskRecursiveToggle = document.getElementById(
-          "task-recursion-toggle"
+          "task-recursion-toggle",
         );
         const calendarMonthEl = document.getElementById("calendar-month");
         const calendarYearEl = document.getElementById("calendar-year");
@@ -5715,34 +5764,34 @@
         const calendarDatesEl = document.getElementById("calendar-dates");
         const calendarWeekdaysEl = document.getElementById("calendar-weekdays");
         const dragLabelsContainer = document.getElementById(
-          "drag-labels-container"
+          "drag-labels-container",
         );
         const dragTimeLabel = document.getElementById("drag-time-label");
 
         // Progress Widget and Bar Elements
         const progressWidget = document.getElementById("progress-widget");
         const progressWidgetCounter = document.getElementById(
-          "progress-widget-counter"
+          "progress-widget-counter",
         );
         const progressWidgetCompleteBtn = document.getElementById(
-          "progress-widget-complete"
+          "progress-widget-complete",
         );
         const progressWidgetTaskName = document.getElementById(
-          "progress-widget-task-name"
+          "progress-widget-task-name",
         );
         const progressBarContainer = document.querySelector(
-          ".progress-bar-container"
+          ".progress-bar-container",
         );
         const progressBarElapsed = document.getElementById(
-          "progress-bar-elapsed"
+          "progress-bar-elapsed",
         );
         const progressBarPercentage = document.getElementById(
-          "progress-bar-percentage"
+          "progress-bar-percentage",
         );
 
         // ADD THIS LINE
         const progressWidgetTaskTime = document.getElementById(
-          "progress-widget-task-time"
+          "progress-widget-task-time",
         );
 
         // ADD these new constants for the integrated feature
@@ -5751,44 +5800,44 @@
 
         // NEW: Format Toggle
         const formatToggleGroup = document.getElementById(
-          "format-toggle-group"
+          "format-toggle-group",
         );
         const formatToggleText = formatToggleGroup.querySelector(
-          ".format-toggle-text"
+          ".format-toggle-text",
         );
 
         // NEW: Digital Clock Elements
         const digitalClockDisplay = document.getElementById(
-          "digital-clock-display"
+          "digital-clock-display",
         );
         const digitalFormatToggle = document.getElementById(
-          "digital-format-toggle"
+          "digital-format-toggle",
         );
 
         // Recurrence Confirmation Modal
         const recurrenceModal = document.getElementById(
-          "recurrence-options-modal"
+          "recurrence-options-modal",
         );
         const recurrenceTitle = document.getElementById(
-          "recurrence-options-title"
+          "recurrence-options-title",
         );
         const recurrenceDesc = document.getElementById(
-          "recurrence-options-desc"
+          "recurrence-options-desc",
         );
         const recurrenceBtnThis = document.getElementById(
-          "recurrence-option-this"
+          "recurrence-option-this",
         );
         const recurrenceBtnFuture = document.getElementById(
-          "recurrence-option-future"
+          "recurrence-option-future",
         );
         const recurrenceBtnCancel = document.getElementById(
-          "recurrence-option-cancel"
+          "recurrence-option-cancel",
         );
 
         // --- CODE TO ADD to the 'DOM Elements' section ---
         const notesWidget = document.getElementById("notes-widget");
         const notesContainer = document.getElementById(
-          "notes-content-container"
+          "notes-content-container",
         );
         const jumpToTodayBtn = document.getElementById("jump-to-today-btn");
 
@@ -5816,7 +5865,7 @@
 
         // --- RECURRING TASKS LOGIC ---
         let recurringTasks = JSON.parse(
-          localStorage.getItem("clockRecurringTasks") || "[]"
+          localStorage.getItem("clockRecurringTasks") || "[]",
         );
         let isBlockDragging = false,
           blockDragStartHour = null;
@@ -5890,7 +5939,7 @@
         const getDateKey = (date) =>
           `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
             2,
-            "0"
+            "0",
           )}-${String(date.getDate()).padStart(2, "0")}`;
         const isToday = (date) => getDateKey(date) === getDateKey(new Date());
         const isPast = (date) => getDateKey(date) < getDateKey(new Date());
@@ -6042,7 +6091,7 @@
             .filter((rt) => {
               // 1. Start Date Check
               const startTs = new Date(
-                rt.recurrenceStart + "T00:00:00"
+                rt.recurrenceStart + "T00:00:00",
               ).getTime();
               if (dateTs < startTs) return false;
 
@@ -6072,7 +6121,7 @@
         function renderClockFace() {
           const t = document.getElementById("ticks-container"),
             e = document.getElementById("numbers-container");
-          (t.innerHTML = ""), (e.innerHTML = "");
+          ((t.innerHTML = ""), (e.innerHTML = ""));
           const n = "24h" === clockMode ? 24 : 12,
             o = "12h" === clockMode ? 6 : 12;
 
@@ -6095,7 +6144,7 @@
                 CENTER_X,
                 CENTER_Y,
                 RADIUS - (a ? 10 : 5),
-                s
+                s,
               );
             // --- Tick Logic ---
             // Calc logic hour for this tick (0..24 or 0..12)
@@ -6141,16 +6190,16 @@
               }
             }
 
-            i.setAttribute(
+            (i.setAttribute(
               "class",
               (a ? "clock-tick" : "clock-tick-small") +
-                (isPastTick ? " past" : "")
+                (isPastTick ? " past" : ""),
             ),
               i.setAttribute("x1", l.x),
               i.setAttribute("y1", l.y),
               i.setAttribute("x2", c.x),
               i.setAttribute("y2", c.y),
-              t.appendChild(i);
+              t.appendChild(i));
           }
 
           for (let d = 0; d < n; d++) {
@@ -6221,16 +6270,17 @@
             if (isCurrentNum) classes += " current-hour";
             else if (isPastNum) classes += " past";
 
-            m.setAttribute("class", classes),
+            (m.setAttribute("class", classes),
               m.setAttribute("x", p.x),
               m.setAttribute("y", p.y),
               (m.textContent = displayHour),
-              e.appendChild(m);
+              e.appendChild(m));
           }
         }
         function renderTimeOfDayLabels() {
           const t = document.getElementById("time-of-day-container");
-          (t.innerHTML = ""), t.classList.toggle("hidden", "24h" === clockMode);
+          ((t.innerHTML = ""),
+            t.classList.toggle("hidden", "24h" === clockMode));
           if ("24h" === clockMode) return;
           const e =
             "am" === ampm ? TIME_OF_DAY_SEGMENTS_AM : TIME_OF_DAY_SEGMENTS_PM;
@@ -6256,21 +6306,21 @@
                 "Z",
               ].join(" "),
               u = document.createElementNS(SVG_NS, "path");
-            u.setAttribute("d", p),
+            (u.setAttribute("d", p),
               u.setAttribute("class", "time-of-day-arc"),
               u.setAttribute("fill", n.color),
-              t.appendChild(u);
+              t.appendChild(u));
             const m = RADIUS + 10,
               g = polarToCartesian(CENTER_X, CENTER_Y, m, s),
               k = 16,
               v = document.createElementNS(SVG_NS, "image");
-            v.setAttributeNS("http://www.w3.org/1999/xlink", "href", n.image),
+            (v.setAttributeNS("http://www.w3.org/1999/xlink", "href", n.image),
               v.setAttribute("width", k),
               v.setAttribute("height", k),
               v.setAttribute("x", g.x - k / 2),
               v.setAttribute("y", g.y - k / 2),
               v.setAttribute("preserveAspectRatio", "xMidYMid meet"),
-              t.appendChild(v);
+              t.appendChild(v));
           });
         }
 
@@ -6348,13 +6398,13 @@
                 CENTER_Y,
                 TASK_PIE_RADIUS,
                 startAngle,
-                endAngle
-              )
+                endAngle,
+              ),
             );
             taskSlicePath.setAttribute("fill", sliceFillColor);
             taskSlicePath.setAttribute("fill-opacity", sliceFillOpacity);
             taskSlicePath.addEventListener("click", () =>
-              showModal(task, selectedDate)
+              showModal(task, selectedDate),
             );
             tasksContainer.appendChild(taskSlicePath);
 
@@ -6398,8 +6448,8 @@
                     CENTER_Y,
                     TASK_PIE_RADIUS,
                     startAngle,
-                    progressEndAngle
-                  )
+                    progressEndAngle,
+                  ),
                 );
                 progressPath.setAttribute("fill", UNCOMPLETED_PAST_COLOR);
                 progressPath.setAttribute("fill-opacity", "0.6");
@@ -6425,19 +6475,19 @@
               CENTER_X,
               CENTER_Y,
               TASK_PIE_RADIUS * 0.55,
-              labelAngle
+              labelAngle,
             );
             const safePos = polarToCartesian(
               CENTER_X,
               CENTER_Y,
               SAFE_RADIUS,
-              labelAngle
+              labelAngle,
             );
             const checkboxHoverPos = polarToCartesian(
               CENTER_X,
               CENTER_Y,
               CHECKBOX_HOVER_RADIUS,
-              labelAngle
+              labelAngle,
             );
 
             let textRotation = labelAngle - 90;
@@ -6448,7 +6498,7 @@
             const labelGroup = document.createElementNS(SVG_NS, "g");
             labelGroup.setAttribute("class", "task-label-group");
             labelGroup.addEventListener("click", () =>
-              showModal(task, selectedDate)
+              showModal(task, selectedDate),
             );
 
             const taskLabelText = document.createElementNS(SVG_NS, "text");
@@ -6457,7 +6507,7 @@
             taskLabelText.setAttribute("text-anchor", "middle");
             taskLabelText.setAttribute(
               "fill",
-              task.completed ? COMPLETED_COLOR : task.color
+              task.completed ? COMPLETED_COLOR : task.color,
             );
 
             // --- Truncation Logic ---
@@ -6476,13 +6526,13 @@
               taskLabelText.textContent = task.name;
               taskLabelText.setAttribute(
                 "text-anchor",
-                isFlipped ? "end" : "start"
+                isFlipped ? "end" : "start",
               );
               taskLabelText.setAttribute("x", safePos.x);
               taskLabelText.setAttribute("y", safePos.y);
               taskLabelText.setAttribute(
                 "transform",
-                `rotate(${textRotation} ${safePos.x} ${safePos.y})`
+                `rotate(${textRotation} ${safePos.x} ${safePos.y})`,
               );
             } else {
               taskLabelText.textContent = displayName;
@@ -6490,7 +6540,7 @@
               taskLabelText.setAttribute("y", labelPos.y);
               taskLabelText.setAttribute(
                 "transform",
-                `rotate(${textRotation} ${labelPos.x} ${labelPos.y})`
+                `rotate(${textRotation} ${labelPos.x} ${labelPos.y})`,
               );
             }
 
@@ -6498,18 +6548,19 @@
             labelGroup.addEventListener("mouseenter", (e) => {
               hoveredTaskId = task.id; // UPDATE STATE
               taskLabelText.textContent = task.name;
-              labelsContainer.appendChild(labelGroup); // Bring to front
+              // We CANNOT use labelsContainer.appendChild(labelGroup) here because
+              // detaching a DOM node under the pointer reliably breaks mouseleave events in Chromium.
 
               // 1. Move Text to Safe Radius
               taskLabelText.setAttribute(
                 "text-anchor",
-                isFlipped ? "end" : "start"
+                isFlipped ? "end" : "start",
               );
               taskLabelText.setAttribute("x", safePos.x);
               taskLabelText.setAttribute("y", safePos.y);
               taskLabelText.setAttribute(
                 "transform",
-                `rotate(${textRotation} ${safePos.x} ${safePos.y})`
+                `rotate(${textRotation} ${safePos.x} ${safePos.y})`,
               );
 
               // 2. Move Checkbox to Margin (Before Text)
@@ -6519,7 +6570,7 @@
                   checkboxHoverPos.y - checkboxSize / 2
                 }) rotate(${textRotation}, ${checkboxSize / 2}, ${
                   checkboxSize / 2
-                })`
+                })`,
               );
 
               // 3. Add HIT AREA BRIDGE (Transparent Rect)
@@ -6528,22 +6579,26 @@
                 bridge = document.createElementNS(SVG_NS, "rect");
                 bridge.setAttribute("class", "hover-bridge");
                 bridge.setAttribute("fill", "transparent");
-                bridge.setAttribute("height", "20");
+                bridge.setAttribute("height", "30"); // Increased height to catch strays
                 labelGroup.prepend(bridge);
               }
-              const bridgeWidth = SAFE_RADIUS - CHECKBOX_HOVER_RADIUS + 5;
+              // The text originally sits at labelPos (radius 88). It jumps to safePos (radius 60).
+              // The bridge must seamlessly connect these two radii.
+              const labelRadius = TASK_PIE_RADIUS * 0.55;
+              const bridgeWidth = labelRadius - SAFE_RADIUS + 30; // +30 ensures full seamless overlap
+              const bridgeCenterRadius = SAFE_RADIUS + (labelRadius - SAFE_RADIUS) / 2;
               const bridgePos = polarToCartesian(
                 CENTER_X,
                 CENTER_Y,
-                CHECKBOX_HOVER_RADIUS + bridgeWidth / 2,
-                labelAngle
+                bridgeCenterRadius,
+                labelAngle,
               );
               bridge.setAttribute("width", bridgeWidth);
               bridge.setAttribute("x", bridgePos.x - bridgeWidth / 2);
-              bridge.setAttribute("y", bridgePos.y - 10);
+              bridge.setAttribute("y", bridgePos.y - 15);
               bridge.setAttribute(
                 "transform",
-                `rotate(${textRotation} ${bridgePos.x} ${bridgePos.y})`
+                `rotate(${textRotation} ${bridgePos.x} ${bridgePos.y})`,
               );
 
               // --- Restore Tooltip ---
@@ -6571,7 +6626,7 @@
               taskLabelText.setAttribute("y", labelPos.y);
               taskLabelText.setAttribute(
                 "transform",
-                `rotate(${textRotation} ${labelPos.x} ${labelPos.y})`
+                `rotate(${textRotation} ${labelPos.x} ${labelPos.y})`,
               );
 
               // 2. Revert Checkbox
@@ -6581,7 +6636,7 @@
                   checkboxPos.y - checkboxSize / 2
                 }) rotate(${textRotation}, ${checkboxSize / 2}, ${
                   checkboxSize / 2
-                })`
+                })`,
               );
 
               // 3. Remove Bridge
@@ -6606,7 +6661,7 @@
               CENTER_X,
               CENTER_Y,
               TASK_PIE_RADIUS - checkboxSize * 1.5,
-              labelAngle
+              labelAngle,
             );
 
             // Initial Checkbox Position (based on persistence)
@@ -6617,7 +6672,7 @@
                   checkboxHoverPos.y - checkboxSize / 2
                 }) rotate(${textRotation}, ${checkboxSize / 2}, ${
                   checkboxSize / 2
-                })`
+                })`,
               );
               // Ensure bridge exists immediately if hovered to maintain stability
               // We defer appending it to after checkboxGroup is appended to labelGroup
@@ -6628,7 +6683,7 @@
                   checkboxPos.y - checkboxSize / 2
                 }) rotate(${textRotation}, ${checkboxSize / 2}, ${
                   checkboxSize / 2
-                })`
+                })`,
               );
             }
 
@@ -6651,7 +6706,7 @@
                 "d",
                 `M3 ${checkboxSize / 2} L${checkboxSize / 2.5} ${
                   checkboxSize - 4
-                } L${checkboxSize - 3} 4`
+                } L${checkboxSize - 3} 4`,
               );
               checkboxGroup.appendChild(checkmarkPath);
             }
@@ -6671,14 +6726,14 @@
                 CENTER_X,
                 CENTER_Y,
                 CHECKBOX_HOVER_RADIUS + bridgeWidth / 2,
-                labelAngle
+                labelAngle,
               );
               bridge.setAttribute("width", bridgeWidth);
               bridge.setAttribute("x", bridgePosBridge.x - bridgeWidth / 2);
               bridge.setAttribute("y", bridgePosBridge.y - 10);
               bridge.setAttribute(
                 "transform",
-                `rotate(${textRotation} ${bridgePosBridge.x} ${bridgePosBridge.y})`
+                `rotate(${textRotation} ${bridgePosBridge.x} ${bridgePosBridge.y})`,
               );
               labelGroup.prepend(bridge);
             }
@@ -6701,15 +6756,15 @@
             a = "24h" === clockMode ? 24 : 12,
             i = o % a,
             l = (i / a) * 360 + (n / 60) * (360 / a);
-          (secondHand.style.transform = `rotate(${r}deg)`),
+          ((secondHand.style.transform = `rotate(${r}deg)`),
             (minuteHand.style.transform = `rotate(${s}deg)`),
-            (hourHand.style.transform = `rotate(${l}deg)`);
+            (hourHand.style.transform = `rotate(${l}deg)`));
           let c = !isToday(selectedDate);
-          isToday(selectedDate) &&
+          (isToday(selectedDate) &&
             "12h" === clockMode &&
             (("am" === ampm && o >= 12) || ("pm" === ampm && o < 12)) &&
             (c = !0),
-            handsContainer.classList.toggle("faded", c);
+            handsContainer.classList.toggle("faded", c));
         }
 
         // --- Digital Clock Logic ---
@@ -6746,35 +6801,23 @@
           const tomorrow = new Date(today);
           tomorrow.setDate(today.getDate() + 1);
           const options = { weekday: "long", day: "numeric", month: "short" };
-          document.getElementById(
-            "yesterday-label"
-          ).textContent = `Yesterday: ${yesterday.toLocaleDateString(
-            undefined,
-            options
-          )}`;
-          document.getElementById(
-            "today-label"
-          ).textContent = `Today: ${today.toLocaleDateString(
-            undefined,
-            options
-          )}`;
-          document.getElementById(
-            "tomorrow-label"
-          ).textContent = `Tomorrow: ${tomorrow.toLocaleDateString(
-            undefined,
-            options
-          )}`;
+          document.getElementById("yesterday-label").textContent =
+            `Yesterday: ${yesterday.toLocaleDateString(undefined, options)}`;
+          document.getElementById("today-label").textContent =
+            `Today: ${today.toLocaleDateString(undefined, options)}`;
+          document.getElementById("tomorrow-label").textContent =
+            `Tomorrow: ${tomorrow.toLocaleDateString(undefined, options)}`;
           renderDayBlock(
             yesterday,
-            document.getElementById("yesterday-tasks-container")
+            document.getElementById("yesterday-tasks-container"),
           );
           renderDayBlock(
             today,
-            document.getElementById("today-tasks-container")
+            document.getElementById("today-tasks-container"),
           );
           renderDayBlock(
             tomorrow,
-            document.getElementById("tomorrow-tasks-container")
+            document.getElementById("tomorrow-tasks-container"),
           );
           updateCurrentTimeLine();
         }
@@ -6886,8 +6929,8 @@
               CENTER_Y,
               TASK_PIE_RADIUS,
               startAngle,
-              endAngle
-            )
+              endAngle,
+            ),
           );
         };
         const handleDragEnd = () => {
@@ -6963,7 +7006,7 @@
           }
 
           dragTimeLabel.textContent = `${formatForLabel(
-            startDisplay
+            startDisplay,
           )} - ${formatForLabel(endDisplay)}`;
           dragTimeLabel.setAttribute("x", n);
           dragTimeLabel.setAttribute("y", o + 30);
@@ -6984,7 +7027,7 @@
           blockDragStartHour = getHourFromBlockEvent(e, activeDragBlock);
 
           const previewBlock = activeDragBlock.querySelector(
-            ".task-preview-block"
+            ".task-preview-block",
           );
           if (previewBlock) {
             previewBlock.style.display = "block";
@@ -7003,7 +7046,7 @@
 
           const endHour = getHourFromBlockEvent(e, activeDragBlock);
           const previewBlock = activeDragBlock.querySelector(
-            ".task-preview-block"
+            ".task-preview-block",
           );
           if (previewBlock) {
             previewBlock.style.display = "none";
@@ -7020,7 +7063,7 @@
         };
         function updateBlockPreview(e) {
           const previewBlock = activeDragBlock.querySelector(
-            ".task-preview-block"
+            ".task-preview-block",
           );
           if (!previewBlock) return;
           const currentHour = getHourFromBlockEvent(e, activeDragBlock);
@@ -7037,10 +7080,10 @@
         const confirmationTitle = document.getElementById("confirmation-title");
         const confirmationDesc = document.getElementById("confirmation-desc");
         const confirmationBtnConfirm = document.getElementById(
-          "confirmation-btn-confirm"
+          "confirmation-btn-confirm",
         );
         const confirmationBtnCancel = document.getElementById(
-          "confirmation-btn-cancel"
+          "confirmation-btn-cancel",
         );
 
         function showConfirmation(title, desc, onConfirm) {
@@ -7097,7 +7140,7 @@
         // --- Modal Logic ---
         let modalTaskDate = null;
         function showModal(t = null, e, n = null) {
-          (modalTaskDate = e || selectedDate),
+          ((modalTaskDate = e || selectedDate),
             t
               ? ((modalTitle.textContent = "Edit Task"),
                 (taskIdInput.value = t.id),
@@ -7109,7 +7152,7 @@
                 document
                   .querySelectorAll(".color-option")
                   .forEach((e) =>
-                    e.classList.toggle("selected", e.dataset.color === t.color)
+                    e.classList.toggle("selected", e.dataset.color === t.color),
                   ),
                 (taskRecursiveToggle.checked = !!t.isRecurringInstance))
               : ((modalTitle.textContent = "New Task"),
@@ -7127,11 +7170,11 @@
                 document
                   .querySelector(".color-option")
                   ?.classList.add("selected")),
-            modal.classList.add("visible");
+            modal.classList.add("visible"));
         }
         const hideModal = () => {
-          modal.classList.remove("visible"),
-            (dragLabelsContainer.style.visibility = "hidden");
+          (modal.classList.remove("visible"),
+            (dragLabelsContainer.style.visibility = "hidden"));
         };
         async function saveTask() {
           const taskName = taskNameInput.value.trim();
@@ -7177,7 +7220,7 @@
                     if (choice === "future") {
                       // Update SERIES
                       const rIndex = recurringTasks.findIndex(
-                        (rt) => rt.id === originalId
+                        (rt) => rt.id === originalId,
                       );
                       if (rIndex > -1) {
                         recurringTasks[rIndex] = {
@@ -7189,14 +7232,14 @@
                         };
                         localStorage.setItem(
                           "clockRecurringTasks",
-                          JSON.stringify(recurringTasks)
+                          JSON.stringify(recurringTasks),
                         );
                       }
                     } else {
                       // Update INSTANCE (Exception)
                       // 1. Blacklist date in recurringTasks
                       const rIndex = recurringTasks.findIndex(
-                        (rt) => rt.id === originalId
+                        (rt) => rt.id === originalId,
                       );
                       if (rIndex > -1) {
                         if (!recurringTasks[rIndex].exceptions)
@@ -7204,7 +7247,7 @@
                         recurringTasks[rIndex].exceptions[dateKey] = true;
                         localStorage.setItem(
                           "clockRecurringTasks",
-                          JSON.stringify(recurringTasks)
+                          JSON.stringify(recurringTasks),
                         );
                       }
                       // 2. Create One-Off
@@ -7220,12 +7263,12 @@
                       });
                       localStorage.setItem(
                         "clockTasksPro",
-                        JSON.stringify(tasksByDate)
+                        JSON.stringify(tasksByDate),
                       );
                     }
                     renderAppView();
                     hideModal();
-                  }
+                  },
                 );
                 return; // Stop here, wait for callback
               } else {
@@ -7238,7 +7281,7 @@
                     if (choice === "cancel") return;
 
                     const rIndex = recurringTasks.findIndex(
-                      (rt) => rt.id === originalId
+                      (rt) => rt.id === originalId,
                     );
 
                     if (choice === "future") {
@@ -7251,7 +7294,7 @@
                           getDateKey(yesterday);
                         localStorage.setItem(
                           "clockRecurringTasks",
-                          JSON.stringify(recurringTasks)
+                          JSON.stringify(recurringTasks),
                         );
                       }
                     } else {
@@ -7262,7 +7305,7 @@
                         recurringTasks[rIndex].exceptions[dateKey] = true;
                         localStorage.setItem(
                           "clockRecurringTasks",
-                          JSON.stringify(recurringTasks)
+                          JSON.stringify(recurringTasks),
                         );
                       }
                     }
@@ -7280,12 +7323,12 @@
                     });
                     localStorage.setItem(
                       "clockTasksPro",
-                      JSON.stringify(tasksByDate)
+                      JSON.stringify(tasksByDate),
                     );
 
                     renderAppView();
                     hideModal();
-                  }
+                  },
                 );
                 return;
               }
@@ -7297,11 +7340,11 @@
                 // 1. Remove One-off
                 if (tasksByDate[dateKey]) {
                   tasksByDate[dateKey] = tasksByDate[dateKey].filter(
-                    (t) => t.id !== tId
+                    (t) => t.id !== tId,
                   );
                   localStorage.setItem(
                     "clockTasksPro",
-                    JSON.stringify(tasksByDate)
+                    JSON.stringify(tasksByDate),
                   );
                 }
                 // 2. Add Recurring
@@ -7316,7 +7359,7 @@
                 });
                 localStorage.setItem(
                   "clockRecurringTasks",
-                  JSON.stringify(recurringTasks)
+                  JSON.stringify(recurringTasks),
                 );
               } else {
                 // Just Update One-off
@@ -7333,7 +7376,7 @@
                   };
                   localStorage.setItem(
                     "clockTasksPro",
-                    JSON.stringify(tasksByDate)
+                    JSON.stringify(tasksByDate),
                   );
                 }
               }
@@ -7353,7 +7396,7 @@
               });
               localStorage.setItem(
                 "clockRecurringTasks",
-                JSON.stringify(recurringTasks)
+                JSON.stringify(recurringTasks),
               );
             } else {
               if (!tasksByDate[dateKey]) tasksByDate[dateKey] = [];
@@ -7368,7 +7411,7 @@
               });
               localStorage.setItem(
                 "clockTasksPro",
-                JSON.stringify(tasksByDate)
+                JSON.stringify(tasksByDate),
               );
             }
           }
@@ -7401,7 +7444,7 @@
                     if (choice === "future") {
                       // Delete Series (or Stop Recurrence)
                       const rIndex = recurringTasks.findIndex(
-                        (rt) => rt.id === originalId
+                        (rt) => rt.id === originalId,
                       );
                       if (rIndex > -1) {
                         // If start date is in future OR today is the start date, just delete completely
@@ -7416,13 +7459,13 @@
                         }
                         localStorage.setItem(
                           "clockRecurringTasks",
-                          JSON.stringify(recurringTasks)
+                          JSON.stringify(recurringTasks),
                         );
                       }
                     } else {
                       // Delete Instance (Exception)
                       const rIndex = recurringTasks.findIndex(
-                        (rt) => rt.id === originalId
+                        (rt) => rt.id === originalId,
                       );
                       if (rIndex > -1) {
                         if (!recurringTasks[rIndex].exceptions)
@@ -7430,13 +7473,13 @@
                         recurringTasks[rIndex].exceptions[dateKey] = true;
                         localStorage.setItem(
                           "clockRecurringTasks",
-                          JSON.stringify(recurringTasks)
+                          JSON.stringify(recurringTasks),
                         );
                       }
                     }
                     renderAppView();
                     hideModal();
-                  }
+                  },
                 );
                 return;
               } else {
@@ -7444,19 +7487,19 @@
                 const tId = Number(taskIdRaw);
                 if (tasksByDate[dateKey]) {
                   tasksByDate[dateKey] = tasksByDate[dateKey].filter(
-                    (t) => t.id !== tId
+                    (t) => t.id !== tId,
                   );
                   if (tasksByDate[dateKey].length === 0)
                     delete tasksByDate[dateKey];
                   localStorage.setItem(
                     "clockTasksPro",
-                    JSON.stringify(tasksByDate)
+                    JSON.stringify(tasksByDate),
                   );
                 }
               }
               renderAppView();
               hideModal();
-            }
+            },
           );
         }
         function toggleTaskCompletion(taskId) {
@@ -7476,7 +7519,7 @@
               rTask.exceptions[dateKey] = true;
               localStorage.setItem(
                 "clockRecurringTasks",
-                JSON.stringify(recurringTasks)
+                JSON.stringify(recurringTasks),
               );
 
               // 2. Materialize as Completed One-Off
@@ -7504,7 +7547,7 @@
               tasksByDate[dateKey].push(newTask);
               localStorage.setItem(
                 "clockTasksPro",
-                JSON.stringify(tasksByDate)
+                JSON.stringify(tasksByDate),
               );
               renderAppView();
             }
@@ -7517,7 +7560,7 @@
                 task.completed = !task.completed;
                 localStorage.setItem(
                   "clockTasksPro",
-                  JSON.stringify(tasksByDate)
+                  JSON.stringify(tasksByDate),
                 );
                 renderAppView();
               }
@@ -7630,7 +7673,7 @@
             if (!activeEditorInstance) {
               const todayKey = getDateKey(new Date());
               const todaySection = document.getElementById(
-                `note-section-${todayKey}`
+                `note-section-${todayKey}`,
               );
               if (todaySection) {
                 const editor = todaySection.querySelector(".note-editor");
@@ -7757,7 +7800,7 @@
 
         function renderSlashMenu() {
           const filtered = SLASH_ITEMS.filter((item) =>
-            item.label.toLowerCase().includes(slashMenuFilter.toLowerCase())
+            item.label.toLowerCase().includes(slashMenuFilter.toLowerCase()),
           );
 
           slashMenuEl.innerHTML = "";
@@ -8006,7 +8049,7 @@
             // ... existing slash menu logic ...
             // (Copying existing logic for safety to match replacement signature)
             const filtered = SLASH_ITEMS.filter((item) =>
-              item.label.toLowerCase().includes(slashMenuFilter.toLowerCase())
+              item.label.toLowerCase().includes(slashMenuFilter.toLowerCase()),
             );
 
             if (e.key === "ArrowDown") {
@@ -8217,14 +8260,15 @@
               else if (text === ">") type = "quote";
               // NEW Shortcuts
               else if (text === "---") type = "divider";
-              else if (text === "|") type = "quote"; // Alternate quote shortcut
+              else if (text === "|")
+                type = "quote"; // Alternate quote shortcut
               else if (text === "<>") type = "code";
 
               if (type) {
                 e.preventDefault();
                 // Consume the space and the markdown chars
                 textNode.textContent = textNode.textContent.substring(
-                  range.startOffset
+                  range.startOffset,
                 );
 
                 // If it's a valid block?
@@ -8374,12 +8418,12 @@
             // Ensure "General" is always there if desired, or exclude if purely dynamic
             // allCats.add("General");
             return Array.from(allCats).sort((a, b) =>
-              a.localeCompare(b, undefined, { sensitivity: "base" })
+              a.localeCompare(b, undefined, { sensitivity: "base" }),
             );
           }
 
           const categoryDropdown = document.getElementById(
-            "category-predictions"
+            "category-predictions",
           );
           let currentDropdownSelectionIndex = -1;
 
@@ -8415,7 +8459,7 @@
                 const regex = new RegExp(`(${filterText})`, "gi");
                 item.innerHTML = cat.replace(
                   regex,
-                  '<span class="match-highlight">$1</span>'
+                  '<span class="match-highlight">$1</span>',
                 );
               } else {
                 item.textContent = cat;
@@ -8435,7 +8479,7 @@
 
           function highlightDropdownItem(index) {
             const items = categoryDropdown.querySelectorAll(
-              ".category-dropdown-item"
+              ".category-dropdown-item",
             );
             items.forEach((item, i) => {
               if (i === index) item.classList.add("selected-nav");
@@ -8466,7 +8510,7 @@
             if (e.key === "ArrowDown") {
               e.preventDefault();
               const items = categoryDropdown.querySelectorAll(
-                ".category-dropdown-item"
+                ".category-dropdown-item",
               );
               if (items.length > 0) {
                 currentDropdownSelectionIndex =
@@ -8478,7 +8522,7 @@
             if (e.key === "ArrowUp") {
               e.preventDefault();
               const items = categoryDropdown.querySelectorAll(
-                ".category-dropdown-item"
+                ".category-dropdown-item",
               );
               if (items.length > 0) {
                 currentDropdownSelectionIndex =
@@ -8497,12 +8541,12 @@
                 categoryDropdown.classList.contains("visible")
               ) {
                 const items = categoryDropdown.querySelectorAll(
-                  ".category-dropdown-item"
+                  ".category-dropdown-item",
                 );
                 if (items[currentDropdownSelectionIndex]) {
                   // Trigger mousedown logic/select
                   items[currentDropdownSelectionIndex].onmousedown(
-                    new Event("mousedown")
+                    new Event("mousedown"),
                   ); // Simulate
                   return; // Done
                 }
@@ -8562,7 +8606,7 @@
           function saveTaskTabs() {
             localStorage.setItem(
               "clockTaskTabs",
-              JSON.stringify(clockTaskTabs)
+              JSON.stringify(clockTaskTabs),
             );
             localStorage.setItem("activeTaskTabId", activeTaskTabId);
           }
@@ -8669,7 +8713,7 @@
           function saveTaskTabContent() {
             const brainDumpList = document.getElementById("brain-dump-list");
             const activeTab = clockTaskTabs.find(
-              (t) => t.id === activeTaskTabId
+              (t) => t.id === activeTaskTabId,
             );
             if (activeTab && brainDumpList) {
               activeTab.content = brainDumpList.innerHTML;
@@ -8697,10 +8741,10 @@
             const title = document.getElementById("confirmation-title");
             const desc = document.getElementById("confirmation-desc");
             const confirmBtn = document.getElementById(
-              "confirmation-btn-confirm"
+              "confirmation-btn-confirm",
             );
             const cancelBtn = document.getElementById(
-              "confirmation-btn-cancel"
+              "confirmation-btn-cancel",
             );
 
             title.textContent = "Delete Tab?";
@@ -8742,7 +8786,7 @@
           function renderBrainDump() {
             const brainDumpList = document.getElementById("brain-dump-list");
             const activeTab = clockTaskTabs.find(
-              (t) => t.id === activeTaskTabId
+              (t) => t.id === activeTaskTabId,
             );
             const content = activeTab ? activeTab.content : "";
 
@@ -8771,16 +8815,16 @@
           const tabTasks = document.getElementById("tab-tasks");
           const tabTopics = document.getElementById("tab-topics");
           const finalNotesContentContainer = document.getElementById(
-            "notes-content-container"
+            "notes-content-container",
           );
           const tasksContentContainer = document.getElementById(
-            "tasks-content-container"
+            "tasks-content-container",
           );
           const topicListContainer = document.getElementById("topic-list-view");
           const topicDetailContainer =
             document.getElementById("topic-detail-view");
           const topicFilterContainer = document.getElementById(
-            "topic-filter-container"
+            "topic-filter-container",
           );
           const clearTasksBtn = document.getElementById("clear-tasks-btn");
           const addElementBtn = document.getElementById("add-element-btn");
@@ -8907,7 +8951,7 @@
 
           // 2. Render Filters
           const filterContainer = document.getElementById(
-            "topic-filter-container"
+            "topic-filter-container",
           );
           if (filterContainer) {
             if (topicNotes.length > 0) {
@@ -8970,7 +9014,7 @@
                     e.stopPropagation();
                     if (
                       confirm(
-                        `Delete category "${cat}"? This will remove it from all notes.`
+                        `Delete category "${cat}"? This will remove it from all notes.`,
                       )
                     ) {
                       let changed = false;
@@ -9104,7 +9148,7 @@
                 confirm(
                   `Are you sure you want to delete "${
                     note.title || "Untitled"
-                  }"?`
+                  }"?`,
                 )
               ) {
                 topicNotes = topicNotes.filter((n) => n.id !== note.id);
@@ -9170,7 +9214,7 @@
           // Focus title
           setTimeout(
             () => document.getElementById("topic-title-input").focus(),
-            100
+            100,
           );
         }
 
@@ -9194,7 +9238,7 @@
           if (activeEditorInstance.id === "brain-dump-editor") {
             localStorage.setItem(
               "clockBrainDumpHTML",
-              activeEditorInstance.innerHTML
+              activeEditorInstance.innerHTML,
             );
             return;
           }
@@ -9238,7 +9282,7 @@
         function saveNotes() {
           localStorage.setItem(
             "clockTasksProNotes",
-            JSON.stringify(notesByDate)
+            JSON.stringify(notesByDate),
           );
         }
 
@@ -9256,7 +9300,7 @@
           if (getDateKey(date) === getDateKey(yesterday))
             return `Yesterday · ${yesterday.toLocaleDateString(
               "en-US",
-              options
+              options,
             )}`;
           return date.toLocaleDateString("en-US", options);
         }
@@ -9319,7 +9363,7 @@
             e.stopPropagation();
             if (
               confirm(
-                "Are you sure you want to delete all notes for this date?"
+                "Are you sure you want to delete all notes for this date?",
               )
             ) {
               delete notesByDate[dateKey];
@@ -9372,8 +9416,8 @@
 
           const datesToRender = new Set(
             Object.keys(notesByDate).filter((key) =>
-              notesByDate[key]?.replace(/<[^>]*>?/gm, "").trim()
-            )
+              notesByDate[key]?.replace(/<[^>]*>?/gm, "").trim(),
+            ),
           );
           datesToRender.add(focusedDateKey);
 
@@ -9388,7 +9432,7 @@
 
           // ... (Intersection observer logic same as before, see snippet below)
           const focusedElement = document.querySelector(
-            ".note-section.focused"
+            ".note-section.focused",
           );
           if (focusedElement) {
             // Check if widget is visible (not collapsed) before scrolling
@@ -9408,22 +9452,22 @@
 
           if (todayObserver) todayObserver.disconnect();
           const todayElement = document.getElementById(
-            `note-section-${todayKey}`
+            `note-section-${todayKey}`,
           );
           if (todayElement) {
             todayObserver = new IntersectionObserver(
               (entries) =>
                 jumpToTodayBtn.classList.toggle(
                   "visible",
-                  !entries[0].isIntersecting
+                  !entries[0].isIntersecting,
                 ),
-              { root: notesContainer, threshold: 0.1 }
+              { root: notesContainer, threshold: 0.1 },
             );
             todayObserver.observe(todayElement);
           } else {
             jumpToTodayBtn.classList.toggle(
               "visible",
-              focusedDateKey !== todayKey
+              focusedDateKey !== todayKey,
             );
           }
         }
@@ -9439,7 +9483,7 @@
           const minutes = Math.floor(totalSeconds / 60);
           const seconds = Math.floor(totalSeconds % 60);
           return `${String(minutes).padStart(2, "0")}:${String(
-            seconds
+            seconds,
           ).padStart(2, "0")}`;
         }
 
@@ -9447,7 +9491,7 @@
           if (!currentWidgetTaskId) return null;
           const dateKey = getDateKey(selectedDate);
           return (tasksByDate[dateKey] || []).find(
-            (t) => t.id === currentWidgetTaskId
+            (t) => t.id === currentWidgetTaskId,
           );
         }
 
@@ -9478,7 +9522,7 @@
           // --- NEW LOGIC: Focus and select the new subtask name ---
           // Find the newly created card element using its unique data attribute
           const newCardEl = document.querySelector(
-            `[data-subtask-id="${newSubtask.id}"]`
+            `[data-subtask-id="${newSubtask.id}"]`,
           );
           if (newCardEl) {
             const nameEl = newCardEl.querySelector(".subtask-name");
@@ -9593,7 +9637,7 @@
 
           const container = document.getElementById("subtasks-container");
           const controlsContainer = document.getElementById(
-            "subtask-controls-container"
+            "subtask-controls-container",
           );
           container.innerHTML = "";
           controlsContainer.innerHTML = "";
@@ -9673,12 +9717,12 @@
               }
             });
             nameEl.addEventListener("blur", () =>
-              handleSubtaskNameChange(subtask, nameEl.textContent)
+              handleSubtaskNameChange(subtask, nameEl.textContent),
             );
             card
               .querySelector(".subtask-checkbox")
               .addEventListener("click", () =>
-                handleSubtaskCompletionToggle(subtask)
+                handleSubtaskCompletionToggle(subtask),
               );
             card
               .querySelector(".subtask-delete-btn")
@@ -9698,10 +9742,10 @@
               };
               timeInput.addEventListener("input", toggleSetButton);
               timeUpBtn.addEventListener("click", () =>
-                handleSetRemainingTime(subtask)
+                handleSetRemainingTime(subtask),
               );
               setTimeBtn.addEventListener("click", () =>
-                handleSetSubtaskTime(subtask, parseInt(timeInput.value, 10))
+                handleSetSubtaskTime(subtask, parseInt(timeInput.value, 10)),
               );
               toggleSetButton(); // Initial check
             } else {
@@ -9709,19 +9753,19 @@
                 card
                   .querySelector(".play-pause-btn")
                   .addEventListener("click", () =>
-                    handleSubtaskTimerToggle(subtask)
+                    handleSubtaskTimerToggle(subtask),
                   );
                 card
                   .querySelector(".subtask-timer-display")
                   .addEventListener("click", () =>
-                    handleEditSubtaskTime(subtask)
+                    handleEditSubtaskTime(subtask),
                   );
 
                 // NEW: PiP Listener
                 const pipBtn = card.querySelector(".pip-btn");
                 if (pipBtn) {
                   pipBtn.addEventListener("click", () =>
-                    toggleSubtaskPiP(subtask.id)
+                    toggleSubtaskPiP(subtask.id),
                   );
                 }
               } else {
@@ -9735,7 +9779,7 @@
           const mainTaskDurationMinutes = (task.endHour - task.startHour) * 60;
           const totalAllocatedSubtaskMinutes = subtasks.reduce(
             (total, st) => total + (st.setDurationSeconds || 0) / 60,
-            0
+            0,
           );
           const maxAllowedMinutes = mainTaskDurationMinutes + 20;
 
@@ -9767,13 +9811,13 @@
             }
 
             const timerDisplay = document.getElementById(
-              `timer-display-${subtask.id}`
+              `timer-display-${subtask.id}`,
             );
             const progressBar = document.getElementById(
-              `progress-${subtask.id}`
+              `progress-${subtask.id}`,
             );
             const playPauseBtn = document.querySelector(
-              `[data-subtask-id="${subtask.id}"] .play-pause-btn`
+              `[data-subtask-id="${subtask.id}"] .play-pause-btn`,
             );
 
             if (!timerDisplay || !progressBar) return;
@@ -9786,21 +9830,21 @@
             const remainingSeconds =
               subtask.setDurationSeconds - currentElapsed;
             const setTimeFormatted = formatSecondsToMMSS(
-              subtask.setDurationSeconds
+              subtask.setDurationSeconds,
             );
             let progressPercent =
               (currentElapsed / subtask.setDurationSeconds) * 100;
 
             if (remainingSeconds >= 0) {
               timerDisplay.textContent = `${formatSecondsToMMSS(
-                remainingSeconds
+                remainingSeconds,
               )} / ${setTimeFormatted}`;
               timerDisplay.classList.remove("overtime");
               progressBar.classList.remove("overtime");
             } else {
               const overtimeSeconds = Math.abs(remainingSeconds);
               timerDisplay.textContent = `+${formatSecondsToMMSS(
-                overtimeSeconds
+                overtimeSeconds,
               )} / ${setTimeFormatted}`;
               timerDisplay.classList.add("overtime");
               progressBar.classList.add("overtime");
@@ -9844,13 +9888,13 @@
               subtask.elapsedSeconds -
               (subtask.isPaused
                 ? 0
-                : (Date.now() - subtask.timerStartTime) / 1000)
+                : (Date.now() - subtask.timerStartTime) / 1000),
           );
 
           const minutes = Math.floor(remaining / 60);
           const seconds = Math.floor(remaining % 60);
           const timeString = `${String(minutes).padStart(2, "0")}:${String(
-            seconds
+            seconds,
           ).padStart(2, "0")}`;
 
           ctx.font =
@@ -9868,7 +9912,7 @@
               ? mainTaskName.substring(0, 25) + "..."
               : mainTaskName,
             160,
-            145
+            145,
           );
 
           // Subtask Label
@@ -9879,7 +9923,7 @@
               ? subtask.name.substring(0, 30) + "..."
               : subtask.name,
             160,
-            165
+            165,
           );
         }
 
@@ -9916,7 +9960,7 @@
                     activePiPSubtaskId = null;
                   }
                 },
-                { once: true }
+                { once: true },
               );
             }
           } catch (err) {
@@ -9961,7 +10005,7 @@
               currentTask = tasksForDay.find(
                 (task) =>
                   currentHour24 >= task.startHour &&
-                  currentHour24 < task.endHour
+                  currentHour24 < task.endHour,
               );
             }
           }
@@ -9997,7 +10041,7 @@
 
           if (currentTask) {
             const taskIndex = tasksForDay.findIndex(
-              (t) => t.id === currentTask.id
+              (t) => t.id === currentTask.id,
             );
             const taskDuration = currentTask.endHour - currentTask.startHour;
 
@@ -10024,7 +10068,7 @@
             progressWidgetTaskName.title = "Click to edit task details";
 
             progressWidgetTaskTime.textContent = `${formatHourToAMPM(
-              currentTask.startHour
+              currentTask.startHour,
             )} - ${formatHourToAMPM(currentTask.endHour)}`;
 
             // FIX: Restore display
@@ -10043,7 +10087,7 @@
             progressBarPercentage.textContent =
               progressPercentage > 0 || currentTask.completed
                 ? `${Math.floor(
-                    currentTask.completed ? 100 : progressPercentage
+                    currentTask.completed ? 100 : progressPercentage,
                   )}%`
                 : "";
 
@@ -10072,7 +10116,7 @@
             let nextTask = null;
             if (isToday(selectedDate)) {
               nextTask = tasksForDay.find(
-                (t) => !t.completed && t.startHour > currentHour24
+                (t) => !t.completed && t.startHour > currentHour24,
               );
             } else if (isPast(selectedDate)) {
               // No "Next Up" for past days
@@ -10095,7 +10139,7 @@
               progressWidgetTaskName.onclick = null;
 
               progressWidgetTaskTime.textContent = `Starts at ${formatHourToAMPM(
-                nextTask.startHour
+                nextTask.startHour,
               )}`;
               progressBarElapsed.style.width = "0%";
               progressBarPercentage.textContent = "";
@@ -10103,7 +10147,7 @@
               progressWidgetCompleteBtn.style.display = "none";
 
               const nextTaskIndex = tasksForDay.findIndex(
-                (t) => t.id === nextTask.id
+                (t) => t.id === nextTask.id,
               );
               progressWidgetCounter.style.display = "inline-block";
               progressWidgetCounter.textContent = `${nextTaskIndex + 1}/${
@@ -10172,7 +10216,7 @@
         <div class="task-list-card-info">
           <span class="task-list-card-name">${task.name}</span>
           <span class="task-list-card-time">${formatHourToAMPM(
-            task.startHour
+            task.startHour,
           )} - ${formatHourToAMPM(task.endHour)}</span>
         </div>
         <div class="task-list-card-status ${task.completed ? "completed" : ""}">
@@ -10271,7 +10315,7 @@
 
             calendarMonthEl.textContent = headerDate.toLocaleDateString(
               "en-US",
-              { month: "long" }
+              { month: "long" },
             );
             calendarYearEl.textContent = headerDate.getFullYear();
 
@@ -10284,18 +10328,18 @@
               // BUT, if we want to be fancy, we can check if they differ from the header month.
               const isOtherMonth = current.getMonth() !== headerDate.getMonth();
               calendarDatesEl.appendChild(
-                createDateCell(d, current, isOtherMonth)
+                createDateCell(d, current, isOtherMonth),
               );
             }
           } else {
             // --- MONTH VIEW (Original Logic) ---
             const t = displayedDate.getMonth(),
               e = displayedDate.getFullYear();
-            (calendarMonthEl.textContent = displayedDate.toLocaleDateString(
+            ((calendarMonthEl.textContent = displayedDate.toLocaleDateString(
               "en-US",
-              { month: "long" }
+              { month: "long" },
             )),
-              (calendarYearEl.textContent = e);
+              (calendarYearEl.textContent = e));
             const n = new Date(e, t, 1).getDay(),
               o = new Date(e, t + 1, 0).getDate(),
               r = 0 === n ? 6 : n - 1, // Padding count (Mon start)
@@ -10453,14 +10497,14 @@
           widget.classList.toggle("collapsed", isEventsWidgetCollapsed);
           localStorage.setItem(
             "eventsWidgetCollapsed",
-            isEventsWidgetCollapsed
+            isEventsWidgetCollapsed,
           );
           renderEventsWidget();
         }
 
         function renderEventsWidget() {
           const listContainer = document.getElementById(
-            "events-list-container"
+            "events-list-container",
           );
           listContainer.innerHTML = "";
 
@@ -10489,7 +10533,7 @@
               const dateObj = new Date(
                 dateParts[0],
                 dateParts[1] - 1,
-                dateParts[2]
+                dateParts[2],
               );
               const dayNum = dateObj.getDate();
               const monthShort = dateObj.toLocaleDateString("en-US", {
@@ -10566,14 +10610,14 @@
             // If strictly equal to selected date AND it's a focused view (not today)
             if (isFocusedView && dateStr === focusedDateStr) {
               focusedEvents.push(
-                ...dayEvents.map((e) => ({ ...e, date: dateStr }))
+                ...dayEvents.map((e) => ({ ...e, date: dateStr })),
               );
               continue; // Don't add to other groups
             }
 
             if (dateStr === todayStr) {
               todayEvents.push(
-                ...dayEvents.map((e) => ({ ...e, date: dateStr }))
+                ...dayEvents.map((e) => ({ ...e, date: dateStr })),
               );
             } else if (dateStr > todayStr) {
               upcoming.push(...dayEvents.map((e) => ({ ...e, date: dateStr })));
@@ -10626,12 +10670,12 @@
           if (past.length > 0) renderGroup("Past", past.reverse());
 
           const displayDateEl = document.getElementById(
-            "selected-event-date-text"
+            "selected-event-date-text",
           );
           if (displayDateEl) {
             displayDateEl.textContent = selectedDate.toLocaleDateString(
               "en-US",
-              { weekday: "long", month: "long", day: "numeric" }
+              { weekday: "long", month: "long", day: "numeric" },
             );
           }
 
@@ -10639,12 +10683,12 @@
           const selectedStr = getDateKey(selectedDate);
           // Count only UNCOMPLETED events for the badge
           const count = (events[selectedStr] || []).filter(
-            (e) => !e.completed
+            (e) => !e.completed,
           ).length;
 
           const collapsedSvg = document.querySelector(".event-collapsed-svg");
           const collapsedCount = document.getElementById(
-            "event-collapsed-count"
+            "event-collapsed-count",
           );
 
           if (collapsedSvg && collapsedCount) {
@@ -10903,7 +10947,7 @@
             habitList.appendChild(habitItem);
             renderMiniMonth(
               habit,
-              habitItem.querySelector(`#habit-grid-${habit.id}`)
+              habitItem.querySelector(`#habit-grid-${habit.id}`),
             );
           });
         }
@@ -10980,7 +11024,7 @@
 
             dayEl.title = date.toDateString();
             dayEl.addEventListener("click", () =>
-              toggleHabitDate(habit.id, dateKey)
+              toggleHabitDate(habit.id, dateKey),
             );
 
             container.appendChild(dayEl);
@@ -11029,14 +11073,14 @@
 
         // Modal Logic for Habits
         const habitModalOverlay = document.getElementById(
-          "habit-modal-overlay"
+          "habit-modal-overlay",
         );
         const addHabitBtn = document.getElementById("add-habit-btn");
         const saveHabitBtn = document.getElementById("save-habit-btn");
         const cancelHabitBtn = document.getElementById("cancel-habit-btn");
         const habitNameInput = document.getElementById("habit-name");
         const habitColorSelector = document.getElementById(
-          "habit-color-selector"
+          "habit-color-selector",
         );
         let selectedHabitColor = COLORS[0];
 
@@ -11066,7 +11110,7 @@
         // Local Storage Key
         const TIMER_STATE_KEY = "pomodoroTimerState";
         const savedTimerState = JSON.parse(
-          localStorage.getItem(TIMER_STATE_KEY) || "{}"
+          localStorage.getItem(TIMER_STATE_KEY) || "{}",
         );
 
         let pomodoroState = {
@@ -11082,28 +11126,28 @@
         };
 
         const pomodoroTimerDisplay = document.getElementById(
-          "pomodoro-timer-display"
+          "pomodoro-timer-display",
         );
         const pomodoroStartBtn = document.getElementById("pomodoro-start-btn");
         const pomodoroPauseBtn = document.getElementById("pomodoro-pause-btn");
         const pomodoroResetBtn = document.getElementById("pomodoro-reset-btn");
         const pomodoroCustomInput = document.getElementById(
-          "pomodoro-custom-input"
+          "pomodoro-custom-input",
         );
         const pomodoroSetCustomBtn = document.getElementById(
-          "pomodoro-set-custom-btn"
+          "pomodoro-set-custom-btn",
         );
         const pomodoroWidget = document.getElementById("pomodoro-widget");
         const pomodoroPresetsContainer =
           document.getElementById("pomodoro-presets");
         const pomodoroEditPresetsBtn = document.getElementById(
-          "pomodoro-edit-presets-btn"
+          "pomodoro-edit-presets-btn",
         );
 
         // PiP Elements
         const pomodoroPipBtn = document.getElementById("pomodoro-pip-btn");
         const pomodoroPipCanvas = document.getElementById(
-          "pomodoro-pip-canvas"
+          "pomodoro-pip-canvas",
         );
         const pomodoroPipVideo = document.getElementById("pomodoro-pip-video");
 
@@ -11146,7 +11190,7 @@
           // Edit Presets Toggle
           pomodoroEditPresetsBtn.addEventListener(
             "click",
-            togglePresetEditMode
+            togglePresetEditMode,
           );
 
           // Custom Input Button (Set Time OR Add Preset)
@@ -11191,11 +11235,11 @@
           pomodoroState.isEditMode = !pomodoroState.isEditMode;
           pomodoroPresetsContainer.classList.toggle(
             "edit-mode",
-            pomodoroState.isEditMode
+            pomodoroState.isEditMode,
           );
           pomodoroEditPresetsBtn.classList.toggle(
             "active",
-            pomodoroState.isEditMode
+            pomodoroState.isEditMode,
           );
         }
 
@@ -11220,14 +11264,14 @@
         function savePresets() {
           localStorage.setItem(
             "pomodoroPresets",
-            JSON.stringify(pomodoroState.presets)
+            JSON.stringify(pomodoroState.presets),
           );
           renderPresets();
         }
 
         function deletePreset(minutes) {
           pomodoroState.presets = pomodoroState.presets.filter(
-            (m) => m !== minutes
+            (m) => m !== minutes,
           );
           savePresets();
         }
@@ -11285,11 +11329,11 @@
           pomodoroState.isCollapsed = !pomodoroState.isCollapsed;
           pomodoroWidget.classList.toggle(
             "collapsed",
-            pomodoroState.isCollapsed
+            pomodoroState.isCollapsed,
           );
           localStorage.setItem(
             "pomodoroWidgetCollapsed",
-            pomodoroState.isCollapsed
+            pomodoroState.isCollapsed,
           );
         }
 
@@ -11299,7 +11343,7 @@
             JSON.stringify({
               timeLeft: pomodoroState.timeLeft,
               totalTime: pomodoroState.totalTime,
-            })
+            }),
           );
         }
 
@@ -11360,7 +11404,7 @@
           const minutes = Math.floor(pomodoroState.timeLeft / 60);
           const seconds = pomodoroState.timeLeft % 60;
           const timeString = `${String(minutes).padStart(2, "0")}:${String(
-            seconds
+            seconds,
           ).padStart(2, "0")}`;
 
           pomodoroTimerDisplay.textContent = timeString;
@@ -11375,10 +11419,10 @@
             // Show dynamic progress when running
             if (document.getElementById("pomodoro-collapsed-default-icon")) {
               document.getElementById(
-                "pomodoro-collapsed-default-icon"
+                "pomodoro-collapsed-default-icon",
               ).style.display = "none";
               document.getElementById(
-                "pomodoro-collapsed-progress-container"
+                "pomodoro-collapsed-progress-container",
               ).style.display = "flex";
             }
           } else {
@@ -11391,30 +11435,30 @@
               document.getElementById("pomodoro-collapsed-default-icon")
             ) {
               document.getElementById(
-                "pomodoro-collapsed-default-icon"
+                "pomodoro-collapsed-default-icon",
               ).style.display = "block";
               document.getElementById(
-                "pomodoro-collapsed-progress-container"
+                "pomodoro-collapsed-progress-container",
               ).style.display = "none";
             } else if (
               document.getElementById("pomodoro-collapsed-default-icon")
             ) {
               // Paused mid-way -> still show progress
               document.getElementById(
-                "pomodoro-collapsed-default-icon"
+                "pomodoro-collapsed-default-icon",
               ).style.display = "none";
               document.getElementById(
-                "pomodoro-collapsed-progress-container"
+                "pomodoro-collapsed-progress-container",
               ).style.display = "flex";
             }
           }
 
           // Update Collapsed Content
           const collapsedTimeText = document.getElementById(
-            "pomodoro-collapsed-time-text"
+            "pomodoro-collapsed-time-text",
           );
           const progressCircle = document.getElementById(
-            "pomodoro-progress-circle"
+            "pomodoro-progress-circle",
           );
 
           if (
@@ -11466,7 +11510,7 @@
           const minutes = Math.floor(pomodoroState.timeLeft / 60);
           const seconds = pomodoroState.timeLeft % 60;
           const timeString = `${String(minutes).padStart(2, "0")}:${String(
-            seconds
+            seconds,
           ).padStart(2, "0")}`;
 
           ctx.font =
@@ -11510,7 +11554,7 @@
           const nextBtn = document.getElementById("search-next-btn");
           const countSpan = document.getElementById("search-count");
           const notesContainer = document.getElementById(
-            "notes-content-container"
+            "notes-content-container",
           );
 
           let searchMatches = [];
@@ -11570,7 +11614,7 @@
                   return NodeFilter.FILTER_ACCEPT;
                 },
               },
-              false
+              false,
             );
 
             let node;
@@ -11596,8 +11640,8 @@
                 if (matchIndex > lastIndex) {
                   fragment.appendChild(
                     document.createTextNode(
-                      text.substring(lastIndex, matchIndex)
-                    )
+                      text.substring(lastIndex, matchIndex),
+                    ),
                   );
                 }
                 // Add highlight span
@@ -11613,7 +11657,7 @@
               // Add text after last match
               if (lastIndex < text.length) {
                 fragment.appendChild(
-                  document.createTextNode(text.substring(lastIndex))
+                  document.createTextNode(text.substring(lastIndex)),
                 );
               }
 
@@ -11727,7 +11771,7 @@
         class AnalyticsManager {
           constructor() {
             this.history = JSON.parse(
-              localStorage.getItem("clockPomodoroHistory") || "[]"
+              localStorage.getItem("clockPomodoroHistory") || "[]",
             );
           }
 
@@ -11752,7 +11796,7 @@
           saveHistory() {
             localStorage.setItem(
               "clockPomodoroHistory",
-              JSON.stringify(this.history)
+              JSON.stringify(this.history),
             );
           }
 
@@ -11761,12 +11805,12 @@
             const endStr = this.getDateKey(endDate);
 
             const filtered = this.history.filter(
-              (h) => h.date >= startStr && h.date <= endStr
+              (h) => h.date >= startStr && h.date <= endStr,
             );
 
             const totalDuration = filtered.reduce(
               (sum, h) => sum + h.duration,
-              0
+              0,
             );
             return {
               count: filtered.length,
@@ -11841,7 +11885,7 @@
             }
 
             habitScores.sort(
-              (a, b) => b.periodCompletions - a.periodCompletions
+              (a, b) => b.periodCompletions - a.periodCompletions,
             );
 
             return {
@@ -11862,7 +11906,7 @@
           const toggleBtn = document.getElementById("toggle-analytics-btn");
           const closeBtn = document.getElementById("close-analytics-btn");
           const rangeSelector = document.getElementById(
-            "analytics-range-selector"
+            "analytics-range-selector",
           );
 
           if (!widget || !toggleBtn) return;
@@ -11905,7 +11949,7 @@
               startDate = new Date(
                 endDate.getFullYear(),
                 endDate.getMonth(),
-                1
+                1,
               );
             }
 
@@ -11913,32 +11957,28 @@
             const taskStats = analyticsManager.getTaskStats(startDate, endDate);
             const habitStats = analyticsManager.getHabitStats(
               startDate,
-              endDate
+              endDate,
             );
             const pomodoroStats = analyticsManager.getPomodoroStats(
               startDate,
-              endDate
+              endDate,
             );
 
             // 2. Update Overview Cards
-            document.getElementById(
-              "metric-productivity"
-            ).textContent = `${taskStats.completionRate}%`;
-            document.getElementById(
-              "metric-focus"
-            ).textContent = `${pomodoroStats.totalMinutes}m`; // Changed to minutes for precision or use h/m logic
+            document.getElementById("metric-productivity").textContent =
+              `${taskStats.completionRate}%`;
+            document.getElementById("metric-focus").textContent =
+              `${pomodoroStats.totalMinutes}m`; // Changed to minutes for precision or use h/m logic
             if (pomodoroStats.totalMinutes > 60) {
               document.getElementById("metric-focus").textContent = `${(
                 pomodoroStats.totalMinutes / 60
               ).toFixed(1)}h`;
             }
-            document.getElementById(
-              "metric-focus-count"
-            ).textContent = `${pomodoroStats.count} sessions`;
+            document.getElementById("metric-focus-count").textContent =
+              `${pomodoroStats.count} sessions`;
 
-            document.getElementById(
-              "metric-habits"
-            ).textContent = `${habitStats.consistency}%`;
+            document.getElementById("metric-habits").textContent =
+              `${habitStats.consistency}%`;
 
             // 3. Render Top Habits
             const topHabitsList = document.getElementById("top-habits-list");
@@ -12053,7 +12093,7 @@
               // Tooltip title
               const title = document.createElementNS(svgNS, "title");
               title.textContent = `${d.date.toDateString()}: ${Math.round(
-                d.value
+                d.value,
               )} mins`;
               rect.appendChild(title);
 
@@ -12152,7 +12192,7 @@
               circle.setAttribute("stroke-dasharray", `${dash} ${c}`);
               circle.setAttribute(
                 "stroke-dashoffset",
-                -1 * (startAngle / 360) * c
+                -1 * (startAngle / 360) * c,
               ); // Rotate check
               // SVG rotation start is 3 o'clock.
               // We want to accumulate offsets.
@@ -12160,7 +12200,7 @@
               // Actually, rotational transform is cleaner.
               circle.setAttribute(
                 "transform",
-                `rotate(${startAngle} ${center} ${center})`
+                `rotate(${startAngle} ${center} ${center})`,
               );
               circle.setAttribute("stroke-dashoffset", 0);
               // But dasharray gap needs to be handled?
@@ -12175,7 +12215,7 @@
               const legItem = document.createElement("div");
               legItem.className = "legend-item";
               legItem.innerHTML = `<div class="legend-color" style="background:${color}"></div><span>${Math.round(
-                portion * 100
+                portion * 100,
               )}%</span>`;
               legendContainer.appendChild(legItem);
             });
@@ -12208,19 +12248,19 @@
               ampmControls.classList.toggle("hidden", clockMode === "24h");
               viewModeControls.classList.toggle("hidden", clockMode !== "24h");
               renderAppView();
-            })
+            }),
           );
           document.querySelectorAll('input[name="ampm"]').forEach((r) =>
             r.addEventListener("change", (e) => {
               ampm = e.target.value;
               renderAppView();
-            })
+            }),
           );
           document.querySelectorAll('input[name="viewMode"]').forEach((r) =>
             r.addEventListener("change", (e) => {
               viewMode = e.target.value;
               renderAppView();
-            })
+            }),
           );
 
           // Event Listeners for Dragging
@@ -12280,12 +12320,12 @@
             .addEventListener("click", () => {
               const newYear = prompt(
                 "Enter year:",
-                displayedDate.getFullYear()
+                displayedDate.getFullYear(),
               );
               if (!newYear || isNaN(newYear)) return;
               const newMonth = prompt(
                 "Enter month (1-12):",
-                displayedDate.getMonth() + 1
+                displayedDate.getMonth() + 1,
               );
               if (!newMonth || isNaN(newMonth) || newMonth < 1 || newMonth > 12)
                 return;
@@ -12324,7 +12364,7 @@
           // --- Calendar Collapse State (Added functionality) ---
           // isCalendarCollapsed is defined in State
           const toggleCalendarBtn = document.getElementById(
-            "toggle-calendar-btn"
+            "toggle-calendar-btn",
           );
 
           function initCalendarState() {
@@ -12359,7 +12399,7 @@
               isCalendarCollapsed = !isCalendarCollapsed;
               localStorage.setItem(
                 "calendarWidgetCollapsed",
-                isCalendarCollapsed
+                isCalendarCollapsed,
               );
               // On toggle, if collapsing, jump to selected date context
               if (isCalendarCollapsed) {
@@ -12420,7 +12460,7 @@
             widget.classList.toggle("collapsed", isNotesWidgetCollapsed);
             localStorage.setItem(
               "notesWidgetCollapsed",
-              isNotesWidgetCollapsed
+              isNotesWidgetCollapsed,
             );
 
             // NEW: If expanding, scroll to today ONLY if it hasn't happened yet
@@ -12428,7 +12468,7 @@
               setTimeout(() => {
                 const todayKey = getDateKey(new Date());
                 const todayElement = document.getElementById(
-                  `note-section-${todayKey}`
+                  `note-section-${todayKey}`,
                 );
                 if (todayElement) {
                   todayElement.scrollIntoView({
@@ -12540,7 +12580,7 @@
             habitNameInput.focus();
           });
           cancelHabitBtn.addEventListener("click", () =>
-            habitModalOverlay.classList.remove("visible")
+            habitModalOverlay.classList.remove("visible"),
           );
           saveHabitBtn.addEventListener("click", () => {
             const name = habitNameInput.value.trim();
@@ -12625,7 +12665,7 @@
           jumpToTodayBtn.addEventListener("click", () => {
             const todayKey = getDateKey(new Date());
             const todayElement = document.getElementById(
-              `note-section-${todayKey}`
+              `note-section-${todayKey}`,
             );
             if (todayElement) {
               todayElement.scrollIntoView({
@@ -12662,7 +12702,7 @@
           // Data Migration & Initialization
           if (clockTaskTabs.length === 0) {
             const oldTasks = JSON.parse(
-              localStorage.getItem("clockBrainDump") || "[]"
+              localStorage.getItem("clockBrainDump") || "[]",
             );
             let initialContent = "";
 
@@ -12673,8 +12713,8 @@
                     t.indent === 1
                       ? "indent-1"
                       : t.indent === 2
-                      ? "indent-2"
-                      : "";
+                        ? "indent-2"
+                        : "";
                   if (t.isSpacer) return "<p><br></p>";
                   const checkedAttr = t.completed ? "checked" : "";
                   return `<div class="todo-item ${indentClass}">
@@ -12715,10 +12755,10 @@
           const tabNotes = document.getElementById("tab-notes");
           const tabTasks = document.getElementById("tab-tasks");
           const tasksContentContainer = document.getElementById(
-            "tasks-content-container"
+            "tasks-content-container",
           );
           const finalNotesContentContainer = document.getElementById(
-            "notes-content-container"
+            "notes-content-container",
           );
           const clearTasksBtn = document.getElementById("clear-tasks-btn");
           const brainDumpList = document.getElementById("brain-dump-list");
@@ -12735,7 +12775,7 @@
           function saveTaskTabs() {
             localStorage.setItem(
               "clockTaskTabs",
-              JSON.stringify(clockTaskTabs)
+              JSON.stringify(clockTaskTabs),
             );
             localStorage.setItem("activeTaskTabId", activeTaskTabId);
           }
@@ -12857,7 +12897,7 @@
 
           function saveTaskTabContent() {
             const activeTab = clockTaskTabs.find(
-              (t) => t.id === activeTaskTabId
+              (t) => t.id === activeTaskTabId,
             );
             if (activeTab && brainDumpList) {
               activeTab.content = brainDumpList.innerHTML;
@@ -12895,10 +12935,10 @@
             const title = document.getElementById("confirmation-title");
             const desc = document.getElementById("confirmation-desc");
             const confirmBtn = document.getElementById(
-              "confirmation-btn-confirm"
+              "confirmation-btn-confirm",
             );
             const cancelBtn = document.getElementById(
-              "confirmation-btn-cancel"
+              "confirmation-btn-cancel",
             );
 
             title.textContent = "Delete Tab?";
@@ -12946,7 +12986,7 @@
             const topicDetailContainer =
               document.getElementById("topic-detail-view");
             const topicFilterContainer = document.getElementById(
-              "topic-filter-container"
+              "topic-filter-container",
             );
             const tabTopics = document.getElementById("tab-topics");
             const addElementBtn = document.getElementById("add-element-btn");
@@ -13005,7 +13045,7 @@
           function renderBrainDump() {
             // Load from Active Tab
             const activeTab = clockTaskTabs.find(
-              (t) => t.id === activeTaskTabId
+              (t) => t.id === activeTaskTabId,
             );
             const content = activeTab ? activeTab.content : "";
 
