@@ -4994,10 +4994,6 @@
         // --- AI API Integrations ---
         window.tempMealFoods = window.tempMealFoods || [];
 
-        if(!localStorage.getItem("kinetic_ai_key")) {
-            localStorage.setItem("kinetic_ai_key", "AIzaSyBEvFxdsdZm9ZdW6di2gwJ8apAaO5ke1NY");
-        }
-
         window.openAISettingsModal = function () {
           document.getElementById("ai-api-key").value = localStorage.getItem("kinetic_ai_key") || "";
           document.getElementById("ai-settings-overlay").classList.add("active");
