@@ -1143,7 +1143,7 @@
       }
       .set-intensity-btn.WORKING {
         color: #ffffff;
-        border-color: rgba(255,255,255,0.4);
+        border-color: rgba(255, 255, 255, 0.4);
       }
       .set-intensity-btn.PR {
         background: #bf360c;
@@ -1241,6 +1241,619 @@
         font-size: 0.8rem;
         color: var(--text-secondary);
       }
+
+      /* Diet View Styling */
+      .diet-rings-container {
+        position: relative;
+        width: 280px;
+        height: 280px;
+        margin: 40px auto 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .diet-rings-svg {
+        transform: rotate(-90deg);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+      }
+      .circle-bg {
+        fill: none;
+        stroke: var(--surface-container-highest);
+        stroke-width: 12;
+      }
+      .circle-progress {
+        fill: none;
+        stroke-width: 12;
+        stroke-linecap: round;
+        transition: stroke-dashoffset 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .ring-kcal {
+        stroke: var(--primary-container);
+        stroke-dasharray: 779;
+        filter: drop-shadow(0 0 10px rgba(202, 253, 0, 0.4));
+      }
+      .ring-p {
+        stroke: #f3ffca;
+        stroke-dasharray: 653;
+      }
+      .ring-c {
+        stroke: #ff7441;
+        stroke-dasharray: 528;
+      }
+      .ring-f {
+        stroke: #ffd541;
+        stroke-dasharray: 402;
+      }
+      .diet-rings-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+      }
+      .diet-kcal-val {
+        font-family: var(--font-display);
+        font-size: 1.8rem;
+        font-weight: 800;
+        line-height: 1;
+        text-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+      }
+      .diet-kcal-label {
+        font-size: 0.65rem;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 800;
+        margin-top: 6px;
+      }
+
+      .diet-macros-row {
+        display: flex;
+        justify-content: space-around;
+        padding: 0 16px;
+        margin-bottom: 48px;
+      }
+      .macro-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .macro-val {
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        font-weight: 800;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      }
+      .macro-val.p {
+        color: #f3ffca;
+      }
+      .macro-val.c {
+        color: #ff7441;
+      }
+      .macro-val.f {
+        color: #ffd541;
+      }
+      .macro-label {
+        font-size: 0.65rem;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 700;
+        margin-top: 4px;
+      }
+
+      .summary-header {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        margin-top: 16px;
+      }
+
+      .summary-carousel {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 16px;
+        margin: 0 -24px 16px;
+        padding: 0 24px;
+        scrollbar-width: none;
+      }
+      .summary-carousel::-webkit-scrollbar {
+        display: none;
+      }
+      .summary-slide {
+        min-width: 100%;
+        scroll-snap-align: center;
+        flex-shrink: 0;
+      }
+
+      .diet-summary-card {
+        background: linear-gradient(
+          145deg,
+          var(--surface-container-high) 0%,
+          rgba(20, 20, 20, 0.8) 100%
+        );
+        border-radius: 28px;
+        padding: 24px;
+        margin-bottom: 16px;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+      }
+      .dsc-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+      .dsc-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--text-secondary);
+        font-weight: 800;
+      }
+      .dsc-icon {
+        color: var(--primary);
+      }
+      .dsc-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 12px;
+      }
+      .dsc-val {
+        font-family: var(--font-display);
+        font-size: 1.9rem;
+        font-weight: 800;
+        line-height: 1;
+      }
+      .dsc-val small {
+        font-size: 0.9rem;
+        color: var(--outline-variant);
+        font-weight: 700;
+      }
+      .dsc-pct {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 1.1rem;
+        color: var(--primary);
+      }
+      .dsc-bar-track {
+        height: 6px;
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 3px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
+      }
+      .dsc-bar-fill {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        border-radius: 3px;
+        transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .dsc-bar-fill.lime {
+        background: var(--primary-container);
+      }
+      .dsc-bar-fill.pale {
+        background: #f3ffca;
+      }
+      .dsc-bar-fill.orange {
+        background: #ff7441;
+      }
+      .dsc-bar-fill.yellow {
+        background: #ffd541;
+      }
+
+      .meal-log-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin: 48px 0 20px;
+      }
+      .meal-log-title {
+        font-family: var(--font-display);
+        font-size: 1.3rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .meal-log-sub {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        margin-top: 6px;
+        font-weight: 600;
+      }
+
+      .timeline-container {
+        position: relative;
+        padding-left: 28px;
+        margin-top: 24px;
+        margin-bottom: 120px; /* space for FAB / nav */
+      }
+      .timeline-line {
+        position: absolute;
+        left: 9px;
+        top: 10px;
+        bottom: 0;
+        width: 2px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .timeline-item {
+        position: relative;
+        margin-bottom: 24px;
+      }
+      .timeline-dot {
+        position: absolute;
+        left: -24px;
+        top: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        background: var(--primary);
+        box-shadow: 0 0 10px var(--primary);
+      }
+      .timeline-time {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        font-weight: 800;
+        margin-bottom: 6px;
+        display: block;
+        text-transform: uppercase;
+      }
+      .timeline-card {
+        background: linear-gradient(
+          145deg,
+          var(--surface-container-high) 0%,
+          rgba(25, 25, 25, 0.7) 100%
+        );
+        border-radius: 20px;
+        padding: 16px 20px;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        cursor: pointer;
+        transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+      }
+      .timeline-card:active {
+        transform: scale(0.97);
+      }
+      .timeline-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .timeline-title {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin: 0;
+      }
+      .timeline-macros {
+        font-size: 0.75rem;
+        color: var(--primary);
+        font-weight: 800;
+      }
+      .timeline-foods {
+        font-size: 0.85rem;
+        color: var(--outline-variant);
+        line-height: 1.4;
+      }
+      .empty-timeline {
+        text-align: center;
+        padding: 40px 0;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+
+      .fab-add-meal {
+        position: fixed;
+        bottom: 104px;
+        right: 24px;
+        width: 64px;
+        height: 64px;
+        border-radius: 32px;
+        background: var(--primary);
+        color: var(--surface);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 12px 24px rgba(202, 253, 0, 0.3);
+        z-index: 100;
+        cursor: pointer;
+        border: none;
+        transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .fab-add-meal:active {
+        transform: scale(0.9);
+      }
+      .fab-add-meal svg {
+        width: 28px;
+        height: 28px;
+        stroke: currentColor;
+        stroke-width: 2.5;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .food-search-wrapper {
+        position: relative;
+        margin-bottom: 16px;
+      }
+      .food-search-bar {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 14px 16px 14px 44px;
+        color: var(--text-primary);
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .food-search-bar:focus {
+        border-color: var(--primary);
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .food-search-icon {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+      }
+      .food-search-icon svg {
+        width: 18px;
+        height: 18px;
+        stroke: currentColor;
+      }
+
+      .food-library-section {
+        display: flex;
+        overflow-x: auto;
+        gap: 16px;
+        padding: 18px 18px 26px 18px; /* Extra padding so delete buttons don't get clipped */
+        scrollbar-width: none;
+        margin-bottom: 24px;
+        align-items: center;
+        min-height: 120px;
+      }
+      .food-library-section::-webkit-scrollbar {
+        display: none;
+      }
+
+      .food-lib-chip {
+        padding: 8px 12px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: var(--text-primary);
+        font-size: 1rem;
+        font-weight: 700;
+        white-space: nowrap;
+        flex-shrink: 0;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        position: relative;
+        transition: transform 0.2s;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      .food-lib-chip:active {
+        background: rgba(255, 255, 255, 0.18);
+        transform: scale(0.97);
+      }
+      .food-lib-chip.dotted {
+        background: transparent;
+        border: 2px dashed rgba(255, 255, 255, 0.3);
+        color: var(--primary);
+        align-items: center;
+        justify-content: center;
+        padding: 14px 24px;
+      }
+      .food-lib-chip-macros {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 500;
+        letter-spacing: 0.02em;
+      }
+      .btn-del-chip {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: #ff453a;
+        color: white;
+        border-radius: 50%;
+        border: 2px solid var(--bg-surface);
+        width: 22px;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        cursor: pointer;
+        opacity: 0.9;
+        transition:
+          opacity 0.2s,
+          transform 0.2s;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      }
+      .btn-del-chip:hover {
+        opacity: 1;
+      }
+
+      .manual-entry-details {
+        background: rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        border-radius: 16px;
+        padding: 16px;
+        margin-bottom: 24px;
+      }
+      .manual-entry-details summary {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 0.95rem;
+        color: var(--primary);
+        cursor: pointer;
+        list-style: none;
+        outline: none;
+      }
+      .manual-entry-details summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .meal-food-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .meal-food-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 12px 16px;
+        border-radius: 12px;
+      }
+      .meal-food-item-name {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+      .meal-food-item-macros {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        margin-top: 4px;
+      }
+      .meal-food-del-btn {
+        background: none;
+        border: none;
+        color: #ff453a;
+        padding: 8px;
+        cursor: pointer;
+      }
+      .meal-food-del-btn svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      /* Rituals UI */
+      .rituals-progress-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .rp-bar-container {
+        flex: 1;
+        height: 6px;
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .rp-bar-fill {
+        height: 100%;
+        background: var(--primary);
+        width: 0%;
+        transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        border-radius: 3px;
+      }
+      .rp-text {
+        font-family: var(--font-display);
+        font-size: 0.9rem;
+        font-weight: 800;
+        color: var(--primary);
+      }
+
+      .ritual-card {
+        background: linear-gradient(
+          145deg,
+          var(--surface-container-high) 0%,
+          rgba(25, 25, 25, 0.7) 100%
+        );
+        border-radius: 20px;
+        padding: 16px 20px;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        cursor: pointer;
+      }
+      .ritual-card:active {
+        transform: scale(0.97);
+      }
+      .ritual-card.completed {
+        border-color: var(--primary);
+        background: rgba(202, 253, 0, 0.05);
+        box-shadow: 0 0 16px rgba(202, 253, 0, 0.1) inset;
+      }
+
+      .ritual-checkbox {
+        width: 28px;
+        height: 28px;
+        border-radius: 14px;
+        border: 2px solid var(--outline-variant);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        flex-shrink: 0;
+      }
+      .ritual-card.completed .ritual-checkbox {
+        background: var(--primary);
+        border-color: var(--primary);
+      }
+      .ritual-checkbox svg {
+        width: 14px;
+        height: 14px;
+        stroke: var(--surface);
+        stroke-width: 3;
+        fill: none;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .ritual-card.completed .ritual-checkbox svg {
+        opacity: 1;
+      }
+
+      .ritual-info {
+        flex: 1;
+      }
+      .ritual-title {
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+        color: var(--text-primary);
+        transition: color 0.3s;
+      }
+      .ritual-card.completed .ritual-title {
+        color: var(--primary);
+      }
+      .ritual-desc {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+      }
     </style>
   </head>
   <body>
@@ -1250,12 +1863,12 @@
         <header class="top-header">
           <div class="header-subtitle">PROGRESS TRACKING</div>
           <div class="header-title-row">
-            <h1 id="current-month-display">Month Year</h1>
+            <h1 class="current-month-display">Month Year</h1>
             <div class="month-controls">
-              <button id="prev-month" class="icon-btn">
+              <button class="icon-btn prev-month-btn">
                 <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" /></svg>
               </button>
-              <button id="next-month" class="icon-btn">
+              <button class="icon-btn next-month-btn">
                 <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" /></svg>
               </button>
             </div>
@@ -1263,7 +1876,7 @@
         </header>
 
         <div class="calendar-wrapper">
-          <div class="calendar-scroll" id="calendar-scroll">
+          <div class="calendar-scroll">
             <!-- Date cards injected by JS -->
           </div>
         </div>
@@ -1318,10 +1931,92 @@
       </section>
 
       <!-- Rituals View -->
-      <section id="view-rituals" class="view-section"></section>
+      <section id="view-rituals" class="view-section">
+        <header class="top-header">
+          <div class="header-subtitle" style="color: var(--secondary)">
+            SYSTEM OPTIMIZATION
+          </div>
+          <div class="header-title-row">
+            <h1 class="current-month-display">Month Year</h1>
+            <div class="month-controls">
+              <button class="icon-btn prev-month-btn">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M15 18l-6-6 6-6" stroke-linecap="round" />
+                </svg>
+              </button>
+              <button class="icon-btn next-month-btn">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M9 18l6-6-6-6" stroke-linecap="round" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <div class="calendar-wrapper">
+          <div class="calendar-scroll">
+            <!-- Date cards injected by JS -->
+          </div>
+        </div>
+
+        <div id="rituals-content">
+          <!-- Rendered by JS -->
+        </div>
+      </section>
 
       <!-- Diet View -->
-      <section id="view-diet" class="view-section"></section>
+      <section id="view-diet" class="view-section">
+        <header class="top-header">
+          <div class="header-subtitle" style="color: var(--primary)">
+            NUTRITION TRACKING
+          </div>
+          <div class="header-title-row">
+            <h1 class="current-month-display">Month Year</h1>
+            <div class="month-controls">
+              <button class="icon-btn prev-month-btn">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M15 18l-6-6 6-6" stroke-linecap="round" />
+                </svg>
+              </button>
+              <button class="icon-btn next-month-btn">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M9 18l6-6-6-6" stroke-linecap="round" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <div class="calendar-wrapper">
+          <div class="calendar-scroll">
+            <!-- Date cards injected by JS -->
+          </div>
+        </div>
+
+        <div id="diet-dashboard-content">
+          <!-- Rendered by JS -->
+        </div>
+      </section>
     </main>
 
     <!-- Routine Builder Modal / Bottom Sheet -->
@@ -1477,6 +2172,349 @@
       </div>
     </div>
 
+    <!-- Meal Log Modal Redesign -->
+    <div
+      class="modal-overlay"
+      id="meal-modal-overlay"
+      onclick="closeMealModal()"
+    ></div>
+    <div
+      class="bottom-sheet"
+      id="meal-modal"
+      style="max-height: 90vh; overflow-y: auto"
+    >
+      <div class="sheet-header">
+        <h3 class="sheet-title" id="meal-modal-title">Log Meal</h3>
+        <button class="sheet-close" onclick="closeMealModal()">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M18 6L6 18M6 6l12 12"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="sheet-content">
+        <input type="hidden" id="active-meal-id" />
+
+        <div style="display: flex; gap: 12px">
+          <div class="input-group" style="flex: 2">
+            <label>Meal Name</label>
+            <input
+              type="text"
+              id="meal-name"
+              placeholder="e.g. Morning Snack"
+            />
+          </div>
+          <div class="input-group" style="flex: 1">
+            <label>Time</label>
+            <input type="time" id="meal-time" />
+          </div>
+        </div>
+
+        <!-- Foods Added List -->
+        <div
+          class="sheet-title"
+          style="font-size: 1.1rem; color: var(--primary); margin: 8px 0 16px"
+        >
+          Items in Meal
+        </div>
+        <div class="meal-food-list" id="meal-food-list">
+          <!-- Injected via JS -->
+        </div>
+
+        <div class="modal-divider"></div>
+
+        <!-- Add Food Form -->
+        <div class="sheet-title" style="font-size: 1.1rem; margin-bottom: 12px">
+          Add Food
+        </div>
+
+        <div class="food-search-wrapper">
+          <div class="food-search-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.3-4.3" />
+            </svg>
+          </div>
+          <input
+            type="search"
+            id="food-search-input"
+            class="food-search-bar"
+            placeholder="Search saved foods..."
+            oninput="window.filterFoodLibrary()"
+          />
+        </div>
+
+        <!-- Smart Suggestions / Search Results -->
+        <div class="food-library-section" id="food-library-list">
+          <!-- Rows injected via JS -->
+        </div>
+
+        <details class="manual-entry-details">
+          <summary>+ Create Custom Food</summary>
+          <div style="margin-top: 16px">
+            <div class="input-group" style="margin-bottom: 16px">
+              <label>Food Item Description</label>
+              <input
+                type="text"
+                id="food-name"
+                placeholder="e.g. 2 Scrambled Eggs"
+              />
+            </div>
+
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 16px;
+                margin-bottom: 20px;
+              "
+            >
+              <div
+                class="input-group"
+                style="flex: 1; min-width: 60px; margin-bottom: 0"
+              >
+                <label style="color: var(--primary-container)">Kcals</label>
+                <input type="number" id="food-kcals" placeholder="0" />
+              </div>
+              <div
+                class="input-group"
+                style="flex: 1; min-width: 60px; margin-bottom: 0"
+              >
+                <label style="color: #f3ffca">Pro(g)</label>
+                <input type="number" id="food-p" placeholder="0" />
+              </div>
+              <div
+                class="input-group"
+                style="flex: 1; min-width: 60px; margin-bottom: 0"
+              >
+                <label style="color: #ff7441">Carb(g)</label>
+                <input type="number" id="food-c" placeholder="0" />
+              </div>
+              <div
+                class="input-group"
+                style="flex: 1; min-width: 60px; margin-bottom: 0"
+              >
+                <label style="color: #ffd541">Fat(g)</label>
+                <input type="number" id="food-f" placeholder="0" />
+              </div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:12px; margin-bottom: 8px">
+              <button
+                class="primary-btn"
+                onclick="saveCustomFoodToLibrary()"
+                style="width: 100%"
+              >
+                <svg viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px; vertical-align:middle; display:inline-block;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                Save to Food List
+              </button>
+              <button
+                class="primary-btn secondary"
+                onclick="addFoodToMeal()"
+                style="width: 100%"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  style="margin-right:6px; vertical-align:middle; display:inline-block;"
+                >
+                  <path d="M12 5v14M5 12h14" stroke-linecap="round" />
+                </svg>
+                Add Custom Meal (Today)
+              </button>
+            </div>
+          </div>
+        </details>
+
+        <!-- Delete Meal Button -->
+        <button
+          class="danger-btn"
+          id="delete-meal-btn"
+          onclick="deleteMeal()"
+          style="display: none; margin-bottom: 12px"
+        >
+          Delete Entire Meal
+        </button>
+
+        <button class="primary-btn" onclick="saveMealLog()">
+          Complete Meal Log
+        </button>
+      </div>
+    </div>
+
+    <!-- Diet Settings Modal -->
+    <div
+      class="modal-overlay"
+      id="diet-settings-overlay"
+      onclick="closeDietSettingsModal()"
+    ></div>
+    <div class="bottom-sheet" id="diet-settings-modal">
+      <div class="sheet-header">
+        <h3 class="sheet-title">Nutrition Targets</h3>
+        <button class="sheet-close" onclick="closeDietSettingsModal()">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M18 6L6 18M6 6l12 12"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="sheet-content">
+        <h4
+          style="
+            font-family: var(--font-display);
+            color: var(--primary);
+            margin-bottom: 12px;
+          "
+        >
+          BASE TARGETS
+        </h4>
+        <div class="input-group">
+          <label style="color: var(--primary-container)">Daily Calories</label>
+          <input type="number" id="ds-kcals" placeholder="3000" />
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px">
+          <div class="input-group" style="flex: 1; min-width: 80px">
+            <label style="color: #f3ffca">Protein (g)</label>
+            <input type="number" id="ds-p" placeholder="160" />
+          </div>
+          <div class="input-group" style="flex: 1; min-width: 80px">
+            <label style="color: #ff7441">Carbs (g)</label>
+            <input type="number" id="ds-c" placeholder="350" />
+          </div>
+          <div class="input-group" style="flex: 1; min-width: 80px">
+            <label style="color: #ffd541">Fats (g)</label>
+            <input type="number" id="ds-f" placeholder="80" />
+          </div>
+        </div>
+
+        <div class="modal-divider" style="margin: 24px 0"></div>
+
+        <h4
+          style="
+            font-family: var(--font-display);
+            color: var(--secondary);
+            margin-bottom: 12px;
+          "
+        >
+          DATE OVERRIDES
+        </h4>
+        <p
+          style="
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: -8px;
+            margin-bottom: 16px;
+          "
+        >
+          Set specific targets for cut/bulk cycles
+        </p>
+
+        <div id="ds-overrides-list">
+          <!-- Data populated dynamically -->
+        </div>
+
+        <button
+          class="primary-btn secondary"
+          style="margin-bottom: 16px"
+          onclick="addDietOverride()"
+        >
+          + Add Target Override
+        </button>
+        <button class="primary-btn" onclick="saveDietSettings()">
+          Save Configuration
+        </button>
+      </div>
+    </div>
+
+    <!-- Rituals Settings Modal -->
+    <div
+      class="modal-overlay"
+      id="rituals-settings-overlay"
+      onclick="closeRitualsSettingsModal()"
+    ></div>
+    <div class="bottom-sheet" id="rituals-settings-modal">
+      <div class="sheet-header">
+        <h3 class="sheet-title">Manage Rituals</h3>
+        <button class="sheet-close" onclick="closeRitualsSettingsModal()">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M18 6L6 18M6 6l12 12"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="sheet-content">
+        <h4
+          style="
+            font-family: var(--font-display);
+            color: var(--primary);
+            margin-bottom: 12px;
+          "
+        >
+          DAILY HABITS
+        </h4>
+        <p
+          style="
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: -8px;
+            margin-bottom: 16px;
+          "
+        >
+          These protocols will auto-populate into your daily Tracker lists.
+        </p>
+
+        <div id="rs-list">
+          <!-- Data populated dynamically -->
+        </div>
+
+        <button
+          class="primary-btn secondary"
+          style="margin-bottom: 16px"
+          onclick="addRitualConfig()"
+        >
+          + Add Protocol
+        </button>
+        <button class="primary-btn" onclick="saveRitualsSettings()">
+          Save Configuration
+        </button>
+      </div>
+    </div>
+
+    <!-- AI Settings Modal -->
+    <div class="modal-overlay" id="ai-settings-overlay" onclick="closeAISettingsModal()"></div>
+    <div class="bottom-sheet" id="ai-settings-modal">
+      <div class="sheet-header">
+        <h3 class="sheet-title">AI Settings</h3>
+        <button class="sheet-close" onclick="closeAISettingsModal()">
+          <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+      </div>
+      <div class="sheet-content">
+        <h4 style="font-family: var(--font-display); color: var(--primary); margin-bottom: 12px;">GEMINI API CONFIGURATION</h4>
+        <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: -8px; margin-bottom: 16px;">
+          To enable Smart Text-to-Macros and Snap-and-Log, please provide your Google Gemini API key. This key is saved locally on your device.
+        </p>
+        <div class="input-group" style="margin-bottom: 24px;">
+          <label style="color: var(--primary-container)">Gemini API Key</label>
+          <input type="password" id="ai-api-key" placeholder="AIzaSy..." />
+        </div>
+        
+        <button class="primary-btn" onclick="saveAISettings()">Save API Key</button>
+      </div>
+    </div>
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const navItems = document.querySelectorAll(".nav-item");
@@ -1496,6 +2534,19 @@
             // Show target view
             const targetId = item.getAttribute("data-target");
             document.getElementById(targetId).classList.add("active");
+
+            if (
+              targetId === "view-workout" ||
+              targetId === "view-diet" ||
+              targetId === "view-rituals"
+            ) {
+              if (
+                window.calendarWidget &&
+                typeof window.calendarWidget.recenter === "function"
+              ) {
+                window.calendarWidget.recenter();
+              }
+            }
           });
         });
 
@@ -1515,27 +2566,16 @@
           constructor() {
             this.currentDate = new Date();
             this.activeDate = new Date();
-            this.scrollContainer = document.getElementById("calendar-scroll");
-            this.monthDisplay = document.getElementById(
-              "current-month-display",
-            );
-            this.selectedDateDisplay = document.getElementById(
-              "selected-date-display",
-            );
-
             this.init();
           }
 
           init() {
-            if (!this.scrollContainer) return;
-
-            document
-              .getElementById("prev-month")
-              .addEventListener("click", () => this.changeMonth(-1));
-            document
-              .getElementById("next-month")
-              .addEventListener("click", () => this.changeMonth(1));
-
+            document.querySelectorAll(".prev-month-btn").forEach((btn) => {
+              btn.onclick = () => this.changeMonth(-1);
+            });
+            document.querySelectorAll(".next-month-btn").forEach((btn) => {
+              btn.onclick = () => this.changeMonth(1);
+            });
             this.renderCalendar();
           }
 
@@ -1549,8 +2589,8 @@
           }
 
           renderCalendar() {
-            if (!this.scrollContainer) return;
-            this.scrollContainer.innerHTML = "";
+            const containers = document.querySelectorAll(".calendar-scroll");
+            if (containers.length === 0) return;
 
             const year = this.currentDate.getFullYear();
             const month = this.currentDate.getMonth();
@@ -1569,7 +2609,12 @@
               "November",
               "December",
             ];
-            this.monthDisplay.textContent = `${monthNames[month]} ${year}`;
+
+            document
+              .querySelectorAll(".current-month-display")
+              .forEach((el) => {
+                el.innerHTML = `${monthNames[month]} <span style="font-weight:400; color:var(--text-secondary);">${year}</span>`;
+              });
 
             const daysInMonth = new Date(year, month + 1, 0).getDate();
             const prevMonthDays = new Date(year, month, 0).getDate();
@@ -1584,7 +2629,7 @@
             ];
 
             const todayStr = this.formatDateStr(new Date());
-            let activeCard = null;
+            const activeStr = this.formatDateStr(this.activeDate);
 
             const allDates = [];
 
@@ -1612,101 +2657,81 @@
               });
             }
 
-            // Pad left for centering
-            const paddingLeft = document.createElement("div");
-            paddingLeft.className = "scroll-pad";
-            this.scrollContainer.appendChild(paddingLeft);
+            let htmlString = '<div class="scroll-pad"></div>';
 
             allDates.forEach((item) => {
               const date = item.date;
               const dateStr = this.formatDateStr(date);
               const dayName = daysOfWeek[date.getDay()];
 
-              const card = document.createElement("div");
-              card.className = `date-card ${item.isCurrentMonth ? "" : "other-month"}`;
-              card.dataset.date = dateStr;
+              let cssClass = "date-card";
+              if (!item.isCurrentMonth) cssClass += " other-month";
+              if (dateStr === todayStr) cssClass += " today";
+              if (dateStr === activeStr && item.isCurrentMonth)
+                cssClass += " active";
 
-              if (dateStr === todayStr) {
-                card.classList.add("today");
-              }
+              htmlString += `
+                  <div class="${cssClass}" data-date="${dateStr}" data-is-current="${item.isCurrentMonth}">
+                      <div class="day-name">${dayName}</div>
+                      <div class="day-number">${date.getDate()}</div>
+                  </div>
+              `;
+            });
+            htmlString += '<div class="scroll-pad"></div>';
 
-              if (
-                dateStr === this.formatDateStr(this.activeDate) &&
-                item.isCurrentMonth
-              ) {
-                card.classList.add("active");
-                activeCard = card;
-              }
+            containers.forEach((container) => {
+              container.innerHTML = htmlString;
 
-              card.innerHTML = `
-                            <div class="day-name">${dayName}</div>
-                            <div class="day-number">${date.getDate()}</div>
-                        `;
+              // Attach Events
+              container.querySelectorAll(".date-card").forEach((card) => {
+                card.addEventListener("click", () => {
+                  const isCurrent =
+                    card.getAttribute("data-is-current") === "true";
+                  // Extract year, month, day to reconstruct reliably across timezones
+                  const parts = card.dataset.date.split("-");
+                  const d = new Date(parts[0], parts[1] - 1, parts[2]);
 
-              card.addEventListener("click", () => {
-                if (!item.isCurrentMonth) {
-                  this.activeDate = date;
-                  this.currentDate = new Date(
-                    date.getFullYear(),
-                    date.getMonth(),
-                    1,
-                  );
-                  this.renderCalendar();
-                  this.selectDate(date, null);
-                } else {
-                  this.selectDate(date, card);
-                }
+                  if (!isCurrent) {
+                    this.activeDate = d;
+                    this.currentDate = new Date(
+                      d.getFullYear(),
+                      d.getMonth(),
+                      1,
+                    );
+                    this.renderCalendar();
+                    this.selectDate(d);
+                  } else {
+                    this.selectDate(d);
+                  }
+                });
               });
-              this.scrollContainer.appendChild(card);
             });
 
-            // Pad right for centering
-            const paddingRight = document.createElement("div");
-            paddingRight.className = "scroll-pad";
-            this.scrollContainer.appendChild(paddingRight);
-
-            // Center active or today after render
-            requestAnimationFrame(() => {
-              if (activeCard) {
-                this.centerCard(activeCard);
-              } else if (
-                year === new Date().getFullYear() &&
-                month === new Date().getMonth()
-              ) {
-                const todayCard = this.scrollContainer.querySelector(".today");
-                if (todayCard) this.centerCard(todayCard);
-              } else {
-                const firstCard = this.scrollContainer.querySelector(
-                  ".date-card:not(.other-month)",
-                );
-                if (firstCard) this.centerCard(firstCard);
-              }
-            });
+            this.recenter();
           }
 
-          selectDate(date, cardElement = null) {
+          selectDate(date) {
             this.activeDate = date;
-            const dateCards =
-              this.scrollContainer.querySelectorAll(".date-card");
-            dateCards.forEach((c) => c.classList.remove("active"));
+            const targetDateStr = this.formatDateStr(date);
+            const containers = document.querySelectorAll(".calendar-scroll");
 
-            let targetCard = cardElement;
-            if (!targetCard) {
-              targetCard = Array.from(dateCards).find(
+            containers.forEach((container) => {
+              const dateCards = container.querySelectorAll(".date-card");
+              dateCards.forEach((c) => c.classList.remove("active"));
+
+              const targetCard = Array.from(dateCards).find(
                 (c) =>
-                  c.dataset.date === this.formatDateStr(date) &&
-                  !c.classList.contains("other-month"),
+                  c.dataset.date === targetDateStr &&
+                  c.getAttribute("data-is-current") === "true",
               );
-            }
+              if (targetCard) {
+                targetCard.classList.add("active");
+                this.centerCard(container, targetCard);
+              }
+            });
 
-            if (targetCard) {
-              targetCard.classList.add("active");
-              this.centerCard(targetCard);
-            }
-
-            // Update dummy text
-            const isToday =
-              this.formatDateStr(date) === this.formatDateStr(new Date());
+            // Update dummy text if it exists
+            const isToday = targetDateStr === this.formatDateStr(new Date());
             const displayStr = isToday
               ? "today"
               : date.toLocaleDateString("en-US", {
@@ -1714,24 +2739,44 @@
                   day: "numeric",
                   year: "numeric",
                 });
-            if (this.selectedDateDisplay) {
-              this.selectedDateDisplay.textContent = displayStr;
+            const selectedDateDisplay = document.getElementById(
+              "selected-date-display",
+            );
+            if (selectedDateDisplay) {
+              selectedDateDisplay.textContent = displayStr;
             }
 
-            // Trigger generic event for workout view to load local storage data
             document.dispatchEvent(
               new CustomEvent("dateSelected", {
-                detail: { date: this.formatDateStr(date) },
+                detail: { date: targetDateStr },
               }),
             );
           }
 
-          centerCard(card) {
-            const containerCenter = this.scrollContainer.clientWidth / 2;
+          centerCard(container, card) {
+            const containerCenter = container.clientWidth / 2;
             const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-            this.scrollContainer.scrollTo({
+            container.scrollTo({
               left: cardCenter - containerCenter,
               behavior: "smooth",
+            });
+          }
+
+          recenter() {
+            requestAnimationFrame(() => {
+              const containers = document.querySelectorAll(".calendar-scroll");
+              containers.forEach((container) => {
+                if (container.clientWidth > 0) {
+                  // Only process if visible
+                  const activeCard =
+                    container.querySelector(".date-card.active") ||
+                    container.querySelector(".today") ||
+                    container.querySelector(".date-card:not(.other-month)");
+                  if (activeCard) {
+                    this.centerCard(container, activeCard);
+                  }
+                }
+              });
             });
           }
         }
@@ -2136,6 +3181,7 @@
         document.addEventListener("dateSelected", (e) => {
           window.currentSelectedDate = e.detail.date;
           if (window.renderWorkoutView) window.renderWorkoutView(e.detail.date);
+          if (window.renderDietView) window.renderDietView(e.detail.date);
         });
 
         window.renderWorkoutView = function (dateStr) {
@@ -2268,7 +3314,7 @@
         window.isTimerRunningFor = function (dateStr) {
           const key = `kinetic_workout_${dateStr}`;
           const dataSt = localStorage.getItem(key);
-          if(!dataSt) return false;
+          if (!dataSt) return false;
           return JSON.parse(dataSt).isTimerRunning;
         };
 
@@ -2289,14 +3335,16 @@
           if (!data) return;
 
           if (data.isTimerRunning) {
-              if (data.lastActiveTimestamp) {
-                  data.accumulatedSeconds = (data.accumulatedSeconds || 0) + Math.floor((Date.now() - data.lastActiveTimestamp) / 1000);
-              }
-              data.isTimerRunning = false;
-              data.lastActiveTimestamp = null;
+            if (data.lastActiveTimestamp) {
+              data.accumulatedSeconds =
+                (data.accumulatedSeconds || 0) +
+                Math.floor((Date.now() - data.lastActiveTimestamp) / 1000);
+            }
+            data.isTimerRunning = false;
+            data.lastActiveTimestamp = null;
           } else {
-              data.isTimerRunning = true;
-              data.lastActiveTimestamp = Date.now();
+            data.isTimerRunning = true;
+            data.lastActiveTimestamp = Date.now();
           }
           localStorage.setItem(key, JSON.stringify(data));
           renderWorkoutView(window.currentSelectedDate);
@@ -2324,7 +3372,9 @@
 
             let displaySecs = data.accumulatedSeconds || 0;
             if (data.lastActiveTimestamp) {
-                displaySecs += Math.floor((Date.now() - data.lastActiveTimestamp) / 1000);
+              displaySecs += Math.floor(
+                (Date.now() - data.lastActiveTimestamp) / 1000,
+              );
             }
 
             const timeEl = document.getElementById("workout-top-timer");
@@ -2370,7 +3420,9 @@
 
           let displaySecsForUI = data.accumulatedSeconds || 0;
           if (data.isTimerRunning && data.lastActiveTimestamp) {
-              displaySecsForUI += Math.floor((Date.now() - data.lastActiveTimestamp) / 1000);
+            displaySecsForUI += Math.floor(
+              (Date.now() - data.lastActiveTimestamp) / 1000,
+            );
           }
 
           let html = `
@@ -2384,7 +3436,7 @@
                         <div class="heroic-stats">
                             <div class="heroic-stat">
                                 <span class="heroic-stat-label">Volume</span>
-                                <span class="heroic-stat-val">${volStr} <small>Lbs</small></span>
+                                <span class="heroic-stat-val">${volStr} <small>kg</small></span>
                             </div>
                             <div class="heroic-stat" style="position:relative;">
                                 <span class="heroic-stat-label">Time</span>
@@ -2428,7 +3480,7 @@
                                             <div class="log-stepper-group">
                                                 <button class="log-stepper-btn" onclick="stepVal(${exIdx}, ${setIdx}, 'weight', -5)">−</button>
                                                 <div class="log-stepper-val">
-                                                    <label>Weight (LBS)</label>
+                                                    <label>Weight (KG)</label>
                                                     <input type="number" value="${set.weight}" onchange="updateSet(${exIdx}, ${setIdx}, 'weight', this.value)">
                                                 </div>
                                                 <button class="log-stepper-btn" onclick="stepVal(${exIdx}, ${setIdx}, 'weight', 5)">+</button>
@@ -2516,7 +3568,7 @@
                                         <thead>
                                             <tr>
                                                 <th style="text-align:left; font-size:0.6rem; color:var(--text-secondary); text-transform:uppercase; padding-bottom:8px;">Set</th>
-                                                <th style="text-align:center; font-size:0.6rem; color:var(--text-secondary); text-transform:uppercase; padding-bottom:8px;">Lbs</th>
+                                                <th style="text-align:center; font-size:0.6rem; color:var(--text-secondary); text-transform:uppercase; padding-bottom:8px;">Kg</th>
                                                 <th style="text-align:center; font-size:0.6rem; color:var(--text-secondary); text-transform:uppercase; padding-bottom:8px;">Reps</th>
                                                 <th style="text-align:right; font-size:0.6rem; color:var(--text-secondary); text-transform:uppercase; padding-bottom:8px;">Level</th>
                                             </tr>
@@ -2857,11 +3909,1279 @@
           renderActiveWorkout(window.currentSelectedDate, data);
         };
 
+        // --- Diet Tracking Logic ---
+
+        window.getDietConfigForDate = function (dateStr) {
+          const config = JSON.parse(
+            localStorage.getItem("kinetic_diet_config"),
+          ) || {
+            defaultTargets: {
+              totalCalories: 3000,
+              proteinTarget: 160,
+              carbTarget: 350,
+              fatTarget: 80,
+            },
+            overrides: [],
+          };
+          let target = config.defaultTargets;
+          if (config.overrides && config.overrides.length > 0) {
+            config.overrides.forEach((o) => {
+              // Simple string comparison YYYY-MM-DD
+              if (dateStr >= o.start && dateStr <= o.end) {
+                target = o.targets;
+              }
+            });
+          }
+          return target;
+        };
+
+        window.getDietData = function (dateStr) {
+          const key = `kinetic_diet_${dateStr}`;
+          const targetConfig = getDietConfigForDate(dateStr);
+          let data = localStorage.getItem(key);
+
+          let parsed = data
+            ? JSON.parse(data)
+            : {
+                meals: [],
+              };
+
+          // Assign dynamic targets securely without relying on previously initialized defaults logic overrides
+          parsed.totalCalories = targetConfig.totalCalories;
+          parsed.proteinTarget = targetConfig.proteinTarget;
+          parsed.carbTarget = targetConfig.carbTarget;
+          parsed.fatTarget = targetConfig.fatTarget;
+
+          return parsed;
+        };
+
+        window.saveDietData = function (dateStr, data) {
+          localStorage.setItem(`kinetic_diet_${dateStr}`, JSON.stringify(data));
+        };
+
+        window.getFoodLibrary = function () {
+          try {
+            let libStr = localStorage.getItem("kinetic_food_library");
+            if (!libStr) {
+              let oldRecentStr = localStorage.getItem("kinetic_recent_foods");
+              let oldRecent = [];
+              if (oldRecentStr) {
+                try {
+                  oldRecent = JSON.parse(oldRecentStr);
+                } catch (e) {}
+              }
+              if (!Array.isArray(oldRecent)) oldRecent = [];
+
+              let lib = oldRecent.map((rf, idx) => ({
+                id: "f_" + Date.now() + "_" + idx,
+                name: rf.name || "Unknown Item",
+                kcals: parseInt(rf.kcals) || 0,
+                p: parseInt(rf.p) || 0,
+                c: parseInt(rf.c) || 0,
+                f: parseInt(rf.f) || 0,
+                usageCount: 1,
+                favorite: false,
+                lastUsed: Date.now(),
+              }));
+              localStorage.setItem("kinetic_food_library", JSON.stringify(lib));
+              return lib;
+            }
+
+            let parsed = JSON.parse(libStr);
+            return Array.isArray(parsed) ? parsed : [];
+          } catch (e) {
+            console.error("Library parse error", e);
+            return [];
+          }
+        };
+
+        window.saveFoodLibrary = function (lib) {
+          localStorage.setItem("kinetic_food_library", JSON.stringify(lib));
+        };
+
+        window.renderFoodLibrary = function (query = "") {
+          let lib = window.getFoodLibrary();
+          let container = document.getElementById("food-library-list");
+          if (!container) return;
+
+          const currentHour = new Date().getHours();
+
+          lib.sort((a, b) => {
+            const aFav = a.favorite === true;
+            const bFav = b.favorite === true;
+            if (aFav !== bFav) return bFav ? 1 : -1;
+
+            let aScore = a.usageCount || 0;
+            let bScore = b.usageCount || 0;
+
+            // AI Predictive boost: Has it been eaten around this time of day before?
+            const getHourScore = (food) => {
+                let s = 0;
+                if (!food.hourCounts) return 0;
+                for (let i = -2; i <= 2; i++) {
+                    let h = (currentHour + i + 24) % 24;
+                    s += (food.hourCounts[h] || 0) * (3 - Math.abs(i)) * 5; // Strong weight modifier
+                }
+                return s;
+            }
+
+            aScore += getHourScore(a);
+            bScore += getHourScore(b);
+
+            if (aScore !== bScore) return bScore - aScore;
+
+            const aLast = a.lastUsed || 0;
+            const bLast = b.lastUsed || 0;
+            return bLast - aLast;
+          });
+
+          if (query && query.trim() !== "") {
+            const q = query.toLowerCase().trim();
+            lib = lib.filter((f) => (f.name || "").toLowerCase().includes(q));
+          } else {
+            lib = lib.slice(0, 20); // show top 20 by default
+          }
+
+          let html = `
+                <div class="food-lib-chip dotted" onclick="openCustomFoodForm()">
+                    + Add New
+                </div>
+            `;
+
+          if (lib.length === 0 && (!query || query.trim() === "")) {
+            // If library empty, the + Add New might be enough
+          } else if (lib.length === 0) {
+            html += `<div style="text-align:center; color:var(--text-secondary); font-size:0.85rem; padding:24px; font-style:italic;">No saved foods match your search.</div>`;
+          } else {
+            html += lib
+              .map((f) => {
+                return `
+                    <div class="food-lib-chip" onclick="applyLibFood('${f.id}')">
+                        <button class="btn-del-chip" onclick="event.stopPropagation(); deleteLibFood('${f.id}')">✕</button>
+                        <div class="food-lib-chip-name">${f.name}</div>
+                        <div class="food-lib-chip-macros">${f.kcals} KCAL &bull; ${f.p}P &bull; ${f.c}C &bull; ${f.f}F</div>
+                    </div>
+                    `;
+              })
+              .join("");
+          }
+          container.innerHTML = html;
+        };
+
+        window.filterFoodLibrary = function () {
+          const query = document.getElementById("food-search-input").value;
+          window.renderFoodLibrary(query);
+        };
+
+        window.applyLibFood = function (id) {
+          let lib = window.getFoodLibrary();
+          let f = lib.find((x) => x.id === id);
+          if (!f) return;
+
+          window.tempMealFoods.push({
+            name: f.name,
+            kcals: f.kcals,
+            p: f.p,
+            c: f.c,
+            f: f.f,
+          });
+          f.usageCount = (f.usageCount || 0) + 1;
+          f.lastUsed = Date.now();
+          
+          const currentHour = new Date().getHours();
+          f.hourCounts = f.hourCounts || {};
+          f.hourCounts[currentHour] = (f.hourCounts[currentHour] || 0) + 1;
+
+          window.saveFoodLibrary(lib);
+
+          document.getElementById("food-search-input").value = "";
+          window.renderFoodLibrary();
+          window.renderTempMealFoods();
+        };
+
+        window.toggleFavoriteFood = function (id) {
+          let lib = window.getFoodLibrary();
+          let f = lib.find((x) => x.id === id);
+          if (f) {
+            f.favorite = !f.favorite;
+            window.saveFoodLibrary(lib);
+            window.renderFoodLibrary(
+              document.getElementById("food-search-input").value,
+            );
+          }
+        };
+
+        window.deleteLibFood = function (id) {
+          if (!confirm("Remove from food library entirely?")) return;
+          let lib = window.getFoodLibrary();
+          lib = lib.filter((x) => x.id !== id);
+          window.saveFoodLibrary(lib);
+          window.renderFoodLibrary(
+            document.getElementById("food-search-input").value,
+          );
+        };
+
+        window.openMealModal = function (mealId = null) {
+          const data = getDietData(window.currentSelectedDate);
+
+          document.getElementById("food-search-input").value = "";
+          window.renderFoodLibrary();
+
+          if (mealId) {
+            const meal = data.meals.find((m) => m.id === mealId);
+            if (!meal) return;
+
+            document.getElementById("active-meal-id").value = mealId;
+            document.getElementById("meal-modal-title").innerText =
+              "Edit " + meal.name;
+            document.getElementById("meal-name").value = meal.name;
+            document.getElementById("meal-time").value = meal.time || "";
+
+            window.tempMealFoods = [...(meal.items || [])];
+            document.getElementById("delete-meal-btn").style.display = "block";
+          } else {
+            document.getElementById("active-meal-id").value = "";
+            document.getElementById("meal-modal-title").innerText =
+              "Log New Meal";
+
+            const now = new Date();
+            const hours = now.getHours();
+            const mins = now.getMinutes().toString().padStart(2, "0");
+            document.getElementById("meal-time").value =
+              `${hours.toString().padStart(2, "0")}:${mins}`;
+
+            let suggested = "Snack";
+            if (hours >= 6 && hours <= 10) suggested = "Breakfast";
+            else if (hours >= 11 && hours <= 14) suggested = "Lunch";
+            else if (hours >= 18 && hours <= 21) suggested = "Dinner";
+
+            document.getElementById("meal-name").value = suggested;
+            window.tempMealFoods = [];
+            document.getElementById("delete-meal-btn").style.display = "none";
+          }
+
+          document.getElementById("food-name").value = "";
+          document.getElementById("food-kcals").value = "";
+          document.getElementById("food-p").value = "";
+          document.getElementById("food-c").value = "";
+          document.getElementById("food-f").value = "";
+
+          window.renderTempMealFoods();
+
+          document.getElementById("meal-modal-overlay").classList.add("active");
+          document.getElementById("meal-modal").classList.add("active");
+        };
+
+        window.closeMealModal = function () {
+          document
+            .getElementById("meal-modal-overlay")
+            .classList.remove("active");
+          document.getElementById("meal-modal").classList.remove("active");
+        };
+
+        window.renderTempMealFoods = function () {
+          const container = document.getElementById("meal-food-list");
+          if (!container) return;
+          if (window.tempMealFoods.length === 0) {
+            container.innerHTML = `<div style="text-align:center; color:var(--text-secondary); font-size:0.8rem; padding: 12px;">No items added yet.</div>`;
+            return;
+          }
+
+          container.innerHTML = window.tempMealFoods
+            .map(
+              (f, i) => `
+                <div class="meal-food-item">
+                    <div style="flex: 1;">
+                        <div class="meal-food-item-name">${f.name}</div>
+                        <div class="meal-food-item-macros">${f.kcals} KCALS &bull; ${f.p}P &bull; ${f.c}C &bull; ${f.f}F</div>
+                    </div>
+                    <button class="meal-food-del-btn" style="margin-right: 8px; border-color: rgba(255,255,255,0.2)" onclick="editTempFood(${i})">
+                        <svg viewBox="0 0 24 24" width="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </button>
+                    <button class="meal-food-del-btn" onclick="removeTempFood(${i})">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            `,
+            )
+            .join("");
+        };
+
+        window.editTempFood = function(index) {
+           const f = window.tempMealFoods[index];
+           document.getElementById("food-name").value = f.name;
+           document.getElementById("food-kcals").value = f.kcals;
+           document.getElementById("food-p").value = f.p;
+           document.getElementById("food-c").value = f.c;
+           document.getElementById("food-f").value = f.f;
+           
+           window.tempMealFoods.splice(index, 1);
+           window.renderTempMealFoods();
+           
+           openCustomFoodForm();
+        };
+
+        window.openCustomFoodForm = function() {
+          const details = document.querySelector(".manual-entry-details");
+          if (details) details.setAttribute("open", "");
+          const nameEl = document.getElementById("food-name");
+          if (nameEl) {
+            nameEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setTimeout(() => nameEl.focus(), 300);
+          }
+        };
+
+        window.saveCustomFoodToLibrary = function () {
+          const nameEl = document.getElementById("food-name");
+          const name = nameEl.value.trim();
+          if (!name) {
+            alert(
+              "Please provide a description or name to save this food to your list.",
+            );
+            nameEl.focus();
+            return;
+          }
+          const kcals =
+            parseInt(document.getElementById("food-kcals").value) || 0;
+          const p = parseInt(document.getElementById("food-p").value) || 0;
+          const c = parseInt(document.getElementById("food-c").value) || 0;
+          const f = parseInt(document.getElementById("food-f").value) || 0;
+
+          let lib = window.getFoodLibrary();
+          let existing = lib.find(
+            (x) => x.name.toLowerCase() === name.toLowerCase(),
+          );
+          if (existing) {
+            existing.usageCount = (existing.usageCount || 0) + 1;
+            existing.lastUsed = Date.now();
+            existing.kcals = kcals;
+            existing.p = p;
+            existing.c = c;
+            existing.f = f;
+          } else {
+            lib.push({
+              id: "f_" + Date.now() + Math.random().toString(36).substr(2, 9),
+              name,
+              kcals,
+              p,
+              c,
+              f,
+              usageCount: 1,
+              favorite: false,
+              lastUsed: Date.now(),
+              hourCounts: { [new Date().getHours()]: 1 }
+            });
+          }
+          window.saveFoodLibrary(lib);
+
+          document.getElementById("food-search-input").value = "";
+          window.renderFoodLibrary();
+
+          document.getElementById("food-name").value = "";
+          document.getElementById("food-kcals").value = "";
+          document.getElementById("food-p").value = "";
+          document.getElementById("food-c").value = "";
+          document.getElementById("food-f").value = "";
+        };
+
+        window.addFoodToMeal = function () {
+          const name =
+            document.getElementById("food-name").value.trim() || "Custom Item";
+          const kcals =
+            parseInt(document.getElementById("food-kcals").value) || 0;
+          const p = parseInt(document.getElementById("food-p").value) || 0;
+          const c = parseInt(document.getElementById("food-c").value) || 0;
+          const f = parseInt(document.getElementById("food-f").value) || 0;
+
+          if (
+            kcals === 0 &&
+            p === 0 &&
+            c === 0 &&
+            f === 0 &&
+            name === "Custom Item"
+          ) {
+            alert("Please enter food item details or macros.");
+            return;
+          }
+
+          window.tempMealFoods.push({ name, kcals, p, c, f });
+
+          document.getElementById("food-name").value = "";
+          document.getElementById("food-kcals").value = "";
+          document.getElementById("food-p").value = "";
+          document.getElementById("food-c").value = "";
+          document.getElementById("food-f").value = "";
+
+          const details = document.querySelector(".manual-entry-details");
+          if (details) details.removeAttribute("open");
+
+          window.renderTempMealFoods();
+        };
+
+        window.removeTempFood = function (index) {
+          window.tempMealFoods.splice(index, 1);
+          window.renderTempMealFoods();
+        };
+
+        window.deleteMeal = function () {
+          const mealId = document.getElementById("active-meal-id").value;
+          if (!mealId) return;
+          if (!confirm("Delete this entire meal log?")) return;
+
+          const data = getDietData(window.currentSelectedDate);
+          data.meals = data.meals.filter((m) => m.id !== mealId);
+
+          saveDietData(window.currentSelectedDate, data);
+          closeMealModal();
+          renderDietView(window.currentSelectedDate);
+        };
+
+        window.deleteMealDirect = function (mealId) {
+          if (!confirm("Remove this meal from today's log?")) return;
+          const data = getDietData(window.currentSelectedDate);
+          data.meals = data.meals.filter((m) => m.id !== mealId);
+          saveDietData(window.currentSelectedDate, data);
+          renderDietView(window.currentSelectedDate);
+        };
+
+        // --- Diet Settings UI Logic ---
+        window.tempConfigOverrides = [];
+        window.openDietSettingsModal = function () {
+          const config = JSON.parse(
+            localStorage.getItem("kinetic_diet_config"),
+          ) || {
+            defaultTargets: {
+              totalCalories: 3000,
+              proteinTarget: 160,
+              carbTarget: 350,
+              fatTarget: 80,
+            },
+            overrides: [],
+          };
+          document.getElementById("ds-kcals").value =
+            config.defaultTargets.totalCalories;
+          document.getElementById("ds-p").value =
+            config.defaultTargets.proteinTarget;
+          document.getElementById("ds-c").value =
+            config.defaultTargets.carbTarget;
+          document.getElementById("ds-f").value =
+            config.defaultTargets.fatTarget;
+
+          window.tempConfigOverrides = [...config.overrides];
+          renderDietOverrides();
+
+          document
+            .getElementById("diet-settings-overlay")
+            .classList.add("active");
+          document
+            .getElementById("diet-settings-modal")
+            .classList.add("active");
+        };
+
+        window.closeDietSettingsModal = function () {
+          document
+            .getElementById("diet-settings-overlay")
+            .classList.remove("active");
+          document
+            .getElementById("diet-settings-modal")
+            .classList.remove("active");
+        };
+
+        window.renderDietOverrides = function () {
+          const container = document.getElementById("ds-overrides-list");
+          container.innerHTML = "";
+          window.tempConfigOverrides.forEach((o, index) => {
+            container.innerHTML += `
+                    <div style="background:var(--surface-container); padding:16px; border-radius:12px; margin-bottom:16px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                            <div style="font-size:0.8rem; font-weight:700;">Override #${index + 1}</div>
+                            <button style="background:none; border:none; color:var(--text-secondary); cursor:pointer;" onclick="removeDietOverride(${index})">
+                                <svg viewBox="0 0 24 24" width="16" stroke="currentColor" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke-width="2"/></svg>
+                            </button>
+                        </div>
+                        <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+                            <div class="input-group" style="flex:1; min-width:120px;">
+                                <label>Start Date</label>
+                                <input type="date" value="${o.start}" onchange="updateOverride(${index}, 'start', this.value)">
+                            </div>
+                            <div class="input-group" style="flex:1; min-width:120px;">
+                                <label>End Date</label>
+                                <input type="date" value="${o.end}" onchange="updateOverride(${index}, 'end', this.value)">
+                            </div>
+                        </div>
+                        <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:8px;">
+                            <div class="input-group" style="flex:1; min-width:70px;">
+                                <label style="color:var(--primary-container)">Kcals</label>
+                                <input type="number" value="${o.targets.totalCalories}" onchange="updateOverrideTarget(${index}, 'totalCalories', this.value)">
+                            </div>
+                            <div class="input-group" style="flex:1; min-width:70px;">
+                                <label style="color:#f3ffca">Pro.</label>
+                                <input type="number" value="${o.targets.proteinTarget}" onchange="updateOverrideTarget(${index}, 'proteinTarget', this.value)">
+                            </div>
+                            <div class="input-group" style="flex:1; min-width:70px;">
+                                <label style="color:#ff7441">Carbs</label>
+                                <input type="number" value="${o.targets.carbTarget}" onchange="updateOverrideTarget(${index}, 'carbTarget', this.value)">
+                            </div>
+                            <div class="input-group" style="flex:1; min-width:70px;">
+                                <label style="color:#ffd541">Fats</label>
+                                <input type="number" value="${o.targets.fatTarget}" onchange="updateOverrideTarget(${index}, 'fatTarget', this.value)">
+                            </div>
+                        </div>
+                    </div>
+                `;
+          });
+        };
+
+        window.addDietOverride = function () {
+          window.tempConfigOverrides.push({
+            start:
+              window.currentSelectedDate ||
+              new Date().toISOString().split("T")[0],
+            end:
+              window.currentSelectedDate ||
+              new Date().toISOString().split("T")[0],
+            targets: {
+              totalCalories: 2500,
+              proteinTarget: 150,
+              carbTarget: 250,
+              fatTarget: 60,
+            },
+          });
+          renderDietOverrides();
+        };
+
+        window.removeDietOverride = function (idx) {
+          window.tempConfigOverrides.splice(idx, 1);
+          renderDietOverrides();
+        };
+
+        window.updateOverride = function (idx, field, val) {
+          window.tempConfigOverrides[idx][field] = val;
+        };
+
+        window.updateOverrideTarget = function (idx, field, val) {
+          window.tempConfigOverrides[idx].targets[field] = parseInt(val) || 0;
+        };
+
+        window.saveDietSettings = function () {
+          const newConfig = {
+            defaultTargets: {
+              totalCalories:
+                parseInt(document.getElementById("ds-kcals").value) || 3000,
+              proteinTarget:
+                parseInt(document.getElementById("ds-p").value) || 160,
+              carbTarget:
+                parseInt(document.getElementById("ds-c").value) || 350,
+              fatTarget: parseInt(document.getElementById("ds-f").value) || 80,
+            },
+            overrides: window.tempConfigOverrides,
+          };
+          localStorage.setItem(
+            "kinetic_diet_config",
+            JSON.stringify(newConfig),
+          );
+          closeDietSettingsModal();
+          renderDietView(window.currentSelectedDate);
+        };
+
+        window.saveMealLog = function () {
+          const mealId = document.getElementById("active-meal-id").value;
+          const mealName =
+            document.getElementById("meal-name").value.trim() || "Meal";
+          const mealTime =
+            document.getElementById("meal-time").value || "12:00";
+
+          const data = getDietData(window.currentSelectedDate);
+
+          let tkcals = 0,
+            tp = 0,
+            tc = 0,
+            tf = 0;
+          window.tempMealFoods.forEach((f) => {
+            tkcals += f.kcals;
+            tp += f.p;
+            tc += f.c;
+            tf += f.f;
+          });
+
+          if (mealId) {
+            const meal = data.meals.find((m) => m.id === mealId);
+            if (meal) {
+              meal.name = mealName;
+              meal.time = mealTime;
+              meal.items = window.tempMealFoods;
+              meal.calories = tkcals;
+              meal.protein = tp;
+              meal.carbs = tc;
+              meal.fats = tf;
+              meal.logged = true;
+            }
+          } else {
+            data.meals.push({
+              id: "m_" + Date.now(),
+              name: mealName,
+              time: mealTime,
+              items: window.tempMealFoods,
+              calories: tkcals,
+              protein: tp,
+              carbs: tc,
+              fats: tf,
+              logged: true,
+              timestamp: Date.now(),
+            });
+          }
+
+          data.meals.sort((a, b) => {
+            const tA = a.time || "00:00";
+            const tB = b.time || "00:00";
+            return tA.localeCompare(tB);
+          });
+
+          saveDietData(window.currentSelectedDate, data);
+          closeMealModal();
+          renderDietView(window.currentSelectedDate);
+        };
+
+        window.renderDietView = function (dateStr) {
+          const container = document.getElementById("diet-dashboard-content");
+          if (!container) return;
+
+          const data = getDietData(dateStr);
+
+          let consumedKcal = 0;
+          let consumedP = 0;
+          let consumedC = 0;
+          let consumedF = 0;
+
+          const legacyStaticIds = ["breakfast", "lunch", "dinner", "snacks"];
+
+          data.meals.forEach((m) => {
+            if (m.logged || !legacyStaticIds.includes(m.id)) {
+              consumedKcal += m.calories || 0;
+              consumedP += m.protein || 0;
+              consumedC += m.carbs || 0;
+              consumedF += m.fats || 0;
+            }
+          });
+
+          const kcalLeft = Math.max(0, data.totalCalories - consumedKcal);
+          const ring1Pct = Math.min(1, consumedKcal / data.totalCalories);
+          const ring2Pct = Math.min(1, consumedP / data.proteinTarget);
+          const ring3Pct = Math.min(1, consumedC / data.carbTarget);
+          const ring4Pct = Math.min(1, consumedF / data.fatTarget);
+
+          const r1Offset = 779 - 779 * ring1Pct;
+          const r2Offset = 653 - 653 * ring2Pct;
+          const r3Offset = 528 - 528 * ring3Pct;
+          const r4Offset = 402 - 402 * ring4Pct;
+
+          let mealsHtml = "";
+          let meaningfulMeals = data.meals.filter(
+            (m) => !legacyStaticIds.includes(m.id) || m.logged,
+          );
+
+          if (meaningfulMeals.length === 0) {
+            mealsHtml = `<div class="empty-timeline">No meals logged today yet.<br>Tap the + button to get started!</div>`;
+          } else {
+            mealsHtml = `<div class="timeline-container">
+                                <div class="timeline-line"></div>`;
+
+            meaningfulMeals.forEach((m) => {
+              let itemsStr = "Logged via macros";
+              if (m.items && m.items.length > 0) {
+                itemsStr = m.items.map((i) => i.name).join(", ");
+                if (itemsStr.length > 55)
+                  itemsStr = itemsStr.substring(0, 52) + "...";
+              }
+
+              mealsHtml += `
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <span class="timeline-time">${m.time || "Logged"}</span>
+                            <div class="timeline-card" onclick="openMealModal('${m.id}')" style="position:relative;">
+                                <div class="timeline-header">
+                                    <h4 class="timeline-title">${m.name}</h4>
+                                    <div class="timeline-macros">${m.calories} KCAL</div>
+                                </div>
+                                <div class="timeline-foods">${itemsStr}</div>
+                                <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:6px; font-weight:700; padding-right: 32px;">
+                                    ${m.protein}P &bull; ${m.carbs}C &bull; ${m.fats}F
+                                </div>
+                                <button onclick="event.stopPropagation(); deleteMealDirect('${m.id}')" style="position:absolute; bottom:10px; right:10px; background:rgba(255,69,58,0.12); border:1px solid rgba(255,69,58,0.25); border-radius:8px; width:28px; height:28px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:#ff453a; padding:0;" title="Delete meal">
+                                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+            });
+            mealsHtml += `</div>`;
+          }
+
+          setTimeout(() => {
+            const ringKcal = container.querySelector(".ring-kcal");
+            const ringP = container.querySelector(".ring-p");
+            const ringC = container.querySelector(".ring-c");
+            const ringF = container.querySelector(".ring-f");
+
+            if (ringKcal) ringKcal.style.strokeDashoffset = r1Offset;
+            if (ringP) ringP.style.strokeDashoffset = r2Offset;
+            if (ringC) ringC.style.strokeDashoffset = r3Offset;
+            if (ringF) ringF.style.strokeDashoffset = r4Offset;
+
+            const limeFill = container.querySelector(".dsc-bar-fill.lime");
+            const paleFill = container.querySelector(".dsc-bar-fill.pale");
+            const orangeFill = container.querySelector(".dsc-bar-fill.orange");
+            const yellowFill = container.querySelector(".dsc-bar-fill.yellow");
+
+            if (limeFill) limeFill.style.width = `${ring1Pct * 100}%`;
+            if (paleFill) paleFill.style.width = `${ring2Pct * 100}%`;
+            if (orangeFill) orangeFill.style.width = `${ring3Pct * 100}%`;
+            if (yellowFill) yellowFill.style.width = `${ring4Pct * 100}%`;
+          }, 50);
+
+          container.innerHTML = `
+                <!-- Circular Dashboard -->
+                <div class="diet-rings-container">
+                    <svg class="diet-rings-svg" viewBox="0 0 280 280">
+                        <circle class="circle-bg" cx="140" cy="140" r="124"></circle>
+                        <circle class="circle-bg" cx="140" cy="140" r="104"></circle>
+                        <circle class="circle-bg" cx="140" cy="140" r="84"></circle>
+                        <circle class="circle-bg" cx="140" cy="140" r="64"></circle>
+                        
+                        <circle class="circle-progress ring-kcal" cx="140" cy="140" r="124" style="stroke-dashoffset: 779"></circle>
+                        <circle class="circle-progress ring-p" cx="140" cy="140" r="104" style="stroke-dashoffset: 653"></circle>
+                        <circle class="circle-progress ring-c" cx="140" cy="140" r="84" style="stroke-dashoffset: 528"></circle>
+                        <circle class="circle-progress ring-f" cx="140" cy="140" r="64" style="stroke-dashoffset: 402"></circle>
+                    </svg>
+                    
+                    <div class="diet-rings-content">
+                        <div class="diet-kcal-val">${kcalLeft.toLocaleString()}</div>
+                        <div class="diet-kcal-label">Kcals Left</div>
+                    </div>
+                </div>
+
+                <!-- Macros -->
+                <div class="diet-macros-row">
+                    <div class="macro-col">
+                        <div class="macro-val p" style="${consumedP >= data.proteinTarget ? "text-decoration: line-through; opacity: 0.5;" : ""}">${consumedP}g</div>
+                        <div class="macro-label">Protein</div>
+                    </div>
+                    <div class="macro-col">
+                        <div class="macro-val c" style="${consumedC >= data.carbTarget ? "text-decoration: line-through; opacity: 0.5;" : ""}">${consumedC}g</div>
+                        <div class="macro-label">Carbs</div>
+                    </div>
+                    <div class="macro-col">
+                        <div class="macro-val f" style="${consumedF >= data.fatTarget ? "text-decoration: line-through; opacity: 0.5;" : ""}">${consumedF}g</div>
+                        <div class="macro-label">Fats</div>
+                    </div>
+                </div>
+                
+                <div style="text-align:center; margin-bottom: 48px;">
+                     <button style="font-size:0.65rem; font-family:var(--font-display); text-transform:uppercase; color:var(--text-secondary); background:var(--surface-container-high); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:8px 16px; cursor:pointer;" onclick="openDietSettingsModal()">⛭ Configure Targets</button>
+                </div>
+
+                <!-- Summary Cards -->
+                <div class="summary-header">Daily Summary <span style="font-size:0.6rem; color:var(--text-secondary); float:right; margin-top:8px;">← Swipe →</span></div>
+                
+                <div class="summary-carousel">
+                    <!-- Slide 1 -->
+                    <div class="summary-slide">
+                        <div class="diet-summary-card">
+                            <div class="dsc-header">
+                                <div class="dsc-label">Calorie Progress</div>
+                                <svg class="dsc-icon" width="16" height="16" viewBox="0 0 24 24" fill="var(--primary)"><path d="M12 2c-3.1 3.5-6 6.8-6 10 0 3.3 2.7 6 6 6s6-2.7 6-6c0-3.2-2.9-6.5-6-10z"/></svg>
+                            </div>
+                            <div class="dsc-row">
+                                <div class="dsc-val">${consumedKcal.toLocaleString()} <small>/ ${data.totalCalories.toLocaleString()}</small></div>
+                                <div class="dsc-pct">${Math.round(ring1Pct * 100)}%</div>
+                            </div>
+                            <div class="dsc-bar-track">
+                                <div class="dsc-bar-fill lime" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="diet-summary-card">
+                            <div class="dsc-header">
+                                <div class="dsc-label">Protein Target</div>
+                                <svg class="dsc-icon" width="16" height="16" style="color:#f3ffca;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 10l-4 4 4 4m12-8l4 4-4 4M10 6L6 10m8-4l4 4M2 14h20M14 2L2 14"/></svg>
+                            </div>
+                            <div class="dsc-row">
+                                <div class="dsc-val">${consumedP} <small>/ ${data.proteinTarget}g</small></div>
+                                <div class="dsc-pct" style="color:#f3ffca;">${Math.round(ring2Pct * 100)}%</div>
+                            </div>
+                            <div class="dsc-bar-track">
+                                <div class="dsc-bar-fill pale" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="summary-slide">
+                        <div class="diet-summary-card">
+                            <div class="dsc-header">
+                                <div class="dsc-label">Carb Target</div>
+                                <svg class="dsc-icon" width="16" height="16" style="color:#ff7441;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 21v-4a2 2 0 012-2h10a2 2 0 012 2v4M2 7h20M12 3v4"/></svg>
+                            </div>
+                            <div class="dsc-row">
+                                <div class="dsc-val">${consumedC} <small>/ ${data.carbTarget}g</small></div>
+                                <div class="dsc-pct" style="color:#ff7441;">${Math.round(ring3Pct * 100)}%</div>
+                            </div>
+                            <div class="dsc-bar-track">
+                                <div class="dsc-bar-fill orange" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="diet-summary-card">
+                            <div class="dsc-header">
+                                <div class="dsc-label">Fat Target</div>
+                                <svg class="dsc-icon" width="16" height="16" style="color:#ffd541;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/></svg>
+                            </div>
+                            <div class="dsc-row">
+                                <div class="dsc-val">${consumedF} <small>/ ${data.fatTarget}g</small></div>
+                                <div class="dsc-pct" style="color:#ffd541;">${Math.round(ring4Pct * 100)}%</div>
+                            </div>
+                            <div class="dsc-bar-track">
+                                <div class="dsc-bar-fill yellow" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Action Bar -->
+                <div id="ai-bar-wrapper" style="margin: 8px 0 24px; position: relative;">
+                    <div id="ai-bar-glow" style="position:absolute; inset:-1px; border-radius:21px; background: linear-gradient(135deg, var(--primary), #00e5a0, var(--primary)); opacity:0.6; filter:blur(8px); z-index:0; animation: ai-pulse 3s ease-in-out infinite;"></div>
+                    <div style="position:relative; z-index:1; background: var(--surface-container-high); border-radius:20px; padding: 14px 16px; border: 1.5px solid var(--primary); display: flex; align-items: center; gap: 12px;">
+                        <button onclick="document.getElementById('ai-file-input').click()" style="background: rgba(255, 255, 255, 0.05); border: none; border-radius: 12px; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; color: var(--primary); cursor: pointer; flex-shrink: 0;" title="Snap &amp; Log">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                        </button>
+                        <input type="text" id="ai-text-input" placeholder="✦  Describe your meal..." style="flex: 1; background: transparent; border: none; color: var(--text-primary); font-family: var(--font-body); font-size: 0.9rem; outline: none; caret-color: var(--primary);" onkeypress="if(event.key === 'Enter') handleAILogText(this.value);" />
+                        <button onclick="openAISettingsModal()" style="background: transparent; border: none; color: var(--text-secondary); cursor: pointer; flex-shrink: 0; padding: 6px;" title="AI Settings">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                <style>
+                  @keyframes ai-pulse {
+                    0%, 100% { opacity: 0.45; transform: scale(1); }
+                    50% { opacity: 0.75; transform: scale(1.01); }
+                  }
+                </style>
+
+                <!-- Meal Log -->
+                <div class="meal-log-header">
+                    <div>
+                        <div class="meal-log-title">Meal Timeline</div>
+                        <div class="meal-log-sub">Chronological Nutritional Log</div>
+                    </div>
+                </div>
+
+                ${mealsHtml}
+
+                <button class="fab-add-meal" onclick="openMealModal()">
+                    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                </button>
+            `;
+        };
+
+        // --- Rituals Tracking Logic ---
+        window.getRitualsConfig = function () {
+          const config = localStorage.getItem("kinetic_rituals_config");
+          if (config) return JSON.parse(config);
+          return [
+            {
+              id: "r1",
+              title: "Hydration Protocol",
+              desc: "Consume 1 Gallon of water",
+            },
+            { id: "r2", title: "Active Recovery", desc: "10,000 daily steps" },
+            { id: "r3", title: "Mental Conditioning", desc: "Read 10 pages" },
+            {
+              id: "r4",
+              title: "Thermal Stress",
+              desc: "Cold exposure / Shower",
+            },
+          ];
+        };
+
+        window.getRitualsData = function (dateStr) {
+          const key = `kinetic_rituals_${dateStr}`;
+          const data = localStorage.getItem(key);
+          const config = window.getRitualsConfig();
+
+          const todayStr = new Date().toISOString().split("T")[0];
+
+          if (data) {
+            let parsed = JSON.parse(data);
+
+            // Only merge updates into today or future dates
+            if (dateStr >= todayStr) {
+              // Update descriptions and titles
+              parsed.forEach((p) => {
+                const c = config.find((cfg) => cfg.id === p.id);
+                if (c) {
+                  p.desc = c.desc;
+                  p.title = c.title;
+                }
+              });
+
+              // Add newly spawned config items
+              config.forEach((c) => {
+                if (!parsed.find((p) => p.id === c.id)) {
+                  parsed.push({ ...c, completed: false });
+                }
+              });
+
+              // Filter out items that were actively deleted from config
+              parsed = parsed.filter((p) =>
+                config.find((cfg) => cfg.id === p.id),
+              );
+            }
+
+            return parsed;
+          }
+
+          // If historical date was never logged/accessed, freeze it as an empty slate.
+          if (dateStr < todayStr) return [];
+
+          return config.map((c) => ({ ...c, completed: false }));
+        };
+
+        window.saveRitualsData = function (dateStr, data) {
+          localStorage.setItem(
+            `kinetic_rituals_${dateStr}`,
+            JSON.stringify(data),
+          );
+        };
+
+        window.toggleRitual = function (id) {
+          const data = window.getRitualsData(window.currentSelectedDate);
+          const ritual = data.find((r) => r.id === id);
+          if (ritual) {
+            ritual.completed = !ritual.completed;
+            window.saveRitualsData(window.currentSelectedDate, data);
+            window.renderRitualsView(window.currentSelectedDate);
+          }
+        };
+
+        window.openRitualsSettingsModal = function () {
+          window.tempRitualsConfig = [...window.getRitualsConfig()];
+          window.renderRitualsSettings();
+          document
+            .getElementById("rituals-settings-overlay")
+            .classList.add("active");
+          document
+            .getElementById("rituals-settings-modal")
+            .classList.add("active");
+        };
+
+        window.closeRitualsSettingsModal = function () {
+          document
+            .getElementById("rituals-settings-overlay")
+            .classList.remove("active");
+          document
+            .getElementById("rituals-settings-modal")
+            .classList.remove("active");
+        };
+
+        window.renderRitualsSettings = function () {
+          const container = document.getElementById("rs-list");
+          container.innerHTML = "";
+          window.tempRitualsConfig.forEach((rt, index) => {
+            container.innerHTML += `
+                    <div style="background:var(--surface-container); padding:16px; border-radius:12px; margin-bottom:12px; display:flex; gap:12px; align-items:center;">
+                        <div style="flex:1;">
+                            <input type="text" value="${rt.title}" onchange="window.tempRitualsConfig[${index}].title = this.value" placeholder="Ritual Title" style="width:100%; background:transparent; border:none; color:var(--text-primary); font-weight:700; font-family:var(--font-display); outline:none; margin-bottom:4px;">
+                            <input type="text" value="${rt.desc}" onchange="window.tempRitualsConfig[${index}].desc = this.value" placeholder="Description" style="width:100%; background:transparent; border:none; color:var(--text-secondary); font-size:0.75rem; outline:none;">
+                        </div>
+                        <button style="background:none; border:none; color:#ff453a; cursor:pointer; padding:8px;" onclick="window.removeRitualConfig(${index})">
+                            <svg viewBox="0 0 24 24" width="20" stroke="currentColor" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke-width="2"/></svg>
+                        </button>
+                    </div>
+                `;
+          });
+        };
+
+        window.addRitualConfig = function () {
+          window.tempRitualsConfig.push({
+            id: "r" + Date.now(),
+            title: "",
+            desc: "",
+          });
+          window.renderRitualsSettings();
+        };
+
+        window.removeRitualConfig = function (idx) {
+          window.tempRitualsConfig.splice(idx, 1);
+          window.renderRitualsSettings();
+        };
+
+        window.saveRitualsSettings = function () {
+          const finalConfig = window.tempRitualsConfig.filter(
+            (r) => r.title.trim() !== "",
+          );
+          localStorage.setItem(
+            "kinetic_rituals_config",
+            JSON.stringify(finalConfig),
+          );
+          window.closeRitualsSettingsModal();
+          window.renderRitualsView(window.currentSelectedDate);
+        };
+
+        window.renderRitualsView = function (dateStr) {
+          const container = document.getElementById("rituals-content");
+          if (!container) return;
+
+          const data = window.getRitualsData(dateStr);
+          let completed = data.filter((r) => r.completed).length;
+          let total = data.length;
+          let percent = total === 0 ? 0 : (completed / total) * 100;
+
+          let html = `
+                <div class="rituals-progress-header">
+                    <div class="rp-bar-container">
+                        <div class="rp-bar-fill" style="width: ${percent}%"></div>
+                    </div>
+                    <div class="rp-text">${Math.round(percent)}% COMPLETE</div>
+                </div>
+            `;
+
+          if (total === 0) {
+            html += `
+                    <div style="text-align:center; margin-top:60px; color:var(--text-secondary);">
+                        <p style="margin-bottom:16px;">No protocols defined.</p>
+                    </div>
+                `;
+          } else {
+            data.forEach((ritual) => {
+              html += `
+                        <div class="ritual-card ${ritual.completed ? "completed" : ""}" onclick="window.toggleRitual('${ritual.id}')">
+                            <div class="ritual-checkbox">
+                                <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="ritual-info">
+                                <div class="ritual-title">${ritual.title}</div>
+                                <div class="ritual-desc">${ritual.desc}</div>
+                            </div>
+                        </div>
+                    `;
+            });
+          }
+
+          html += `
+                <div style="text-align:center; margin-top: 32px; padding-bottom: 32px;">
+                     <button style="font-size:0.65rem; font-family:var(--font-display); text-transform:uppercase; color:var(--text-secondary); background:var(--surface-container-high); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:8px 16px; cursor:pointer;" onclick="window.openRitualsSettingsModal()">⛭ Manage Rituals</button>
+                </div>
+            `;
+
+          container.innerHTML = html;
+        };
+
+        // --- Global Sync Hooking ---
+        document.addEventListener("dateSelected", (e) => {
+          const dateStr = e.detail.date;
+          window.currentSelectedDate = dateStr;
+          renderWorkoutView(dateStr);
+          renderDietView(dateStr);
+          renderRitualsView(dateStr);
+        });
+
         // Call to render workout on initial load
         const todayStr = new Date().toISOString().split("T")[0];
         window.currentSelectedDate = todayStr;
         renderWorkoutView(todayStr);
+        renderDietView(todayStr);
+        renderRitualsView(todayStr);
+        // --- AI API Integrations ---
+        window.tempMealFoods = window.tempMealFoods || [];
+
+        if(!localStorage.getItem("kinetic_ai_key")) {
+            localStorage.setItem("kinetic_ai_key", "AIzaSyBEvFxdsdZm9ZdW6di2gwJ8apAaO5ke1NY");
+        }
+
+        window.openAISettingsModal = function () {
+          document.getElementById("ai-api-key").value = localStorage.getItem("kinetic_ai_key") || "";
+          document.getElementById("ai-settings-overlay").classList.add("active");
+          document.getElementById("ai-settings-modal").classList.add("active");
+        }
+
+        window.closeAISettingsModal = function () {
+          document.getElementById("ai-settings-overlay").classList.remove("active");
+          document.getElementById("ai-settings-modal").classList.remove("active");
+        }
+
+        window.saveAISettings = function () {
+          const key = document.getElementById("ai-api-key").value.trim();
+          if(key) localStorage.setItem("kinetic_ai_key", key);
+          closeAISettingsModal();
+        }
+
+        async function callGeminiAPI(prompt, base64Image = null) {
+          const apiKey = localStorage.getItem("kinetic_ai_key");
+          if (!apiKey) {
+            alert("Please config Gemini API Key in the settings.");
+            openAISettingsModal();
+            return null;
+          }
+          
+          const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`;
+          
+          let contents = [];
+          if (base64Image) {
+             const base64Data = base64Image.split(',')[1];
+             contents.push({
+               parts: [
+                 { inline_data: { mime_type: "image/jpeg", data: base64Data } },
+                 { text: prompt }
+               ]
+             });
+          } else {
+             contents.push({
+               parts: [{ text: prompt }]
+             });
+          }
+
+          try {
+            document.getElementById("ai-loading-overlay").classList.add("active");
+            const btn = document.getElementById("ai-text-input");
+            const oldPlaceholder = btn.placeholder;
+            btn.placeholder = "AI is thinking...";
+            btn.disabled = true;
+            
+            const response = await fetch(endpoint, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                contents: contents
+              })
+            });
+            
+            btn.placeholder = oldPlaceholder;
+            btn.disabled = false;
+            
+            const data = await response.json();
+            if (data.error) {
+              alert("API Error: " + data.error.message);
+              document.getElementById("ai-loading-overlay").classList.remove("active");
+              return null;
+            }
+            
+            let rawText = data.candidates[0].content.parts[0].text;
+            rawText = rawText.replace(/```json/gi, "").replace(/```/g, "").trim();
+            document.getElementById("ai-loading-overlay").classList.remove("active");
+            return JSON.parse(rawText);
+          } catch (e) {
+            console.error(e);
+            alert("Failed to process with AI.");
+            document.getElementById("ai-loading-overlay").classList.remove("active");
+            document.getElementById("ai-text-input").disabled = false;
+            return null;
+          }
+        }
+
+        function processAIResult(result) {
+            openMealModal();
+            document.getElementById("meal-name").value = result.name || "AI Logged Meal";
+            
+            if (result.items && Array.isArray(result.items)) {
+                result.items.forEach(item => {
+                   window.tempMealFoods.push({
+                      name: item.name || "Unknown item",
+                      kcals: item.kcals || 0,
+                      p: item.p || 0,
+                      c: item.c || 0,
+                      f: item.f || 0
+                   });
+                });
+            } else {
+                window.tempMealFoods.push({
+                   name: result.name || "AI Item",
+                   kcals: result.kcals || 0,
+                   p: result.p || 0,
+                   c: result.c || 0,
+                   f: result.f || 0
+                });
+            }
+            
+            window.renderTempMealFoods();
+            document.getElementById("ai-file-input").value = ""; 
+        }
+
+        window.handleAILogText = async function(text) {
+          if (!text.trim()) return;
+          const prompt = `You are a nutrition expert. Analyze this meal description: "${text}". 
+          Extract the nutritional information and return it strictly as JSON. Use metric units (grams for macros, kcal for calories).
+          Format: { "name": "A short, clean name for the meal", "kcals": (Total calories as number), "p": (Total protein grams as number), "c": (Total carb grams), "f": (Total fat grams), "items": [{ "name": "Item 1", "kcals": 100, "p": 10, "c": 0, "f": 5 }] }.`;
+          
+          const result = await callGeminiAPI(prompt, null);
+          if (result) processAIResult(result);
+          document.getElementById('ai-text-input').value = "";
+        }
+
+        window.handleAILogImage = function(event) {
+          const file = event.target.files[0];
+          if (!file) return;
+          
+          const reader = new FileReader();
+          reader.onload = async function(e) {
+             const base64Image = e.target.result;
+             const prompt = `You are a nutrition expert. Analyze this image. If it's a nutrition label, read the macros and multiply by serving size if obvious. If it is a picture of a meal, estimate the nutritional content. Use metric units (grams for macros, kcal for calories).
+             Return strictly as JSON containing the estimated stats. 
+             Format: { "name": "A short, clean name for the meal", "kcals": 0, "p": 0, "c": 0, "f": 0, "items": [{"name":"Component 1", "kcals": 0, "p": 0, "c": 0, "f": 0}] }`;
+             
+             const result = await callGeminiAPI(prompt, base64Image);
+             if (result) processAIResult(result);
+          };
+          reader.readAsDataURL(file);
+        }
+
       });
     </script>
+    <!-- AI Loading Overlay -->
+    <div id="ai-loading-overlay" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.45); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); justify-content:center; align-items:center;">
+      <div style="background:rgba(40,40,42,0.82); border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:32px 40px; display:flex; flex-direction:column; align-items:center; gap:16px; box-shadow:0 24px 60px rgba(0,0,0,0.5);">
+        <div class="apple-spinner" style="width:36px; height:36px; position:relative;">
+          <div class="apple-tick"></div><div class="apple-tick"></div><div class="apple-tick"></div>
+          <div class="apple-tick"></div><div class="apple-tick"></div><div class="apple-tick"></div>
+          <div class="apple-tick"></div><div class="apple-tick"></div><div class="apple-tick"></div>
+          <div class="apple-tick"></div><div class="apple-tick"></div><div class="apple-tick"></div>
+        </div>
+        <div style="font-size:0.95rem; font-weight:590; color:rgba(255,255,255,0.9); letter-spacing:0.01em; font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;">Analyzing nutrition...</div>
+      </div>
+      <style>
+        #ai-loading-overlay.active { display:flex !important; }
+
+        .apple-spinner { position:relative; }
+        .apple-spinner::before { content:''; }
+        .apple-tick {
+          position:absolute;
+          width:3px;
+          height:9px;
+          border-radius:2px;
+          background: rgba(255,255,255,0.9);
+          left: 50%;
+          top: 50%;
+          transform-origin: 0px 14px;
+          margin-left: -1.5px;
+          margin-top: -14px;
+          animation: apple-fade 1.1s linear infinite;
+        }
+        .apple-tick:nth-child(1)  { transform: rotate(0deg);    animation-delay: 0s; }
+        .apple-tick:nth-child(2)  { transform: rotate(30deg);   animation-delay: -1.008s; }
+        .apple-tick:nth-child(3)  { transform: rotate(60deg);   animation-delay: -0.917s; }
+        .apple-tick:nth-child(4)  { transform: rotate(90deg);   animation-delay: -0.825s; }
+        .apple-tick:nth-child(5)  { transform: rotate(120deg);  animation-delay: -0.733s; }
+        .apple-tick:nth-child(6)  { transform: rotate(150deg);  animation-delay: -0.642s; }
+        .apple-tick:nth-child(7)  { transform: rotate(180deg);  animation-delay: -0.55s; }
+        .apple-tick:nth-child(8)  { transform: rotate(210deg);  animation-delay: -0.458s; }
+        .apple-tick:nth-child(9)  { transform: rotate(240deg);  animation-delay: -0.367s; }
+        .apple-tick:nth-child(10) { transform: rotate(270deg);  animation-delay: -0.275s; }
+        .apple-tick:nth-child(11) { transform: rotate(300deg);  animation-delay: -0.183s; }
+        .apple-tick:nth-child(12) { transform: rotate(330deg);  animation-delay: -0.092s; }
+        @keyframes apple-fade {
+          0%   { opacity: 1; }
+          100% { opacity: 0.1; }
+        }
+      </style>
+    </div>
   </body>
 </html>
