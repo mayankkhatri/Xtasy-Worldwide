@@ -1854,6 +1854,130 @@
         font-size: 0.75rem;
         color: var(--text-secondary);
       }
+      /* AI Progress Tracker Styles */
+      .ai-insight-section {
+        margin-bottom: 24px;
+      }
+      .ai-section-title {
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--primary);
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        letter-spacing: 0.5px;
+      }
+      .ai-insight-card {
+        background: linear-gradient(135deg, var(--surface-container-high) 0%, rgba(202, 253, 0, 0.05) 100%);
+        border: 1px solid rgba(202, 253, 0, 0.15);
+        border-radius: 20px;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      .ai-pr-target {
+        font-family: var(--font-display);
+        font-size: 2.2rem;
+        font-weight: 900;
+        line-height: 1.1;
+      }
+      .ai-pr-date {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--primary);
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .ai-pr-bar-bg {
+        height: 6px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 3px;
+        margin: 12px 0 8px;
+        overflow: hidden;
+      }
+      .ai-pr-bar-fill {
+        height: 100%;
+        background: var(--primary);
+        border-radius: 3px;
+        box-shadow: 0 0 10px rgba(202, 253, 0, 0.5);
+      }
+      .weekly-summary-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 16px;
+      }
+      .summary-bull {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        background: rgba(0,0,0,0.2);
+        padding: 12px;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        line-height: 1.4;
+      }
+      .summary-bull strong {
+        font-family: var(--font-display);
+        color: var(--text-primary);
+        display: block;
+        margin-bottom: 2px;
+      }
+      .summary-icon {
+        font-size: 1.2rem;
+        line-height: 1;
+      }
+      
+      /* Heatmap */
+      .heatmap-container {
+        background: var(--surface-container-highest);
+        border-radius: 20px;
+        padding: 24px 12px;
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        gap: 20px;
+        min-height: 250px;
+      }
+      .heatmap-wrapper-3d {
+        position: relative;
+        width: 100%;
+        max-width: 250px;
+        height: 250px;
+        background: url('body_heatmap.png') center center/contain no-repeat;
+      }
+      .muscle-glow {
+        position: absolute;
+        filter: blur(14px);
+        border-radius: 50%;
+        opacity: 0.8;
+        transition: background-color 0.8s ease, transform 0.3s;
+        mix-blend-mode: screen;
+      }
+      .heatmap-legend {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 12px;
+        font-size: 0.7rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .legend-color {
+        width: 12px;
+        height: 12px;
+        border-radius: 3px;
+      }
     </style>
   </head>
   <body>
@@ -1864,13 +1988,16 @@
           <div class="header-subtitle">PROGRESS TRACKING</div>
           <div class="header-title-row">
             <h1 class="current-month-display">Month Year</h1>
-            <div class="month-controls">
-              <button class="icon-btn prev-month-btn">
-                <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" /></svg>
-              </button>
-              <button class="icon-btn next-month-btn">
-                <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" /></svg>
-              </button>
+            <div style="display: flex; gap: 8px;">
+              <button onclick="document.getElementById('ai-progress-dashboard').style.display = document.getElementById('ai-progress-dashboard').style.display === 'none' ? 'block' : 'none'" style="background:var(--surface-container-high); border:1px solid rgba(202,253,0,0.3); color:var(--primary); font-size:0.7rem; font-weight:800; font-family:var(--font-display); text-transform:uppercase; padding:0 12px; border-radius:22px; cursor:pointer; height:44px;">✨ Coach</button>
+              <div class="month-controls">
+                <button class="icon-btn prev-month-btn">
+                  <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" /></svg>
+                </button>
+                <button class="icon-btn next-month-btn">
+                  <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" /></svg>
+                </button>
+              </div>
             </div>
           </div>
         </header>
@@ -1880,6 +2007,10 @@
             <!-- Date cards injected by JS -->
           </div>
         </div>
+
+        <!-- AI Progress Dashboard (Predictive PRs, Heatmap, Synthesis) -->
+        <div id="ai-progress-dashboard" style="display: none; margin-top: 24px; padding-bottom: 12px;"></div>
+
 
         <div class="workout-content" id="workout-content">
           <p
@@ -5011,7 +5142,7 @@
           closeAISettingsModal();
         }
 
-        async function callGeminiAPI(prompt, base64Image = null) {
+        window.callGeminiAPI = async function(prompt, base64Image = null) {
           const apiKey = localStorage.getItem("kinetic_ai_key");
           if (!apiKey) {
             alert("Please config Gemini API Key in the settings.");
@@ -5039,9 +5170,12 @@
           try {
             document.getElementById("ai-loading-overlay").classList.add("active");
             const btn = document.getElementById("ai-text-input");
-            const oldPlaceholder = btn.placeholder;
-            btn.placeholder = "AI is thinking...";
-            btn.disabled = true;
+            let oldPlaceholder = "";
+            if (btn) {
+              oldPlaceholder = btn.placeholder;
+              btn.placeholder = "AI is thinking...";
+              btn.disabled = true;
+            }
             
             const response = await fetch(endpoint, {
               method: "POST",
@@ -5051,8 +5185,10 @@
               })
             });
             
-            btn.placeholder = oldPlaceholder;
-            btn.disabled = false;
+            if (btn) {
+              btn.placeholder = oldPlaceholder;
+              btn.disabled = false;
+            }
             
             const data = await response.json();
             if (data.error) {
@@ -5130,6 +5266,368 @@
           reader.readAsDataURL(file);
         }
 
+        // --- AI Progress & Analytics Logic ---
+        window.renderAIAssistant = function() {
+            const container = document.getElementById("ai-progress-dashboard");
+            if (!container) return;
+            
+            const cache = localStorage.getItem("kinetic_ai_dashboard");
+            let data = null;
+            if (cache) {
+                try { data = JSON.parse(cache); } catch(e){}
+            }
+            
+            if (!data) {
+                container.innerHTML = `
+                   <div style="padding: 24px; text-align: center; color: var(--text-secondary); background: var(--surface-container-high); border-radius: 20px; border: 1px solid rgba(202,253,0,0.1);">
+                       <div style="font-size: 2rem; margin-bottom: 12px;">🧠</div>
+                       <p style="font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; color: var(--text-primary);">AI COACH READY</p>
+                       <p style="font-size: 0.8rem; margin-top: 4px;">Click the button below to analyze your training data and generate personalized insights.</p>
+                       <button onclick="window.openAIDatePicker()" style="margin-top: 16px; background: var(--primary); border: none; color: #000; padding: 12px 24px; border-radius: 12px; cursor:pointer; font-weight: 800; text-transform:uppercase; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 8px;">
+                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                           Generate AI Insights
+                       </button>
+                   </div>
+                `;
+                return;
+            }
+
+            // Precision Front & Back SVG Models
+            const heatmapSVG = `
+                <div style="display:flex; justify-content:center; gap:16px; width:100%;">
+                
+                <!-- ANTERIOR -->
+                <svg viewBox="0 0 100 220" style="width: 45%; height: auto; overflow: visible;">
+                    <g stroke="rgba(255,255,255,0.08)" stroke-width="0.5" style="transition: fill 0.5s ease;">
+                        <g id="hm-head" fill="var(--surface-container-high)">
+                            <polygon points="42.4489796 2.85714286 40 11.8367347 42.0408163 19.5918367 46.122449 23.2653061 49.7959184 25.3061224 54.6938776 22.4489796 57.5510204 19.1836735 59.1836735 10.2040816 57.1428571 2.44897959 49.7959184 0"/>
+                        </g>
+                        <g id="hm-shoulders-front" fill="var(--surface-container-high)">
+                            <!-- Neck -->
+                            <polygon points="55.5102041 23.6734694 50.6122449 33.4693878 50.6122449 39.1836735 61.6326531 40 70.6122449 44.8979592 69.3877551 36.7346939 63.2653061 35.1020408 58.3673469 30.6122449"/>
+                            <polygon points="28.9795918 44.8979592 30.2040816 37.1428571 36.3265306 35.1020408 41.2244898 30.2040816 44.4897959 24.4897959 48.9795918 33.877551 48.5714286 39.1836735 37.9591837 39.5918367"/>
+                            <!-- Front Delts -->
+                            <polygon points="78.3673469 53.0612245 79.5918367 47.755102 79.1836735 41.2244898 75.9183673 37.9591837 71.0204082 36.3265306 72.244898 42.8571429 71.4285714 47.3469388"/>
+                            <polygon points="28.1632653 47.3469388 21.2244898 53.0612245 20 47.755102 20.4081633 40.8163265 24.4897959 37.1428571 28.5714286 37.1428571 26.9387755 43.2653061"/>
+                        </g>
+                        <g id="hm-chest" fill="var(--surface-container-high)">
+                            <polygon points="51.8367347 41.6326531 51.0204082 55.1020408 57.9591837 57.9591837 67.755102 55.5102041 70.6122449 47.3469388 62.0408163 41.6326531"/>
+                            <polygon points="29.7959184 46.5306122 31.4285714 55.5102041 40.8163265 57.9591837 48.1632653 55.1020408 47.755102 42.0408163 37.5510204 42.0408163"/>
+                        </g>
+                        <g id="hm-abs" fill="var(--surface-container-high)">
+                            <!-- Abs -->
+                            <polygon points="56.3265306 59.1836735 57.9591837 64.0816327 58.3673469 77.9591837 58.3673469 92.6530612 56.3265306 98.3673469 55.1020408 104.081633 51.4285714 107.755102 51.0204082 84.4897959 50.6122449 67.3469388 51.0204082 57.1428571"/>
+                            <polygon points="43.6734694 58.7755102 48.5714286 57.1428571 48.9795918 67.3469388 48.5714286 84.4897959 48.1632653 107.346939 44.4897959 103.673469 40.8163265 91.4285714 40.8163265 78.3673469 41.2244898 64.4897959"/>
+                            <!-- Obliques -->
+                            <polygon points="68.5714286 63.2653061 67.3469388 57.1428571 58.7755102 59.5918367 60 64.0816327 60.4081633 83.2653061 65.7142857 78.7755102 66.5306122 69.7959184"/>
+                            <polygon points="33.877551 78.3673469 33.0612245 71.8367347 31.0204082 63.2653061 32.244898 57.1428571 40.8163265 59.1836735 39.1836735 63.2653061 39.1836735 83.6734694"/>
+                        </g>
+                        <g id="hm-biceps" fill="var(--surface-container-high)">
+                            <polygon points="16.7346939 68.1632653 17.9591837 71.4285714 22.8571429 66.122449 28.9795918 53.877551 27.755102 49.3877551 20.4081633 55.9183673"/>
+                            <polygon points="71.4285714 49.3877551 70.2040816 54.6938776 76.3265306 66.122449 81.6326531 71.8367347 82.8571429 68.9795918 78.7755102 55.5102041"/>
+                        </g>
+                        <g id="hm-triceps" fill="var(--surface-container-high)">
+                            <polygon points="69.3877551 55.5102041 69.3877551 61.6326531 75.9183673 72.6530612 77.5510204 70.2040816 75.5102041 67.3469388"/>
+                            <polygon points="22.4489796 69.3877551 29.7959184 55.5102041 29.7959184 60.8163265 22.8571429 73.0612245"/>
+                        </g>
+                        <g id="hm-forearms" fill="var(--surface-container-high)">
+                            <polygon points="6.12244898 88.5714286 10.2040816 75.1020408 14.6938776 70.2040816 16.3265306 74.2857143 19.1836735 73.4693878 4.48979592 97.5510204 0 100"/>
+                            <polygon points="84.4897959 69.7959184 83.2653061 73.4693878 80 73.0612245 95.1020408 98.3673469 100 100.408163 93.4693878 89.3877551 89.7959184 76.3265306"/>
+                            <polygon points="77.5510204 72.244898 77.5510204 77.5510204 80.4081633 84.0816327 85.3061224 89.7959184 92.244898 101.22449 94.6938776 99.5918367"/>
+                            <polygon points="6.93877551 101.22449 13.4693878 90.6122449 18.7755102 84.0816327 21.6326531 77.1428571 21.2244898 71.8367347 4.89795918 98.7755102"/>
+                        </g>
+                        <g id="hm-quads" fill="var(--surface-container-high)">
+                            <!-- Quads -->
+                            <polygon points="34.6938776 98.7755102 37.1428571 108.163265 37.1428571 127.755102 34.2857143 137.142857 31.0204082 132.653061 29.3877551 120 28.1632653 111.428571 29.3877551 100.816327 32.244898 94.6938776"/>
+                            <polygon points="63.2653061 105.714286 64.4897959 100 66.9387755 94.6938776 70.2040816 101.22449 71.0204082 111.836735 68.1632653 133.061224 65.3061224 137.55102 62.4489796 128.571429 62.0408163 111.428571"/>
+                            <polygon points="38.7755102 129.387755 38.3673469 112.244898 41.2244898 118.367347 44.4897959 129.387755 42.8571429 135.102041 40 146.122449 36.3265306 146.530612 35.5102041 140"/>
+                            <polygon points="59.5918367 145.714286 55.5102041 128.979592 60.8163265 113.877551 61.2244898 130.204082 64.0816327 139.591837 62.8571429 146.530612"/>
+                            <polygon points="32.6530612 138.367347 26.5306122 145.714286 25.7142857 136.734694 25.7142857 127.346939 26.9387755 114.285714 29.3877551 133.469388"/>
+                            <polygon points="71.8367347 113.061224 73.877551 124.081633 73.877551 140.408163 72.6530612 145.714286 66.5306122 138.367347 70.2040816 133.469388"/>
+                            <!-- Abductors -->
+                            <polygon points="52.6530612 110.204082 54.2857143 124.897959 60 110.204082 62.0408163 100 64.8979592 94.2857143 60 92.6530612 56.7346939 104.489796"/>
+                            <polygon points="47.755102 110.612245 44.8979592 125.306122 42.0408163 115.918367 40.4081633 113.061224 39.5918367 107.346939 37.9591837 102.44898 34.6938776 93.877551 39.5918367 92.244898 41.6326531 99.1836735 43.6734694 105.306122"/>
+                        </g>
+                        <g id="hm-calves" fill="var(--surface-container-high)">
+                            <!-- Knees -->
+                            <polygon points="33.877551 140 34.6938776 143.265306 35.5102041 147.346939 36.3265306 151.020408 35.1020408 156.734694 29.7959184 156.734694 27.3469388 152.653061 27.3469388 147.346939 30.2040816 144.081633"/>
+                            <polygon points="65.7142857 140 72.244898 147.755102 72.244898 152.244898 69.7959184 157.142857 64.8979592 156.734694 62.8571429 151.020408"/>
+                            <!-- Calves -->
+                            <polygon points="71.4285714 160.408163 73.4693878 153.469388 76.7346939 161.22449 79.5918367 167.755102 78.3673469 187.755102 79.5918367 195.510204 74.6938776 195.510204"/>
+                            <polygon points="24.8979592 194.693878 27.755102 164.897959 28.1632653 160.408163 26.122449 154.285714 24.8979592 157.55102 22.4489796 161.632653 20.8163265 167.755102 22.0408163 188.163265 20.8163265 195.510204"/>
+                            <polygon points="72.6530612 195.102041 69.7959184 159.183673 65.3061224 158.367347 64.0816327 162.44898 64.0816327 165.306122 65.7142857 177.142857"/>
+                            <polygon points="35.5102041 158.367347 35.9183673 162.44898 35.9183673 166.938776 35.1020408 172.244898 35.1020408 176.734694 32.244898 182.040816 30.6122449 187.346939 26.9387755 194.693878 27.3469388 187.755102 28.1632653 180.408163 28.5714286 175.510204 28.9795918 169.795918 29.7959184 164.081633 30.2040816 158.77551"/>
+                        </g>
+                    </g>
+                </svg>
+                
+                <!-- POSTERIOR -->
+                <svg viewBox="0 0 100 220" style="width: 45%; height: auto; overflow: visible;">
+                    <g stroke="rgba(255,255,255,0.08)" stroke-width="0.5" style="transition: fill 0.5s ease;">
+                        <g id="hm-head-back" fill="var(--surface-container-high)">
+                            <polygon points="50.6382979 0 45.9574468 0.85106383 40.8510638 5.53191489 40.4255319 12.7659574 45.106383 20 55.7446809 20 59.1489362 13.6170213 59.5744681 4.68085106 55.7446809 1.27659574"/>
+                        </g>
+                        <g id="hm-shoulders-back" fill="var(--surface-container-high)">
+                            <!-- Traps -->
+                            <polygon points="44.6808511 21.7021277 47.6595745 21.7021277 47.2340426 38.2978723 47.6595745 64.6808511 38.2978723 53.1914894 35.3191489 40.8510638 31.0638298 36.5957447 39.1489362 33.1914894 43.8297872 27.2340426"/>
+                            <polygon points="52.3404255 21.7021277 55.7446809 21.7021277 56.5957447 27.2340426 60.8510638 32.7659574 68.9361702 36.5957447 64.6808511 40.4255319 61.7021277 53.1914894 52.3404255 64.6808511 53.1914894 38.2978723"/>
+                            <!-- Back Delts -->
+                            <polygon points="29.3617021 37.0212766 22.9787234 39.1489362 17.4468085 44.2553191 18.2978723 53.6170213 24.2553191 49.3617021 27.2340426 46.3829787"/>
+                            <polygon points="71.0638298 37.0212766 78.2978723 39.5744681 82.5531915 44.6808511 81.7021277 53.6170213 74.893617 48.9361702 72.3404255 45.106383"/>
+                        </g>
+                        <g id="hm-upper-back" fill="var(--surface-container-high)">
+                            <polygon points="31.0638298 38.7234043 28.0851064 48.9361702 28.5106383 55.3191489 34.0425532 75.3191489 47.2340426 71.0638298 47.2340426 66.3829787 36.5957447 54.0425532 33.6170213 41.2765957"/>
+                            <polygon points="68.9361702 38.7234043 71.9148936 49.3617021 71.4893617 56.1702128 65.9574468 75.3191489 52.7659574 71.0638298 52.7659574 66.3829787 63.4042553 54.4680851 66.3829787 41.7021277"/>
+                        </g>
+                        <g id="hm-lower-back" fill="var(--surface-container-high)">
+                            <polygon points="47.6595745 72.7659574 34.4680851 77.0212766 35.3191489 83.4042553 49.3617021 102.12766 46.8085106 82.9787234"/>
+                            <polygon points="52.3404255 72.7659574 65.5319149 77.0212766 64.6808511 83.4042553 50.6382979 102.12766 53.1914894 83.8297872"/>
+                        </g>
+                        <g id="hm-triceps-back" fill="var(--surface-container-high)">
+                            <polygon points="26.8085106 49.787234 17.8723404 55.7446809 14.4680851 72.3404255 16.5957447 81.7021277 21.7021277 63.8297872 26.8085106 55.7446809"/>
+                            <polygon points="73.6170213 50.212766 82.1276596 55.7446809 85.9574468 73.1914894 83.4042553 82.1276596 77.8723404 62.9787234 73.1914894 55.7446809"/>
+                            <polygon points="26.8085106 58.2978723 26.8085106 68.5106383 22.9787234 75.3191489 19.1489362 77.4468085 22.5531915 65.5319149"/>
+                            <polygon points="72.7659574 58.2978723 77.0212766 64.6808511 80.4255319 77.4468085 76.5957447 75.3191489 72.7659574 68.9361702"/>
+                        </g>
+                        <g id="hm-forearms-back" fill="var(--surface-container-high)">
+                            <polygon points="86.3829787 75.7446809 91.0638298 83.4042553 93.1914894 94.0425532 100 106.382979 96.1702128 104.255319 88.0851064 89.3617021 84.2553191 83.8297872"/>
+                            <polygon points="13.6170213 75.7446809 8.93617021 83.8297872 6.80851064 93.6170213 0 106.382979 3.82978723 104.255319 12.3404255 88.5106383 15.7446809 82.9787234"/>
+                            <polygon points="81.2765957 79.5744681 77.4468085 77.8723404 79.1489362 84.6808511 91.0638298 103.829787 93.1914894 108.93617 94.4680851 104.680851"/>
+                            <polygon points="18.7234043 79.5744681 22.1276596 77.8723404 20.8510638 84.2553191 9.36170213 102.978723 6.80851064 108.510638 5.10638298 104.680851"/>
+                        </g>
+                        <g id="hm-glutes" fill="var(--surface-container-high)">
+                            <polygon points="44.6808511 99.5744681 30.212766 108.510638 29.787234 118.723404 31.4893617 125.957447 47.2340426 121.276596 49.3617021 114.893617"/>
+                            <polygon points="55.3191489 99.1489362 51.0638298 114.468085 52.3404255 120.851064 68.0851064 125.957447 69.787234 119.148936 69.3617021 108.510638"/>
+                            <polygon points="48.0851064 122.978723 44.6808511 122.978723 41.2765957 125.531915 45.106383 144.255319 48.5106383 135.744681 48.9361702 129.361702"/>
+                            <polygon points="51.9148936 122.553191 55.7446809 123.404255 59.1489362 125.957447 54.893617 144.255319 51.9148936 136.170213 51.0638298 129.361702"/>
+                        </g>
+                        <g id="hm-hamstrings" fill="var(--surface-container-high)">
+                            <!-- Hamstrings -->
+                            <polygon points="28.9361702 122.12766 31.0638298 129.361702 36.5957447 125.957447 35.3191489 135.319149 34.4680851 150.212766 29.3617021 158.297872 28.9361702 146.808511 27.6595745 141.276596 27.2340426 131.489362"/>
+                            <polygon points="71.4893617 121.702128 69.3617021 128.93617 63.8297872 125.957447 65.5319149 136.595745 66.3829787 150.212766 71.0638298 158.297872 71.4893617 147.659574 72.7659574 142.12766 73.6170213 131.914894"/>
+                            <polygon points="38.7234043 125.531915 44.2553191 145.957447 40.4255319 166.808511 36.1702128 152.765957 37.0212766 135.319149"/>
+                            <polygon points="61.7021277 125.531915 63.4042553 136.170213 64.2553191 153.191489 60 166.808511 56.1702128 146.382979"/>
+                            <!-- Knees -->
+                            <polygon points="34.4680851 153.191489 31.0638298 159.148936 33.6170213 166.382979 37.4468085 162.553191"/>
+                            <polygon points="66.3829787 153.617021 62.9787234 162.978723 66.8085106 166.382979 69.3617021 159.148936"/>
+                        </g>
+                        <g id="hm-calves-back" fill="var(--surface-container-high)">
+                            <!-- Calves -->
+                            <polygon points="29.3617021 160.425532 28.5106383 167.234043 24.6808511 179.574468 23.8297872 192.765957 25.5319149 197.021277 28.5106383 193.191489 29.787234 180 31.9148936 171.06383 31.9148936 166.808511"/>
+                            <polygon points="37.4468085 165.106383 35.3191489 167.659574 33.1914894 171.914894 31.0638298 180.425532 30.212766 191.914894 34.0425532 200 38.7234043 190.638298 39.1489362 168.93617"/>
+                            <polygon points="62.9787234 165.106383 61.2765957 168.510638 61.7021277 190.638298 66.3829787 199.574468 70.6382979 191.914894 68.9361702 179.574468 66.8085106 170.212766"/>
+                            <polygon points="70.6382979 160.425532 72.3404255 168.510638 75.7446809 179.148936 76.5957447 192.765957 74.4680851 196.595745 72.3404255 193.617021 70.6382979 179.574468 68.0851064 168.085106"/>
+                            <!-- Soleus -->
+                            <polygon points="28.5106383 195.744681 30.212766 195.744681 33.6170213 201.702128 30.6382979 220 28.5106383 213.617021 26.8085106 198.297872"/>
+                            <polygon points="69.787234 195.744681 71.9148936 195.744681 73.6170213 198.297872 71.9148936 213.191489 70.212766 219.574468 67.2340426 202.12766"/>
+                        </g>
+                    </g>
+                </svg>
+                </div>
+            `;
+
+            const m = data.predictive_milestones || {};
+            const w = data.weekly_synthesis || {};
+
+            container.innerHTML = `
+                <!-- 1. Predictive Milestones -->
+                <div class="ai-insight-section">
+                    <div class="ai-section-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        Predictive Milestones
+                    </div>
+                    <div class="ai-insight-card">
+                        <div class="ai-pr-date">Target: ${m.target_date || "Unknown"}</div>
+                        <div class="ai-pr-target">${m.target_weight || "Keep Going!"}</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 4px;">${m.exercise_name || ""}</div>
+                        
+                        <div class="ai-pr-bar-bg">
+                            <div class="ai-pr-bar-fill" style="width: ${m.percentage_to_goal || 0}%;"></div>
+                        </div>
+                        <div style="display:flex; justify-content:flex-end; font-size:0.7rem; color: var(--text-secondary); font-weight:800; text-transform:uppercase;">
+                            <span>${m.percentage_to_goal || 0}% to Goal</span>
+                        </div>
+                        
+                        <div style="margin-top: 16px; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 12px; font-size: 0.75rem; color: var(--outline-variant); line-height: 1.5;">
+                            <strong>AI Guidance:</strong> ${m.advice || "Log more data for accurate predictions."}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Weekly Synthesis -->
+                <div class="ai-insight-section">
+                    <div class="ai-section-title" style="justify-content:space-between">
+                        <span style="display:flex; align-items:center; gap:8px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                            Weekly Coach's Synthesis
+                        </span>
+                        <button onclick="window.openAIDatePicker()" style="background: rgba(202, 253, 0, 0.1); border: 1px solid rgba(202,253,0,0.3); color: var(--primary); padding: 4px 10px; border-radius: 8px; cursor:pointer; font-size: 0.65rem; text-transform:uppercase; font-weight:800;">⭮ Regenerate</button>
+                    </div>
+                    <div class="ai-insight-card" style="background: var(--surface-container-high); border-color: rgba(255,255,255,0.05);">
+                        <p style="font-size: 0.9rem; color: var(--text-primary); line-height: 1.5; font-weight: 500;">
+                            "${w.summary_paragraph || "Let's log consistent workouts to generate weekly summaries."}"
+                        </p>
+                        <div class="weekly-summary-grid">
+                            <div class="summary-bull">
+                                <span class="summary-icon">✅</span>
+                                <div>
+                                    <strong>Performance Win</strong>
+                                    ${w.performance_win || "Get out there and smash a session."}
+                                </div>
+                            </div>
+                            <div class="summary-bull">
+                                <span class="summary-icon">⚠️</span>
+                                <div>
+                                    <strong>Observation</strong>
+                                    ${w.dietary_warning || "No warnings."}
+                                </div>
+                            </div>
+                            <div class="summary-bull" style="background: rgba(202, 253, 0, 0.05); border: 1px solid rgba(202, 253, 0, 0.1);">
+                                <span class="summary-icon">🎯</span>
+                                <div>
+                                    <strong>Next Focus</strong>
+                                    ${w.next_focus || "Consistency."}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Muscle Heatmap -->
+                <div class="ai-insight-section">
+                    <div class="ai-section-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                        Thermal Recovery Scan
+                    </div>
+                    <div class="heatmap-container">
+                        ${heatmapSVG}
+                        <div class="heatmap-legend">
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #2ebd59; box-shadow: 0 0 10px #2ebd59;"></div> Fully Recovered
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #ffd541; box-shadow: 0 0 10px #ffd541;"></div> Moderate Fatigue
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #ff453a; box-shadow: 0 0 10px #ff453a;"></div> High Fatigue
+                            </div>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary); text-align: center; margin-top: 12px;">Visualizing AI simulated central & local fatigue</p>
+                </div>
+            `;
+
+            setTimeout(() => {
+                for (const [id, color] of Object.entries(data.muscle_fatigue || {})) {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.style.fill = color;
+                        el.style.filter = `drop-shadow(0 0 4px ${color})`;
+                    }
+                }
+            }, 50);
+        };
+        
+        window.openAIDatePicker = function() {
+            const today = new Date();
+            const lastWeek = new Date(today);
+            lastWeek.setDate(lastWeek.getDate() - 7);
+            
+            document.getElementById('ai-end-date').value = today.toISOString().split('T')[0];
+            document.getElementById('ai-start-date').value = lastWeek.toISOString().split('T')[0];
+            document.getElementById('ai-date-picker-modal').style.display = 'flex';
+        };
+
+        window.submitAIDatePicker = function() {
+            const startStr = document.getElementById('ai-start-date').value;
+            const endStr = document.getElementById('ai-end-date').value;
+            if (!startStr || !endStr) { alert("Please select both dates."); return; }
+            if (startStr > endStr) { alert("Start date cannot be after end date."); return; }
+            
+            document.getElementById('ai-date-picker-modal').style.display = 'none';
+            // Trigger UI update to show processing
+            const t = document.getElementById("ai-progress-dashboard");
+            if (t && t.innerHTML.includes("AI COACH READY")) {
+                t.innerHTML = "<div style='color:var(--text-secondary); text-align:center; padding: 24px;'>Generating Custom Insights...</div>";
+            }
+            window.refreshAIAssistantData(startStr, endStr);
+        };
+        
+        window.refreshAIAssistantData = async function(startStr, endStr) {
+            const apiKey = localStorage.getItem("kinetic_ai_key");
+            if (!apiKey) {
+                alert("Please config Gemini API Key in the Settings first!");
+                if (window.openAISettingsModal) window.openAISettingsModal();
+                return;
+            }
+
+            let history = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith("kinetic_workout_")) {
+                   try {
+                       const dateStr = key.split('_')[2];
+                       if (!startStr || !endStr || (dateStr >= startStr && dateStr <= endStr)) {
+                           history.push({ date: dateStr, data: JSON.parse(localStorage.getItem(key)) });
+                       }
+                   } catch(e){}
+                }
+            }
+            history.sort((a,b) => a.date.localeCompare(b.date));
+            const recent = history; 
+            
+            if (recent.length === 0) {
+               alert("No workout data logged yet! Go log some sets to generate AI insights.");
+               return;
+            }
+            
+            const historyStr = JSON.stringify(recent);
+            const prompt = `You are an elite bodybuilding AI coach. Analyze this raw workout history: ${historyStr}.
+            Calculate and predict a future milestone based on the trajectory (find the most heavily lifted exercise or best progressing).
+            Write a sharp, brutally honest weekly synthesis focusing on what went well and what needs work. If they missed days, call it out.
+            Calculate simulated Central & Local fatigue for the Heatmap colors based on the recent exercises. Use hex colors (#2ebd59 for fully recovered, #ffd541 for moderate fatigue, #ff453a for highly fatigued/sore). Set unused muscles to #2ebd59.
+            The exact available muscle IDs are: hm-chest, hm-abs, hm-biceps, hm-triceps, hm-forearms, hm-shoulders-front, hm-quads, hm-calves, hm-shoulders-back, hm-upper-back, hm-lower-back, hm-triceps-back, hm-forearms-back, hm-glutes, hm-hamstrings, hm-calves-back.
+            
+            Return STRICTLY JSON fitting this format:
+            {
+               "predictive_milestones": {
+                  "target_weight": "100kg",
+                  "target_date": "Nov 14",
+                  "exercise_name": "Barbell Bench Press (1RM)",
+                  "percentage_to_goal": 82,
+                  "advice": "You are currently progressing well..."
+               },
+               "weekly_synthesis": {
+                  "summary_paragraph": "Great week overall...",
+                  "performance_win": "Hit all prescribed...",
+                  "dietary_warning": "Make sure to eat...",
+                  "next_focus": "Deload posterior..."
+               },
+               "muscle_fatigue": {
+                  "hm-chest": "#ffd541",
+                  "hm-abs": "#2ebd59"
+               }
+            }`;
+            
+            const result = await window.callGeminiAPI(prompt, null);
+            if (result) {
+                localStorage.setItem("kinetic_ai_dashboard", JSON.stringify(result));
+                window.renderAIAssistant();
+            }
+        };
+        
+        // Hijack renderWorkoutView to render AI Assistant below the calendar when viewed
+        const oldRenderWV = window.renderWorkoutView;
+        window.renderWorkoutView = function(dateStr) {
+            if (oldRenderWV) oldRenderWV(dateStr);
+            window.renderAIAssistant(dateStr);
+        };
+        
+        // Trigger initial render for AI Assistant since it missed the DOMContentLoaded early trigger
+        if (window.currentSelectedDate) {
+            window.renderAIAssistant(window.currentSelectedDate);
+        }
+
       });
     </script>
     <!-- AI Loading Overlay -->
@@ -5178,6 +5676,56 @@
           100% { opacity: 0.1; }
         }
       </style>
+    </div>
+    <!-- AI Date Picker Modal -->
+    <div id="ai-date-picker-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999; background: rgba(0,0,0,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); align-items: center; justify-content: center; padding: 20px; animation: aiModalFadeIn 0.3s ease forwards;">
+      <style>
+        @keyframes aiModalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes aiModalScaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .ai-apple-modal {
+            background: linear-gradient(145deg, rgba(30,30,30,0.85) 0%, rgba(15,15,15,0.95) 100%);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 28px; /* Ultra-smooth Apple corners */
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 380px;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 24px 48px rgba(0,0,0,0.6);
+            animation: aiModalScaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .ai-apple-close {
+            position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 16px; background: rgba(255,255,255,0.06); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s ease;
+        }
+        .ai-apple-close:hover { background: rgba(255,255,255,0.15); }
+        .ai-apple-input {
+            width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); padding: 14px 16px; border-radius: 14px; color: white; font-family: var(--font-body); font-size: 1rem; appearance: none; -webkit-appearance: none; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; color-scheme: dark;
+        }
+        .ai-apple-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(202,253,0,0.2); }
+        .ai-apple-btn {
+            width: 100%; padding: 16px; background: var(--primary); color: #000; font-weight: 800; font-size: 0.95rem; border: none; border-radius: 16px; text-transform: uppercase; cursor: pointer; transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        .ai-apple-btn:active { transform: scale(0.96); opacity: 0.9; }
+      </style>
+      <div class="ai-apple-modal">
+        <button class="ai-apple-close" onclick="document.getElementById('ai-date-picker-modal').style.display='none'">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <h2 style="font-family: var(--font-display); font-weight:800; font-size:1.5rem; margin-bottom: 8px; color:var(--text-primary); letter-spacing:-0.5px;">Time Horizon</h2>
+        <p style="color:var(--text-secondary); font-size: 0.85rem; margin-bottom: 28px; line-height:1.4;">Select the precise chronological window for your AI coaching synthesis.</p>
+        
+        <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:32px; text-align:left;">
+            <div>
+                <label style="font-size:0.7rem; color:var(--text-secondary); font-weight:700; margin-bottom:8px; display:block; letter-spacing:0.5px;">START DATE</label>
+                <input type="date" id="ai-start-date" class="ai-apple-input">
+            </div>
+            <div>
+                <label style="font-size:0.7rem; color:var(--text-secondary); font-weight:700; margin-bottom:8px; display:block; letter-spacing:0.5px;">END DATE</label>
+                <input type="date" id="ai-end-date" class="ai-apple-input">
+            </div>
+        </div>
+        <button class="ai-apple-btn" onclick="window.submitAIDatePicker()">Synthesize Data</button>
+      </div>
     </div>
   </body>
 </html>
