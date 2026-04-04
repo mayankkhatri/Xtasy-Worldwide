@@ -4883,6 +4883,7 @@
                 <div id="ai-bar-wrapper" style="margin: 8px 0 24px; position: relative;">
                     <div id="ai-bar-glow" style="position:absolute; inset:-1px; border-radius:21px; background: linear-gradient(135deg, var(--primary), #00e5a0, var(--primary)); opacity:0.6; filter:blur(8px); z-index:0; animation: ai-pulse 3s ease-in-out infinite;"></div>
                     <div style="position:relative; z-index:1; background: var(--surface-container-high); border-radius:20px; padding: 14px 16px; border: 1.5px solid var(--primary); display: flex; align-items: center; gap: 12px;">
+                        <input type="file" id="ai-file-input" style="display: none;" accept="image/*" onchange="handleAILogImage(event)">
                         <button onclick="document.getElementById('ai-file-input').click()" style="background: rgba(255, 255, 255, 0.05); border: none; border-radius: 12px; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; color: var(--primary); cursor: pointer; flex-shrink: 0;" title="Snap &amp; Log">
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
                         </button>
