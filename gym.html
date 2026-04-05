@@ -525,12 +525,26 @@
         background: var(--surface-container-highest);
         border: none;
         color: var(--text-primary);
-        font-size: 0.85rem;
-        font-weight: 700;
-        cursor: pointer;
-        padding: 8px 16px;
+        width: 32px;
+        height: 32px;
         border-radius: 16px;
-        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 0;
+        transition: background 0.2s ease;
+      }
+      .sheet-close:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+      .sheet-close svg {
+        width: 18px;
+        height: 18px;
+        stroke: currentColor;
+        stroke-width: 2.5px;
+        stroke-linecap: round;
+        fill: none;
       }
 
       .sheet-content {
@@ -1872,7 +1886,11 @@
         letter-spacing: 0.5px;
       }
       .ai-insight-card {
-        background: linear-gradient(135deg, var(--surface-container-high) 0%, rgba(202, 253, 0, 0.05) 100%);
+        background: linear-gradient(
+          135deg,
+          var(--surface-container-high) 0%,
+          rgba(202, 253, 0, 0.05) 100%
+        );
         border: 1px solid rgba(202, 253, 0, 0.15);
         border-radius: 20px;
         padding: 20px;
@@ -1894,7 +1912,7 @@
       }
       .ai-pr-bar-bg {
         height: 6px;
-        background: rgba(255,255,255,0.1);
+        background: rgba(255, 255, 255, 0.1);
         border-radius: 3px;
         margin: 12px 0 8px;
         overflow: hidden;
@@ -1915,7 +1933,7 @@
         display: flex;
         align-items: flex-start;
         gap: 12px;
-        background: rgba(0,0,0,0.2);
+        background: rgba(0, 0, 0, 0.2);
         padding: 12px;
         border-radius: 12px;
         font-size: 0.85rem;
@@ -1932,7 +1950,7 @@
         font-size: 1.2rem;
         line-height: 1;
       }
-      
+
       /* Heatmap */
       .heatmap-container {
         background: var(--surface-container-highest);
@@ -1949,14 +1967,16 @@
         width: 100%;
         max-width: 250px;
         height: 250px;
-        background: url('body_heatmap.png') center center/contain no-repeat;
+        background: url("body_heatmap.png") center center/contain no-repeat;
       }
       .muscle-glow {
         position: absolute;
         filter: blur(14px);
         border-radius: 50%;
         opacity: 0.8;
-        transition: background-color 0.8s ease, transform 0.3s;
+        transition:
+          background-color 0.8s ease,
+          transform 0.3s;
         mix-blend-mode: screen;
       }
       .heatmap-legend {
@@ -1982,15 +2002,23 @@
 
       /* ===== AI DIET ANALYSIS WIDGET ===== */
       .diet-ai-panel {
-        background: linear-gradient(145deg, var(--surface-container-high) 0%, rgba(202,253,0,0.025) 100%);
-        border: 1px solid rgba(202,253,0,0.18);
+        background: linear-gradient(
+          145deg,
+          var(--surface-container-high) 0%,
+          rgba(202, 253, 0, 0.025) 100%
+        );
+        border: 1px solid rgba(202, 253, 0, 0.18);
         border-radius: 24px;
         margin-bottom: 24px;
         overflow: hidden;
         transition: max-height 0.3s ease;
       }
-      .diet-ai-panel.collapsed .diet-ai-body { display: none; }
-      .diet-ai-panel.collapsed .diet-ai-toggle-btn { transform: rotate(-90deg) !important; }
+      .diet-ai-panel.collapsed .diet-ai-body {
+        display: none;
+      }
+      .diet-ai-panel.collapsed .diet-ai-toggle-btn {
+        transform: rotate(-90deg) !important;
+      }
       .diet-ai-panel-header {
         display: flex;
         align-items: center;
@@ -1998,159 +2026,426 @@
         padding: 16px 18px;
       }
       .diet-ai-icon {
-        width: 38px; height: 38px;
+        width: 38px;
+        height: 38px;
         border-radius: 12px;
-        background: linear-gradient(135deg, rgba(202,253,0,0.18), rgba(0,229,160,0.12));
-        display: flex; align-items: center; justify-content: center;
-        font-size: 1.1rem; flex-shrink: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(202, 253, 0, 0.18),
+          rgba(0, 229, 160, 0.12)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        flex-shrink: 0;
       }
-      .diet-ai-header-text { flex: 1; min-width: 0; }
+      .diet-ai-header-text {
+        flex: 1;
+        min-width: 0;
+      }
       .diet-ai-title {
         font-family: var(--font-display);
-        font-size: 0.9rem; font-weight: 800;
-        color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px;
+        font-size: 0.9rem;
+        font-weight: 800;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
       }
-      .diet-ai-subtitle { font-size: 0.68rem; color: var(--text-secondary); font-weight: 600; margin-top: 1px; }
+      .diet-ai-subtitle {
+        font-size: 0.68rem;
+        color: var(--text-secondary);
+        font-weight: 600;
+        margin-top: 1px;
+      }
       .diet-ai-analyze-btn {
-        background: var(--primary); color: #000;
-        border: none; border-radius: 14px;
+        background: var(--primary);
+        color: #000;
+        border: none;
+        border-radius: 14px;
         padding: 9px 16px;
-        font-family: var(--font-display); font-size: 0.68rem; font-weight: 800;
-        text-transform: uppercase; cursor: pointer; transition: all 0.2s;
-        white-space: nowrap; flex-shrink: 0;
+        font-family: var(--font-display);
+        font-size: 0.68rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+        flex-shrink: 0;
       }
-      .diet-ai-analyze-btn:active { transform: scale(0.93); }
-      .diet-ai-body { padding: 0 18px 18px; }
-      .dai-range-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+      .diet-ai-analyze-btn:active {
+        transform: scale(0.93);
+      }
+      .diet-ai-body {
+        padding: 0 18px 18px;
+      }
+      .dai-range-tabs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
       .dai-range-tab {
-        flex: 1; padding: 8px 10px;
-        border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
-        background: transparent; color: var(--text-secondary);
-        font-family: var(--font-display); font-size: 0.68rem; font-weight: 800;
-        text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+        flex: 1;
+        padding: 8px 10px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: transparent;
+        color: var(--text-secondary);
+        font-family: var(--font-display);
+        font-size: 0.68rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.2s;
       }
       .dai-range-tab.active {
-        background: rgba(202,253,0,0.1); border-color: rgba(202,253,0,0.4); color: var(--primary);
+        background: rgba(202, 253, 0, 0.1);
+        border-color: rgba(202, 253, 0, 0.4);
+        color: var(--primary);
       }
       /* Score */
       .dai-score-wrap {
-        display: flex; align-items: center; gap: 16px;
-        background: rgba(0,0,0,0.2); border-radius: 18px;
-        padding: 14px 16px; margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 18px;
+        padding: 14px 16px;
+        margin-bottom: 16px;
       }
-      .dai-ring-outer { position: relative; width: 86px; height: 86px; flex-shrink: 0; }
-      .dai-ring-svg { width: 86px; height: 86px; transform: rotate(-90deg); }
-      .dai-ring-bg { fill: none; stroke: rgba(255,255,255,0.07); stroke-width: 6; }
+      .dai-ring-outer {
+        position: relative;
+        width: 86px;
+        height: 86px;
+        flex-shrink: 0;
+      }
+      .dai-ring-svg {
+        width: 86px;
+        height: 86px;
+        transform: rotate(-90deg);
+      }
+      .dai-ring-bg {
+        fill: none;
+        stroke: rgba(255, 255, 255, 0.07);
+        stroke-width: 6;
+      }
       .dai-ring-fill {
-        fill: none; stroke-width: 6; stroke-linecap: round;
-        stroke-dasharray: 214; stroke-dashoffset: 214;
-        transition: stroke-dashoffset 1.2s cubic-bezier(0.25,1,0.5,1), stroke 0.4s;
+        fill: none;
+        stroke-width: 6;
+        stroke-linecap: round;
+        stroke-dasharray: 214;
+        stroke-dashoffset: 214;
+        transition:
+          stroke-dashoffset 1.2s cubic-bezier(0.25, 1, 0.5, 1),
+          stroke 0.4s;
       }
       .dai-ring-center {
-        position: absolute; inset: 0;
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
       .dai-score-val {
-        font-family: var(--font-display); font-size: 1.5rem; font-weight: 900; line-height: 1;
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        font-weight: 900;
+        line-height: 1;
       }
-      .dai-score-denom { font-size: 0.58rem; color: var(--text-secondary); font-weight: 700; }
-      .dai-score-info { flex: 1; }
-      .dai-score-label { font-family: var(--font-display); font-size: 1.2rem; font-weight: 800; margin-bottom: 4px; }
-      .dai-score-date { font-size: 0.7rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 8px; }
-      .dai-closing { font-size: 0.76rem; color: var(--text-secondary); line-height: 1.45; font-style: italic; }
+      .dai-score-denom {
+        font-size: 0.58rem;
+        color: var(--text-secondary);
+        font-weight: 700;
+      }
+      .dai-score-info {
+        flex: 1;
+      }
+      .dai-score-label {
+        font-family: var(--font-display);
+        font-size: 1.2rem;
+        font-weight: 800;
+        margin-bottom: 4px;
+      }
+      .dai-score-date {
+        font-size: 0.7rem;
+        color: var(--text-secondary);
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .dai-closing {
+        font-size: 0.76rem;
+        color: var(--text-secondary);
+        line-height: 1.45;
+        font-style: italic;
+      }
       /* Macro bars */
-      .dai-macro-bars { display: flex; flex-direction: column; gap: 9px; margin-bottom: 16px; }
-      .dai-macro-row { display: flex; align-items: center; gap: 10px; }
-      .dai-macro-lbl { width: 56px; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; color: var(--text-secondary); flex-shrink: 0; }
-      .dai-macro-track { flex: 1; height: 5px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden; }
-      .dai-macro-bar { height: 100%; border-radius: 3px; width: 0%; transition: width 1s cubic-bezier(0.25,1,0.5,1); }
-      .dai-macro-bar.lime { background: var(--primary-container); box-shadow: 0 0 6px rgba(202,253,0,0.35); }
-      .dai-macro-bar.pale { background: #f3ffca; }
-      .dai-macro-bar.orange { background: var(--secondary); }
-      .dai-macro-bar.yellow { background: #ffd541; }
-      .dai-macro-pct { width: 34px; text-align: right; font-size: 0.7rem; font-weight: 800; flex-shrink: 0; }
-      /* Sections */
-      .dai-sections { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
-      .dai-section-card { border-radius: 14px; padding: 12px 14px; border: 1px solid transparent; }
-      .dai-section-card.green { background: rgba(46,189,89,0.07); border-color: rgba(46,189,89,0.2); }
-      .dai-section-card.yellow { background: rgba(255,213,65,0.07); border-color: rgba(255,213,65,0.2); }
-      .dai-section-card.red { background: rgba(255,69,58,0.07); border-color: rgba(255,69,58,0.2); }
-      .dai-section-title {
-        font-family: var(--font-display); font-size: 0.7rem; font-weight: 800;
-        text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 9px;
+      .dai-macro-bars {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        margin-bottom: 16px;
       }
-      .dai-section-title.green { color: #2ebd59; }
-      .dai-section-title.yellow { color: #ffd541; }
-      .dai-section-title.red { color: #ff453a; }
-      .dai-chips { display: flex; flex-wrap: wrap; gap: 7px; }
-      .dai-chip { font-size: 0.77rem; font-weight: 600; padding: 5px 11px; border-radius: 20px; background: rgba(255,255,255,0.06); color: var(--text-primary); line-height: 1.3; }
+      .dai-macro-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .dai-macro-lbl {
+        width: 56px;
+        font-size: 0.68rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        flex-shrink: 0;
+      }
+      .dai-macro-track {
+        flex: 1;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.07);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .dai-macro-bar {
+        height: 100%;
+        border-radius: 3px;
+        width: 0%;
+        transition: width 1s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+      .dai-macro-bar.lime {
+        background: var(--primary-container);
+        box-shadow: 0 0 6px rgba(202, 253, 0, 0.35);
+      }
+      .dai-macro-bar.pale {
+        background: #f3ffca;
+      }
+      .dai-macro-bar.orange {
+        background: var(--secondary);
+      }
+      .dai-macro-bar.yellow {
+        background: #ffd541;
+      }
+      .dai-macro-pct {
+        width: 34px;
+        text-align: right;
+        font-size: 0.7rem;
+        font-weight: 800;
+        flex-shrink: 0;
+      }
+      /* Sections */
+      .dai-sections {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .dai-section-card {
+        border-radius: 14px;
+        padding: 12px 14px;
+        border: 1px solid transparent;
+      }
+      .dai-section-card.green {
+        background: rgba(46, 189, 89, 0.07);
+        border-color: rgba(46, 189, 89, 0.2);
+      }
+      .dai-section-card.yellow {
+        background: rgba(255, 213, 65, 0.07);
+        border-color: rgba(255, 213, 65, 0.2);
+      }
+      .dai-section-card.red {
+        background: rgba(255, 69, 58, 0.07);
+        border-color: rgba(255, 69, 58, 0.2);
+      }
+      .dai-section-title {
+        font-family: var(--font-display);
+        font-size: 0.7rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 9px;
+      }
+      .dai-section-title.green {
+        color: #2ebd59;
+      }
+      .dai-section-title.yellow {
+        color: #ffd541;
+      }
+      .dai-section-title.red {
+        color: #ff453a;
+      }
+      .dai-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+      .dai-chip {
+        font-size: 0.77rem;
+        font-weight: 600;
+        padding: 5px 11px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--text-primary);
+        line-height: 1.3;
+      }
       /* Patterns */
-      .dai-patterns { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 13px; }
+      .dai-patterns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-bottom: 13px;
+      }
       .dai-pattern-chip {
-        font-size: 0.7rem; font-weight: 700; padding: 5px 10px; border-radius: 8px;
-        background: rgba(255,116,65,0.12); border: 1px solid rgba(255,116,65,0.25);
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 5px 10px;
+        border-radius: 8px;
+        background: rgba(255, 116, 65, 0.12);
+        border: 1px solid rgba(255, 116, 65, 0.25);
         color: var(--secondary);
       }
       /* Predictive */
       .dai-predictive {
-        background: linear-gradient(135deg, rgba(0,229,160,0.1) 0%, rgba(202,253,0,0.05) 100%);
-        border: 1px solid rgba(0,229,160,0.22); border-radius: 13px;
-        padding: 11px 14px; font-size: 0.79rem; color: #00e5a0;
-        font-weight: 600; line-height: 1.45; margin-bottom: 14px;
-        display: flex; gap: 10px; align-items: flex-start;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 229, 160, 0.1) 0%,
+          rgba(202, 253, 0, 0.05) 100%
+        );
+        border: 1px solid rgba(0, 229, 160, 0.22);
+        border-radius: 13px;
+        padding: 11px 14px;
+        font-size: 0.79rem;
+        color: #00e5a0;
+        font-weight: 600;
+        line-height: 1.45;
+        margin-bottom: 14px;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
       }
       /* Recommendations */
       .dai-recs-header {
-        font-family: var(--font-display); font-size: 0.7rem; font-weight: 800;
-        text-transform: uppercase; color: var(--primary); letter-spacing: 0.5px;
-        margin-bottom: 9px; display: flex; align-items: center; gap: 6px;
+        font-family: var(--font-display);
+        font-size: 0.7rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: var(--primary);
+        letter-spacing: 0.5px;
+        margin-bottom: 9px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
       }
-      .dai-recs-list { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
+      .dai-recs-list {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        margin-bottom: 14px;
+      }
       .dai-rec-item {
-        background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
-        border-radius: 11px; padding: 11px 13px;
-        font-size: 0.8rem; color: var(--text-primary); line-height: 1.4;
-        display: flex; gap: 10px; align-items: flex-start;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 11px;
+        padding: 11px 13px;
+        font-size: 0.8rem;
+        color: var(--text-primary);
+        line-height: 1.4;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
       }
       .dai-rec-dot {
-        width: 6px; height: 6px; border-radius: 3px;
-        background: var(--primary-container); flex-shrink: 0; margin-top: 6px;
-        box-shadow: 0 0 5px rgba(202,253,0,0.4);
+        width: 6px;
+        height: 6px;
+        border-radius: 3px;
+        background: var(--primary-container);
+        flex-shrink: 0;
+        margin-top: 6px;
+        box-shadow: 0 0 5px rgba(202, 253, 0, 0.4);
       }
       /* Loading shimmer */
-      .dai-shimmer { height: 13px; border-radius: 7px; margin-bottom: 10px;
-        background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.09) 50%, rgba(255,255,255,0.04) 75%);
-        background-size: 200% 100%; animation: dai-shimmer 1.5s infinite; }
-      @keyframes dai-shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+      .dai-shimmer {
+        height: 13px;
+        border-radius: 7px;
+        margin-bottom: 10px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.04) 25%,
+          rgba(255, 255, 255, 0.09) 50%,
+          rgba(255, 255, 255, 0.04) 75%
+        );
+        background-size: 200% 100%;
+        animation: dai-shimmer 1.5s infinite;
+      }
+      @keyframes dai-shimmer {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
       /* Range Bottom Sheet */
       .diet-ai-overlay {
-        position: fixed; inset: 0; background: rgba(0,0,0,0.6);
-        backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-        z-index: 2999; opacity: 0; visibility: hidden; transition: all 0.3s;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        z-index: 2999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
       }
-      .diet-ai-overlay.active { opacity: 1; visibility: visible; }
+      .diet-ai-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
       .diet-ai-range-sheet {
-        position: fixed; bottom: 0; left: 0; width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
         background: var(--surface-container-low);
-        border-radius: 28px 28px 0 0; z-index: 3000;
-        padding: 0 24px 40px; max-height: 88vh; overflow-y: auto;
+        border-radius: 28px 28px 0 0;
+        z-index: 3000;
+        padding: 0 24px 40px;
+        max-height: 88vh;
+        overflow-y: auto;
         transform: translateY(100%);
-        transition: transform 0.4s cubic-bezier(0.32,0.72,0,1);
-        box-shadow: 0 -8px 40px rgba(0,0,0,0.5);
-        border-top: 1px solid rgba(255,255,255,0.06);
+        transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+        box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.5);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
       }
-      .diet-ai-range-sheet.active { transform: translateY(0); }
+      .diet-ai-range-sheet.active {
+        transform: translateY(0);
+      }
       .dai-quick-btn {
-        width: 100%; padding: 15px 16px;
+        width: 100%;
+        padding: 15px 16px;
         background: var(--surface-container-high);
-        border: 1px solid rgba(255,255,255,0.07); border-radius: 14px;
-        color: var(--text-primary); font-family: var(--font-display);
-        font-size: 0.88rem; font-weight: 800; text-transform: uppercase;
-        cursor: pointer; display: flex; align-items: center;
-        justify-content: space-between; transition: all 0.2s; margin-bottom: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 14px;
+        color: var(--text-primary);
+        font-family: var(--font-display);
+        font-size: 0.88rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all 0.2s;
+        margin-bottom: 10px;
       }
-      .dai-quick-btn:active { background: rgba(202,253,0,0.08); border-color: rgba(202,253,0,0.3); color: var(--primary); }
-      .dai-quick-icon { color: var(--text-secondary); font-size: 1rem; }
+      .dai-quick-btn:active {
+        background: rgba(202, 253, 0, 0.08);
+        border-color: rgba(202, 253, 0, 0.3);
+        color: var(--primary);
+      }
+      .dai-quick-icon {
+        color: var(--text-secondary);
+        font-size: 1rem;
+      }
     </style>
   </head>
   <body>
@@ -2161,8 +2456,33 @@
           <div class="header-subtitle">PROGRESS TRACKING</div>
           <div class="header-title-row">
             <h1 class="current-month-display">Month Year</h1>
-            <div style="display: flex; gap: 8px;">
-              <button onclick="document.getElementById('ai-progress-dashboard').style.display = document.getElementById('ai-progress-dashboard').style.display === 'none' ? 'block' : 'none'" style="background:var(--surface-container-high); border:1px solid rgba(202,253,0,0.3); color:var(--primary); font-size:0.7rem; font-weight:800; font-family:var(--font-display); text-transform:uppercase; padding:0 12px; border-radius:22px; cursor:pointer; height:44px;">✨ Coach</button>
+            <div style="display: flex; gap: 8px">
+              <button
+                onclick="
+                  document.getElementById(
+                    'ai-progress-dashboard',
+                  ).style.display =
+                    document.getElementById('ai-progress-dashboard').style
+                      .display === 'none'
+                      ? 'block'
+                      : 'none'
+                "
+                style="
+                  background: var(--surface-container-high);
+                  border: 1px solid rgba(202, 253, 0, 0.3);
+                  color: var(--primary);
+                  font-size: 0.7rem;
+                  font-weight: 800;
+                  font-family: var(--font-display);
+                  text-transform: uppercase;
+                  padding: 0 12px;
+                  border-radius: 22px;
+                  cursor: pointer;
+                  height: 44px;
+                "
+              >
+                ✨ Coach
+              </button>
               <div class="month-controls">
                 <button class="icon-btn prev-month-btn">
                   <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" /></svg>
@@ -2182,8 +2502,10 @@
         </div>
 
         <!-- AI Progress Dashboard (Predictive PRs, Heatmap, Synthesis) -->
-        <div id="ai-progress-dashboard" style="display: none; margin-top: 24px; padding-bottom: 12px;"></div>
-
+        <div
+          id="ai-progress-dashboard"
+          style="display: none; margin-top: 24px; padding-bottom: 12px"
+        ></div>
 
         <div class="workout-content" id="workout-content">
           <p
@@ -2606,13 +2928,37 @@
               </div>
             </div>
 
-            <div style="display:flex; flex-direction:column; gap:12px; margin-bottom: 8px">
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                margin-bottom: 8px;
+              "
+            >
               <button
                 class="primary-btn"
                 onclick="saveCustomFoodToLibrary()"
                 style="width: 100%"
               >
-                <svg viewBox="0 0 24 24" width="20" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px; vertical-align:middle; display:inline-block;"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                <svg
+                  viewBox="0 0 24 24"
+                  width="20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  style="
+                    margin-right: 6px;
+                    vertical-align: middle;
+                    display: inline-block;
+                  "
+                >
+                  <path
+                    d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"
+                  ></path>
+                  <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                  <polyline points="7 3 7 8 15 8"></polyline>
+                </svg>
                 Save to Food List
               </button>
               <button
@@ -2626,7 +2972,11 @@
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2"
-                  style="margin-right:6px; vertical-align:middle; display:inline-block;"
+                  style="
+                    margin-right: 6px;
+                    vertical-align: middle;
+                    display: inline-block;
+                  "
                 >
                   <path d="M12 5v14M5 12h14" stroke-linecap="round" />
                 </svg>
@@ -2797,25 +3147,53 @@
     </div>
 
     <!-- AI Settings Modal -->
-    <div class="modal-overlay" id="ai-settings-overlay" onclick="closeAISettingsModal()"></div>
+    <div
+      class="modal-overlay"
+      id="ai-settings-overlay"
+      onclick="closeAISettingsModal()"
+    ></div>
     <div class="bottom-sheet" id="ai-settings-modal">
       <div class="sheet-header">
         <h3 class="sheet-title">AI Settings</h3>
         <button class="sheet-close" onclick="closeAISettingsModal()">
-          <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2"/></svg>
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M18 6L6 18M6 6l12 12"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+          </svg>
         </button>
       </div>
       <div class="sheet-content">
-        <h4 style="font-family: var(--font-display); color: var(--primary); margin-bottom: 12px;">GEMINI API CONFIGURATION</h4>
-        <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: -8px; margin-bottom: 16px;">
-          To enable Smart Text-to-Macros and Snap-and-Log, please provide your Google Gemini API key. This key is saved locally on your device.
+        <h4
+          style="
+            font-family: var(--font-display);
+            color: var(--primary);
+            margin-bottom: 12px;
+          "
+        >
+          GEMINI API CONFIGURATION
+        </h4>
+        <p
+          style="
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: -8px;
+            margin-bottom: 16px;
+          "
+        >
+          To enable Smart Text-to-Macros and Snap-and-Log, please provide your
+          Google Gemini API key. This key is saved locally on your device.
         </p>
-        <div class="input-group" style="margin-bottom: 24px;">
+        <div class="input-group" style="margin-bottom: 24px">
           <label style="color: var(--primary-container)">Gemini API Key</label>
           <input type="password" id="ai-api-key" placeholder="AIzaSy..." />
         </div>
-        
-        <button class="primary-btn" onclick="saveAISettings()">Save API Key</button>
+
+        <button class="primary-btn" onclick="saveAISettings()">
+          Save API Key
+        </button>
       </div>
     </div>
 
@@ -4320,14 +4698,14 @@
 
             // AI Predictive boost: Has it been eaten around this time of day before?
             const getHourScore = (food) => {
-                let s = 0;
-                if (!food.hourCounts) return 0;
-                for (let i = -2; i <= 2; i++) {
-                    let h = (currentHour + i + 24) % 24;
-                    s += (food.hourCounts[h] || 0) * (3 - Math.abs(i)) * 5; // Strong weight modifier
-                }
-                return s;
-            }
+              let s = 0;
+              if (!food.hourCounts) return 0;
+              for (let i = -2; i <= 2; i++) {
+                let h = (currentHour + i + 24) % 24;
+                s += (food.hourCounts[h] || 0) * (3 - Math.abs(i)) * 5; // Strong weight modifier
+              }
+              return s;
+            };
 
             aScore += getHourScore(a);
             bScore += getHourScore(b);
@@ -4391,7 +4769,7 @@
           });
           f.usageCount = (f.usageCount || 0) + 1;
           f.lastUsed = Date.now();
-          
+
           const currentHour = new Date().getHours();
           f.hourCounts = f.hourCounts || {};
           f.hourCounts[currentHour] = (f.hourCounts[currentHour] || 0) + 1;
@@ -4511,26 +4889,26 @@
             .join("");
         };
 
-        window.editTempFood = function(index) {
-           const f = window.tempMealFoods[index];
-           document.getElementById("food-name").value = f.name;
-           document.getElementById("food-kcals").value = f.kcals;
-           document.getElementById("food-p").value = f.p;
-           document.getElementById("food-c").value = f.c;
-           document.getElementById("food-f").value = f.f;
-           
-           window.tempMealFoods.splice(index, 1);
-           window.renderTempMealFoods();
-           
-           openCustomFoodForm();
+        window.editTempFood = function (index) {
+          const f = window.tempMealFoods[index];
+          document.getElementById("food-name").value = f.name;
+          document.getElementById("food-kcals").value = f.kcals;
+          document.getElementById("food-p").value = f.p;
+          document.getElementById("food-c").value = f.c;
+          document.getElementById("food-f").value = f.f;
+
+          window.tempMealFoods.splice(index, 1);
+          window.renderTempMealFoods();
+
+          openCustomFoodForm();
         };
 
-        window.openCustomFoodForm = function() {
+        window.openCustomFoodForm = function () {
           const details = document.querySelector(".manual-entry-details");
           if (details) details.setAttribute("open", "");
           const nameEl = document.getElementById("food-name");
           if (nameEl) {
-            nameEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            nameEl.scrollIntoView({ behavior: "smooth", block: "center" });
             setTimeout(() => nameEl.focus(), 300);
           }
         };
@@ -4573,7 +4951,7 @@
               usageCount: 1,
               favorite: false,
               lastUsed: Date.now(),
-              hourCounts: { [new Date().getHours()]: 1 }
+              hourCounts: { [new Date().getHours()]: 1 },
             });
           }
           window.saveFoodLibrary(lib);
@@ -5323,49 +5701,58 @@
         window.tempMealFoods = window.tempMealFoods || [];
 
         window.openAISettingsModal = function () {
-          document.getElementById("ai-api-key").value = localStorage.getItem("kinetic_ai_key") || "";
-          document.getElementById("ai-settings-overlay").classList.add("active");
+          document.getElementById("ai-api-key").value =
+            localStorage.getItem("kinetic_ai_key") || "";
+          document
+            .getElementById("ai-settings-overlay")
+            .classList.add("active");
           document.getElementById("ai-settings-modal").classList.add("active");
-        }
+        };
 
         window.closeAISettingsModal = function () {
-          document.getElementById("ai-settings-overlay").classList.remove("active");
-          document.getElementById("ai-settings-modal").classList.remove("active");
-        }
+          document
+            .getElementById("ai-settings-overlay")
+            .classList.remove("active");
+          document
+            .getElementById("ai-settings-modal")
+            .classList.remove("active");
+        };
 
         window.saveAISettings = function () {
           const key = document.getElementById("ai-api-key").value.trim();
-          if(key) localStorage.setItem("kinetic_ai_key", key);
+          if (key) localStorage.setItem("kinetic_ai_key", key);
           closeAISettingsModal();
-        }
+        };
 
-        window.callGeminiAPI = async function(prompt, base64Image = null) {
+        window.callGeminiAPI = async function (prompt, base64Image = null) {
           const apiKey = localStorage.getItem("kinetic_ai_key");
           if (!apiKey) {
             alert("Please config Gemini API Key in the settings.");
             openAISettingsModal();
             return null;
           }
-          
+
           const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`;
-          
+
           let contents = [];
           if (base64Image) {
-             const base64Data = base64Image.split(',')[1];
-             contents.push({
-               parts: [
-                 { inline_data: { mime_type: "image/jpeg", data: base64Data } },
-                 { text: prompt }
-               ]
-             });
+            const base64Data = base64Image.split(",")[1];
+            contents.push({
+              parts: [
+                { inline_data: { mime_type: "image/jpeg", data: base64Data } },
+                { text: prompt },
+              ],
+            });
           } else {
-             contents.push({
-               parts: [{ text: prompt }]
-             });
+            contents.push({
+              parts: [{ text: prompt }],
+            });
           }
 
           try {
-            document.getElementById("ai-loading-overlay").classList.add("active");
+            document
+              .getElementById("ai-loading-overlay")
+              .classList.add("active");
             const btn = document.getElementById("ai-text-input");
             let oldPlaceholder = "";
             if (btn) {
@@ -5373,136 +5760,169 @@
               btn.placeholder = "AI is thinking...";
               btn.disabled = true;
             }
-            
+
             const response = await fetch(endpoint, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
-                contents: contents
-              })
+                contents: contents,
+              }),
             });
-            
+
             if (btn) {
               btn.placeholder = oldPlaceholder;
               btn.disabled = false;
             }
-            
+
             const data = await response.json();
             if (data.error) {
               alert("API Error: " + data.error.message);
-              document.getElementById("ai-loading-overlay").classList.remove("active");
+              document
+                .getElementById("ai-loading-overlay")
+                .classList.remove("active");
               return null;
             }
-            
+
             let rawText = data.candidates[0].content.parts[0].text;
-            rawText = rawText.replace(/```json/gi, "").replace(/```/g, "").trim();
-            document.getElementById("ai-loading-overlay").classList.remove("active");
+            rawText = rawText
+              .replace(/```json/gi, "")
+              .replace(/```/g, "")
+              .trim();
+            document
+              .getElementById("ai-loading-overlay")
+              .classList.remove("active");
             return JSON.parse(rawText);
           } catch (e) {
             console.error(e);
             alert("Failed to process with AI.");
-            document.getElementById("ai-loading-overlay").classList.remove("active");
+            document
+              .getElementById("ai-loading-overlay")
+              .classList.remove("active");
             document.getElementById("ai-text-input").disabled = false;
             return null;
           }
-        }
+        };
 
         function processAIResult(result) {
-            openMealModal();
-            document.getElementById("meal-name").value = result.name || "AI Logged Meal";
-            
-            if (result.items && Array.isArray(result.items)) {
-                result.items.forEach(item => {
-                   window.tempMealFoods.push({
-                      name: item.name || "Unknown item",
-                      kcals: item.kcals || 0,
-                      p: item.p || 0,
-                      c: item.c || 0,
-                      f: item.f || 0
-                   });
-                });
-            } else {
-                window.tempMealFoods.push({
-                   name: result.name || "AI Item",
-                   kcals: result.kcals || 0,
-                   p: result.p || 0,
-                   c: result.c || 0,
-                   f: result.f || 0
-                });
-            }
-            
-            window.renderTempMealFoods();
-            document.getElementById("ai-file-input").value = ""; 
+          openMealModal();
+          document.getElementById("meal-name").value =
+            result.name || "AI Logged Meal";
+
+          if (result.items && Array.isArray(result.items)) {
+            result.items.forEach((item) => {
+              window.tempMealFoods.push({
+                name: item.name || "Unknown item",
+                kcals: item.kcals || 0,
+                p: item.p || 0,
+                c: item.c || 0,
+                f: item.f || 0,
+              });
+            });
+          } else {
+            window.tempMealFoods.push({
+              name: result.name || "AI Item",
+              kcals: result.kcals || 0,
+              p: result.p || 0,
+              c: result.c || 0,
+              f: result.f || 0,
+            });
+          }
+
+          window.renderTempMealFoods();
+          document.getElementById("ai-file-input").value = "";
         }
 
         // ===== AI DIET ANALYSIS =====
-        window.toggleDietAIPanel = function() {
-            const panel = document.getElementById("diet-ai-panel");
-            if (panel) panel.classList.toggle("collapsed");
+        window.toggleDietAIPanel = function () {
+          const panel = document.getElementById("diet-ai-panel");
+          if (panel) panel.classList.toggle("collapsed");
         };
 
-        window.switchDietAITab = function(tab) {
-          document.querySelectorAll('.dai-range-tab').forEach(t => t.classList.remove('active'));
-          const el = document.getElementById('dai-tab-' + tab);
-          if (el) el.classList.add('active');
-          if (tab === 'today') runDietAIAnalysis('daily');
+        window.switchDietAITab = function (tab) {
+          document
+            .querySelectorAll(".dai-range-tab")
+            .forEach((t) => t.classList.remove("active"));
+          const el = document.getElementById("dai-tab-" + tab);
+          if (el) el.classList.add("active");
+          if (tab === "today") runDietAIAnalysis("daily");
         };
 
-        window.openDietAIRangePicker = function() {
+        window.openDietAIRangePicker = function () {
           const today = new Date();
-          const wkAgo = new Date(today); wkAgo.setDate(wkAgo.getDate() - 6);
-          const s = document.getElementById('dai-custom-start');
-          const e = document.getElementById('dai-custom-end');
-          if (s) s.value = wkAgo.toISOString().split('T')[0];
-          if (e) e.value = today.toISOString().split('T')[0];
-          document.getElementById('diet-ai-overlay').classList.add('active');
-          document.getElementById('diet-ai-range-sheet').classList.add('active');
+          const wkAgo = new Date(today);
+          wkAgo.setDate(wkAgo.getDate() - 6);
+          const s = document.getElementById("dai-custom-start");
+          const e = document.getElementById("dai-custom-end");
+          if (s) s.value = wkAgo.toISOString().split("T")[0];
+          if (e) e.value = today.toISOString().split("T")[0];
+          document.getElementById("diet-ai-overlay").classList.add("active");
+          document
+            .getElementById("diet-ai-range-sheet")
+            .classList.add("active");
         };
 
-        window.closeDietAIRangePicker = function() {
-          document.getElementById('diet-ai-overlay').classList.remove('active');
-          document.getElementById('diet-ai-range-sheet').classList.remove('active');
+        window.closeDietAIRangePicker = function () {
+          document.getElementById("diet-ai-overlay").classList.remove("active");
+          document
+            .getElementById("diet-ai-range-sheet")
+            .classList.remove("active");
         };
 
-        window.setDietAIQuickRange = function(days) {
+        window.setDietAIQuickRange = function (days) {
           const today = new Date();
-          const start = new Date(today); start.setDate(start.getDate() - (days - 1));
-          const s = document.getElementById('dai-custom-start');
-          const e = document.getElementById('dai-custom-end');
-          if (s) s.value = start.toISOString().split('T')[0];
-          if (e) e.value = today.toISOString().split('T')[0];
+          const start = new Date(today);
+          start.setDate(start.getDate() - (days - 1));
+          const s = document.getElementById("dai-custom-start");
+          const e = document.getElementById("dai-custom-end");
+          if (s) s.value = start.toISOString().split("T")[0];
+          if (e) e.value = today.toISOString().split("T")[0];
         };
 
-        window.runDietAICustomRange = function() {
-          const startStr = document.getElementById('dai-custom-start').value;
-          const endStr = document.getElementById('dai-custom-end').value;
-          if (!startStr || !endStr) { alert('Please select both dates.'); return; }
-          if (startStr > endStr) { alert('Start date cannot be after end date.'); return; }
+        window.runDietAICustomRange = function () {
+          const startStr = document.getElementById("dai-custom-start").value;
+          const endStr = document.getElementById("dai-custom-end").value;
+          if (!startStr || !endStr) {
+            alert("Please select both dates.");
+            return;
+          }
+          if (startStr > endStr) {
+            alert("Start date cannot be after end date.");
+            return;
+          }
           closeDietAIRangePicker();
-          document.querySelectorAll('.dai-range-tab').forEach(t => t.classList.remove('active'));
-          const ct = document.getElementById('dai-tab-custom');
-          if (ct) ct.classList.add('active');
-          runDietAIAnalysis('custom', startStr, endStr);
+          document
+            .querySelectorAll(".dai-range-tab")
+            .forEach((t) => t.classList.remove("active"));
+          const ct = document.getElementById("dai-tab-custom");
+          if (ct) ct.classList.add("active");
+          runDietAIAnalysis("custom", startStr, endStr);
         };
 
-        window.runDietAIAnalysis = async function(mode, startStr, endStr) {
-          const apiKey = localStorage.getItem('kinetic_ai_key');
+        window.runDietAIAnalysis = async function (mode, startStr, endStr) {
+          const apiKey = localStorage.getItem("kinetic_ai_key");
           if (!apiKey) {
-            alert('Please configure your Gemini API Key in Settings first.');
+            alert("Please configure your Gemini API Key in Settings first.");
             if (window.openAISettingsModal) window.openAISettingsModal();
             return;
           }
-          const todayStr = new Date().toISOString().split('T')[0];
-          if (mode === 'daily') { startStr = window.currentSelectedDate || todayStr; endStr = startStr; }
+          const todayStr = new Date().toISOString().split("T")[0];
+          if (mode === "daily") {
+            startStr = window.currentSelectedDate || todayStr;
+            endStr = startStr;
+          }
 
           const selDate = window.currentSelectedDate || todayStr;
           const isToday = startStr === todayStr && endStr === todayStr;
-          const dateLabel = startStr === endStr
-            ? (isToday ? 'Today' : startStr)
-            : startStr + ' → ' + endStr;
+          const dateLabel =
+            startStr === endStr
+              ? isToday
+                ? "Today"
+                : startStr
+              : startStr + " → " + endStr;
 
-          const reportEl = document.getElementById('diet-ai-report');
-          if (reportEl) reportEl.innerHTML = `
+          const reportEl = document.getElementById("diet-ai-report");
+          if (reportEl)
+            reportEl.innerHTML = `
             <div style="padding:8px 0;">
               <div class="dai-shimmer" style="width:40%;height:16px;margin-bottom:14px;"></div>
               <div class="dai-shimmer" style="width:80%;"></div>
@@ -5514,38 +5934,55 @@
 
           // Collect meal data
           const mealDataByDay = [];
-          let d = new Date(startStr + 'T00:00:00');
-          const ed = new Date(endStr + 'T00:00:00');
+          let d = new Date(startStr + "T00:00:00");
+          const ed = new Date(endStr + "T00:00:00");
           const legacyStaticIds = ["breakfast", "lunch", "dinner", "snacks"];
 
           while (d <= ed) {
             const y = d.getFullYear();
-            const m = String(d.getMonth() + 1).padStart(2, '0');
-            const day = String(d.getDate()).padStart(2, '0');
+            const m = String(d.getMonth() + 1).padStart(2, "0");
+            const day = String(d.getDate()).padStart(2, "0");
             const ds = `${y}-${m}-${day}`;
 
-            const raw = localStorage.getItem('kinetic_diet_' + ds);
-            const tgt = window.getDietConfigForDate ? window.getDietConfigForDate(ds) : {};
-            
-            let meals = raw ? (JSON.parse(raw).meals || []) : [];
-            meals = meals.filter(meal => !legacyStaticIds.includes(meal.id) || meal.logged);
+            const raw = localStorage.getItem("kinetic_diet_" + ds);
+            const tgt = window.getDietConfigForDate
+              ? window.getDietConfigForDate(ds)
+              : {};
+
+            let meals = raw ? JSON.parse(raw).meals || [] : [];
+            meals = meals.filter(
+              (meal) => !legacyStaticIds.includes(meal.id) || meal.logged,
+            );
 
             mealDataByDay.push({ date: ds, meals: meals, targets: tgt });
             d.setDate(d.getDate() + 1);
           }
 
-          const totalMeals = mealDataByDay.reduce((s, x) => s + x.meals.length, 0);
+          const totalMeals = mealDataByDay.reduce(
+            (s, x) => s + x.meals.length,
+            0,
+          );
           if (totalMeals === 0) {
-            if (reportEl) reportEl.innerHTML = `<div style="text-align:center;padding:20px 0 8px;color:var(--text-secondary);"><div style="font-size:1.8rem;margin-bottom:10px;">🍽️</div><div style="font-weight:700;color:var(--text-primary);margin-bottom:4px;">No meals logged</div><div style="font-size:0.78rem;">Log at least one meal to get AI analysis.</div></div>`;
+            if (reportEl)
+              reportEl.innerHTML = `<div style="text-align:center;padding:20px 0 8px;color:var(--text-secondary);"><div style="font-size:1.8rem;margin-bottom:10px;">🍽️</div><div style="font-weight:700;color:var(--text-primary);margin-bottom:4px;">No meals logged</div><div style="font-size:0.78rem;">Log at least one meal to get AI analysis.</div></div>`;
             return;
           }
 
-          const cfg = JSON.parse(localStorage.getItem('kinetic_diet_config') || '{}');
-          const tgt = (cfg.defaultTargets) || { totalCalories:3000, proteinTarget:160, carbTarget:350, fatTarget:80 };
-          let goal = 'maintenance';
-          if (tgt.totalCalories <= 2000) goal = 'fat loss / caloric deficit';
-          else if (tgt.totalCalories >= 3200) goal = 'muscle gain / caloric surplus';
-          else if (tgt.proteinTarget >= 180) goal = 'body recomposition / muscle gain';
+          const cfg = JSON.parse(
+            localStorage.getItem("kinetic_diet_config") || "{}",
+          );
+          const tgt = cfg.defaultTargets || {
+            totalCalories: 3000,
+            proteinTarget: 160,
+            carbTarget: 350,
+            fatTarget: 80,
+          };
+          let goal = "maintenance";
+          if (tgt.totalCalories <= 2000) goal = "fat loss / caloric deficit";
+          else if (tgt.totalCalories >= 3200)
+            goal = "muscle gain / caloric surplus";
+          else if (tgt.proteinTarget >= 180)
+            goal = "body recomposition / muscle gain";
 
           const prompt = `You are an elite sports nutrition AI coach. Analyze this user's diet data.
 USER GOAL: ${goal}
@@ -5576,30 +6013,54 @@ Return STRICTLY valid JSON:
           if (result) {
             renderDietAIReport(result, dateLabel);
           } else {
-            if (reportEl) reportEl.innerHTML = `<div style="text-align:center;padding:16px;color:#ff453a;font-size:0.82rem;">Analysis failed. Please check your API key and try again.</div>`;
+            if (reportEl)
+              reportEl.innerHTML = `<div style="text-align:center;padding:16px;color:#ff453a;font-size:0.82rem;">Analysis failed. Please check your API key and try again.</div>`;
           }
         };
 
-        window.renderDietAIReport = function(data, dateLabel) {
-          const reportEl = document.getElementById('diet-ai-report');
+        window.renderDietAIReport = function (data, dateLabel) {
+          const reportEl = document.getElementById("diet-ai-report");
           if (!reportEl) return;
 
           const score = parseFloat(data.score) || 0;
           const circumference = 214;
           const offset = circumference - (score / 10) * circumference;
-          let sc = data.score_color || '#cafd00';
-          if (score < 4) sc = '#ff453a';
-          else if (score < 6) sc = '#ffd541';
-          else if (score >= 8) sc = '#2ebd59';
+          let sc = data.score_color || "#cafd00";
+          if (score < 4) sc = "#ff453a";
+          else if (score < 6) sc = "#ffd541";
+          else if (score >= 8) sc = "#2ebd59";
 
-          const label = data.score_label || (score>=8?'Excellent':score>=6?'Good':score>=4?'Fair':'Needs Work');
-          const cp = v => Math.min(100, Math.max(0, parseInt(v)||0));
-          const chips = arr => (arr||[]).map(s=>`<span class="dai-chip">${s}</span>`).join('');
+          const label =
+            data.score_label ||
+            (score >= 8
+              ? "Excellent"
+              : score >= 6
+                ? "Good"
+                : score >= 4
+                  ? "Fair"
+                  : "Needs Work");
+          const cp = (v) => Math.min(100, Math.max(0, parseInt(v) || 0));
+          const chips = (arr) =>
+            (arr || [])
+              .map((s) => `<span class="dai-chip">${s}</span>`)
+              .join("");
 
-          const secHTML = (cls, title, arr) => arr&&arr.length ? `<div class="dai-section-card ${cls}"><div class="dai-section-title ${cls}">${title}</div><div class="dai-chips">${chips(arr)}</div></div>` : '';
-          const patternsHTML = (data.patterns||[]).length ? `<div style="margin-bottom:12px;"><div style="font-size:0.68rem;font-weight:800;text-transform:uppercase;color:var(--text-secondary);letter-spacing:0.5px;margin-bottom:7px;">🔍 Detected Patterns</div><div class="dai-patterns">${(data.patterns||[]).map(p=>`<span class="dai-pattern-chip">${p}</span>`).join('')}</div></div>` : '';
-          const predictHTML = data.predictive ? `<div class="dai-predictive"><div style="flex-shrink:0;font-size:1rem;">🔮</div><div>${data.predictive}</div></div>` : '';
-          const recsHTML = (data.recommendations||[]).map(r=>`<div class="dai-rec-item"><div class="dai-rec-dot"></div><div>${r}</div></div>`).join('');
+          const secHTML = (cls, title, arr) =>
+            arr && arr.length
+              ? `<div class="dai-section-card ${cls}"><div class="dai-section-title ${cls}">${title}</div><div class="dai-chips">${chips(arr)}</div></div>`
+              : "";
+          const patternsHTML = (data.patterns || []).length
+            ? `<div style="margin-bottom:12px;"><div style="font-size:0.68rem;font-weight:800;text-transform:uppercase;color:var(--text-secondary);letter-spacing:0.5px;margin-bottom:7px;">🔍 Detected Patterns</div><div class="dai-patterns">${(data.patterns || []).map((p) => `<span class="dai-pattern-chip">${p}</span>`).join("")}</div></div>`
+            : "";
+          const predictHTML = data.predictive
+            ? `<div class="dai-predictive"><div style="flex-shrink:0;font-size:1rem;">🔮</div><div>${data.predictive}</div></div>`
+            : "";
+          const recsHTML = (data.recommendations || [])
+            .map(
+              (r) =>
+                `<div class="dai-rec-item"><div class="dai-rec-dot"></div><div>${r}</div></div>`,
+            )
+            .join("");
 
           reportEl.innerHTML = `
             <div class="dai-score-wrap">
@@ -5615,8 +6076,8 @@ Return STRICTLY valid JSON:
               </div>
               <div class="dai-score-info">
                 <div class="dai-score-label" style="color:${sc};">${label}</div>
-                <div class="dai-score-date">${dateLabel||'Today'}</div>
-                <div class="dai-closing">${data.tone_closing||'Keep pushing. Consistency is everything.'}</div>
+                <div class="dai-score-date">${dateLabel || "Today"}</div>
+                <div class="dai-closing">${data.tone_closing || "Keep pushing. Consistency is everything."}</div>
               </div>
             </div>
             <div class="dai-macro-bars">
@@ -5626,68 +6087,76 @@ Return STRICTLY valid JSON:
               <div class="dai-macro-row"><div class="dai-macro-lbl">Fats</div><div class="dai-macro-track"><div class="dai-macro-bar yellow" id="dai-bf" style="width:0%"></div></div><div class="dai-macro-pct" style="color:#ffd541;">${cp(data.summary_fat_pct)}%</div></div>
             </div>
             <div class="dai-sections">
-              ${secHTML('green','✅ Your Strengths',data.strengths)}
-              ${secHTML('yellow','⚠️ Areas to Improve',data.improvements)}
-              ${secHTML('red','🔄 Change Now',data.immediate_changes)}
+              ${secHTML("green", "✅ Your Strengths", data.strengths)}
+              ${secHTML("yellow", "⚠️ Areas to Improve", data.improvements)}
+              ${secHTML("red", "🔄 Change Now", data.immediate_changes)}
             </div>
             ${patternsHTML}
             ${predictHTML}
-            ${recsHTML.length?`<div class="dai-recs-header"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17.1 5.8 21.3l2.4-7.4L2 9.4h7.6L12 2z"/></svg> Smart Recommendations</div><div class="dai-recs-list">${recsHTML}</div>`:''}
+            ${recsHTML.length ? `<div class="dai-recs-header"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17.1 5.8 21.3l2.4-7.4L2 9.4h7.6L12 2z"/></svg> Smart Recommendations</div><div class="dai-recs-list">${recsHTML}</div>` : ""}
             <button onclick="runDietAIAnalysis('daily')" style="width:100%;padding:13px;background:rgba(202,253,0,0.07);border:1px solid rgba(202,253,0,0.18);border-radius:13px;color:var(--primary);font-family:var(--font-display);font-size:0.7rem;font-weight:800;text-transform:uppercase;cursor:pointer;margin-top:6px;">⭮ Re-Analyze</button>`;
 
-          requestAnimationFrame(() => { setTimeout(() => {
-            const r = document.getElementById('dai-ring');
-            if (r) r.style.strokeDashoffset = offset;
-            const bk = document.getElementById('dai-bk'); if (bk) bk.style.width = cp(data.summary_calories_pct)+'%';
-            const bp = document.getElementById('dai-bp'); if (bp) bp.style.width = cp(data.summary_protein_pct)+'%';
-            const bc = document.getElementById('dai-bc'); if (bc) bc.style.width = cp(data.summary_carb_pct)+'%';
-            const bf = document.getElementById('dai-bf'); if (bf) bf.style.width = cp(data.summary_fat_pct)+'%';
-          }, 80); });
+          requestAnimationFrame(() => {
+            setTimeout(() => {
+              const r = document.getElementById("dai-ring");
+              if (r) r.style.strokeDashoffset = offset;
+              const bk = document.getElementById("dai-bk");
+              if (bk) bk.style.width = cp(data.summary_calories_pct) + "%";
+              const bp = document.getElementById("dai-bp");
+              if (bp) bp.style.width = cp(data.summary_protein_pct) + "%";
+              const bc = document.getElementById("dai-bc");
+              if (bc) bc.style.width = cp(data.summary_carb_pct) + "%";
+              const bf = document.getElementById("dai-bf");
+              if (bf) bf.style.width = cp(data.summary_fat_pct) + "%";
+            }, 80);
+          });
         };
 
-        window.handleAILogText = async function(text) {
+        window.handleAILogText = async function (text) {
           if (!text.trim()) return;
           const prompt = `You are a nutrition expert. Analyze this meal description: "${text}". 
           Extract the nutritional information and return it strictly as JSON. Use metric units (grams for macros, kcal for calories).
           Format: { "name": "A short, clean name for the meal", "kcals": (Total calories as number), "p": (Total protein grams as number), "c": (Total carb grams), "f": (Total fat grams), "items": [{ "name": "Item 1", "kcals": 100, "p": 10, "c": 0, "f": 5 }] }.`;
-          
+
           const result = await callGeminiAPI(prompt, null);
           if (result) {
-              processAIResult(result);
-              document.getElementById('ai-text-input').value = "";
+            processAIResult(result);
+            document.getElementById("ai-text-input").value = "";
           }
-        }
+        };
 
-        window.handleAILogImage = function(event) {
+        window.handleAILogImage = function (event) {
           const file = event.target.files[0];
           if (!file) return;
-          
+
           const reader = new FileReader();
-          reader.onload = async function(e) {
-             const base64Image = e.target.result;
-             const prompt = `You are a nutrition expert. Analyze this image. If it's a nutrition label, read the macros and multiply by serving size if obvious. If it is a picture of a meal, estimate the nutritional content. Use metric units (grams for macros, kcal for calories).
+          reader.onload = async function (e) {
+            const base64Image = e.target.result;
+            const prompt = `You are a nutrition expert. Analyze this image. If it's a nutrition label, read the macros and multiply by serving size if obvious. If it is a picture of a meal, estimate the nutritional content. Use metric units (grams for macros, kcal for calories).
              Return strictly as JSON containing the estimated stats. 
              Format: { "name": "A short, clean name for the meal", "kcals": 0, "p": 0, "c": 0, "f": 0, "items": [{"name":"Component 1", "kcals": 0, "p": 0, "c": 0, "f": 0}] }`;
-             
-             const result = await callGeminiAPI(prompt, base64Image);
-             if (result) processAIResult(result);
+
+            const result = await callGeminiAPI(prompt, base64Image);
+            if (result) processAIResult(result);
           };
           reader.readAsDataURL(file);
-        }
+        };
 
         // --- AI Progress & Analytics Logic ---
-        window.renderAIAssistant = function() {
-            const container = document.getElementById("ai-progress-dashboard");
-            if (!container) return;
-            
-            const cache = localStorage.getItem("kinetic_ai_dashboard");
-            let data = null;
-            if (cache) {
-                try { data = JSON.parse(cache); } catch(e){}
-            }
-            
-            if (!data) {
-                container.innerHTML = `
+        window.renderAIAssistant = function () {
+          const container = document.getElementById("ai-progress-dashboard");
+          if (!container) return;
+
+          const cache = localStorage.getItem("kinetic_ai_dashboard");
+          let data = null;
+          if (cache) {
+            try {
+              data = JSON.parse(cache);
+            } catch (e) {}
+          }
+
+          if (!data) {
+            container.innerHTML = `
                    <div style="padding: 24px; text-align: center; color: var(--text-secondary); background: var(--surface-container-high); border-radius: 20px; border: 1px solid rgba(202,253,0,0.1);">
                        <div style="font-size: 2rem; margin-bottom: 12px;">🧠</div>
                        <p style="font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; color: var(--text-primary);">AI COACH READY</p>
@@ -5698,11 +6167,11 @@ Return STRICTLY valid JSON:
                        </button>
                    </div>
                 `;
-                return;
-            }
+            return;
+          }
 
-            // Precision Front & Back SVG Models
-            const heatmapSVG = `
+          // Precision Front & Back SVG Models
+          const heatmapSVG = `
                 <div style="display:flex; justify-content:center; gap:16px; width:100%;">
                 
                 <!-- ANTERIOR -->
@@ -5835,12 +6304,15 @@ Return STRICTLY valid JSON:
                 </div>
             `;
 
-            const m = data.predictive_milestones || {};
-            const w = data.monthly_report || data.weekly_synthesis?.summary_paragraph || "Let's log consistent workouts to generate summaries.";
-            const alerts = data.smart_alerts || [];
-            const achvs = data.key_achievements || [];
+          const m = data.predictive_milestones || {};
+          const w =
+            data.monthly_report ||
+            data.weekly_synthesis?.summary_paragraph ||
+            "Let's log consistent workouts to generate summaries.";
+          const alerts = data.smart_alerts || [];
+          const achvs = data.key_achievements || [];
 
-            container.innerHTML = `
+          container.innerHTML = `
                 <!-- 1. Monthly AI Report -->
                 <div class="ai-insight-section">
                     <div class="ai-section-title" style="justify-content:space-between">
@@ -5854,16 +6326,24 @@ Return STRICTLY valid JSON:
                         <p style="font-size: 0.9rem; color: var(--text-primary); line-height: 1.5; font-weight: 500; margin-bottom: 16px;">
                             "${w}"
                         </p>
-                        ${achvs.length > 0 ? `
+                        ${
+                          achvs.length > 0
+                            ? `
                         <div style="font-size: 0.75rem; color: var(--text-secondary); text-transform:uppercase; font-weight:800; margin-bottom:8px;">Key Achievements</div>
                         <ul style="margin:0 0 16px 20px; color: var(--primary); font-size: 0.85rem; line-height:1.5;">
-                            ${achvs.map(a => `<li>${a}</li>`).join('')}
-                        </ul>` : ""}
-                        ${alerts.length > 0 ? `
+                            ${achvs.map((a) => `<li>${a}</li>`).join("")}
+                        </ul>`
+                            : ""
+                        }
+                        ${
+                          alerts.length > 0
+                            ? `
                         <div style="font-size: 0.75rem; color: var(--text-secondary); text-transform:uppercase; font-weight:800; margin-bottom:8px;">Smart Alerts</div>
                         <ul style="margin:0 0 16px 20px; color: #ff7441; font-size: 0.85rem; line-height:1.5;">
-                            ${alerts.map(a => `<li>${a}</li>`).join('')}
-                        </ul>` : ""}
+                            ${alerts.map((a) => `<li>${a}</li>`).join("")}
+                        </ul>`
+                            : ""
+                        }
                     </div>
                 </div>
                 
@@ -5936,132 +6416,184 @@ Return STRICTLY valid JSON:
                 </div>
             `;
 
-            setTimeout(() => {
-                // Initialize Heatmap
-                for (const [id, color] of Object.entries(data.muscle_fatigue || {})) {
-                    const el = document.getElementById(id);
-                    if (el) {
-                        el.style.fill = color;
-                        el.style.filter = `drop-shadow(0 0 4px ${color})`;
-                    }
-                }
-                
-                // Initialize Charts
-                if (data.strength_trends && window.Chart) {
-                    const ctxStrength = document.getElementById('strengthChart').getContext('2d');
-                    new Chart(ctxStrength, {
-                        type: 'line',
-                        data: {
-                            labels: data.strength_trends.labels || [],
-                            datasets: (data.strength_trends.datasets || []).map((ds, i) => ({
-                                label: ds.label,
-                                data: ds.data,
-                                borderColor: i === 0 ? '#cafd00' : '#ff7441',
-                                backgroundColor: i === 0 ? 'rgba(202, 253, 0, 0.1)' : 'rgba(255, 116, 65, 0.1)',
-                                borderWidth: 3,
-                                fill: true,
-                                tension: 0.4,
-                                pointBackgroundColor: '#ffffff'
-                            }))
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: { labels: { color: 'rgba(255,255,255,0.7)', font: { family: 'Manrope', size: 10 } } }
-                            },
-                            scales: {
-                                y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.5)' } },
-                                x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.5)' } }
-                            }
-                        }
-                    });
-                }
-                
-                if (data.volume_trends && window.Chart) {
-                    const ctxVol = document.getElementById('volumeChart').getContext('2d');
-                    new Chart(ctxVol, {
-                        type: 'bar',
-                        data: {
-                            labels: data.volume_trends.labels || [],
-                            datasets: [{
-                                label: 'Weekly Volume',
-                                data: data.volume_trends.data || [],
-                                backgroundColor: '#f3ffca',
-                                borderRadius: 6
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: { display: false }
-                            },
-                            scales: {
-                                y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.5)' } },
-                                x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.5)' } }
-                            }
-                        }
-                    });
-                }
-            }, 50);
-        };
-        
-        window.openAIDatePicker = function() {
-            const today = new Date();
-            const lastWeek = new Date(today);
-            lastWeek.setDate(lastWeek.getDate() - 7);
-            
-            document.getElementById('ai-end-date').value = today.toISOString().split('T')[0];
-            document.getElementById('ai-start-date').value = lastWeek.toISOString().split('T')[0];
-            document.getElementById('ai-date-picker-modal').style.display = 'flex';
-        };
-
-        window.submitAIDatePicker = function() {
-            const startStr = document.getElementById('ai-start-date').value;
-            const endStr = document.getElementById('ai-end-date').value;
-            if (!startStr || !endStr) { alert("Please select both dates."); return; }
-            if (startStr > endStr) { alert("Start date cannot be after end date."); return; }
-            
-            document.getElementById('ai-date-picker-modal').style.display = 'none';
-            // Trigger UI update to show processing
-            const t = document.getElementById("ai-progress-dashboard");
-            if (t && t.innerHTML.includes("AI COACH READY")) {
-                t.innerHTML = "<div style='color:var(--text-secondary); text-align:center; padding: 24px;'>Generating Custom Insights...</div>";
-            }
-            window.refreshAIAssistantData(startStr, endStr);
-        };
-        
-        window.refreshAIAssistantData = async function(startStr, endStr) {
-            const apiKey = localStorage.getItem("kinetic_ai_key");
-            if (!apiKey) {
-                alert("Please config Gemini API Key in the Settings first!");
-                if (window.openAISettingsModal) window.openAISettingsModal();
-                return;
+          setTimeout(() => {
+            // Initialize Heatmap
+            for (const [id, color] of Object.entries(
+              data.muscle_fatigue || {},
+            )) {
+              const el = document.getElementById(id);
+              if (el) {
+                el.style.fill = color;
+                el.style.filter = `drop-shadow(0 0 4px ${color})`;
+              }
             }
 
-            let history = [];
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key.startsWith("kinetic_workout_")) {
-                   try {
-                       const dateStr = key.split('_')[2];
-                       if (!startStr || !endStr || (dateStr >= startStr && dateStr <= endStr)) {
-                           history.push({ date: dateStr, data: JSON.parse(localStorage.getItem(key)) });
-                       }
-                   } catch(e){}
+            // Initialize Charts
+            if (data.strength_trends && window.Chart) {
+              const ctxStrength = document
+                .getElementById("strengthChart")
+                .getContext("2d");
+              new Chart(ctxStrength, {
+                type: "line",
+                data: {
+                  labels: data.strength_trends.labels || [],
+                  datasets: (data.strength_trends.datasets || []).map(
+                    (ds, i) => ({
+                      label: ds.label,
+                      data: ds.data,
+                      borderColor: i === 0 ? "#cafd00" : "#ff7441",
+                      backgroundColor:
+                        i === 0
+                          ? "rgba(202, 253, 0, 0.1)"
+                          : "rgba(255, 116, 65, 0.1)",
+                      borderWidth: 3,
+                      fill: true,
+                      tension: 0.4,
+                      pointBackgroundColor: "#ffffff",
+                    }),
+                  ),
+                },
+                options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: {
+                    legend: {
+                      labels: {
+                        color: "rgba(255,255,255,0.7)",
+                        font: { family: "Manrope", size: 10 },
+                      },
+                    },
+                  },
+                  scales: {
+                    y: {
+                      grid: { color: "rgba(255,255,255,0.05)" },
+                      ticks: { color: "rgba(255,255,255,0.5)" },
+                    },
+                    x: {
+                      grid: { display: false },
+                      ticks: { color: "rgba(255,255,255,0.5)" },
+                    },
+                  },
+                },
+              });
+            }
+
+            if (data.volume_trends && window.Chart) {
+              const ctxVol = document
+                .getElementById("volumeChart")
+                .getContext("2d");
+              new Chart(ctxVol, {
+                type: "bar",
+                data: {
+                  labels: data.volume_trends.labels || [],
+                  datasets: [
+                    {
+                      label: "Weekly Volume",
+                      data: data.volume_trends.data || [],
+                      backgroundColor: "#f3ffca",
+                      borderRadius: 6,
+                    },
+                  ],
+                },
+                options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: {
+                    legend: { display: false },
+                  },
+                  scales: {
+                    y: {
+                      grid: { color: "rgba(255,255,255,0.05)" },
+                      ticks: { color: "rgba(255,255,255,0.5)" },
+                    },
+                    x: {
+                      grid: { display: false },
+                      ticks: { color: "rgba(255,255,255,0.5)" },
+                    },
+                  },
+                },
+              });
+            }
+          }, 50);
+        };
+
+        window.openAIDatePicker = function () {
+          const today = new Date();
+          const lastWeek = new Date(today);
+          lastWeek.setDate(lastWeek.getDate() - 7);
+
+          document.getElementById("ai-end-date").value = today
+            .toISOString()
+            .split("T")[0];
+          document.getElementById("ai-start-date").value = lastWeek
+            .toISOString()
+            .split("T")[0];
+          document.getElementById("ai-date-picker-modal").style.display =
+            "flex";
+        };
+
+        window.submitAIDatePicker = function () {
+          const startStr = document.getElementById("ai-start-date").value;
+          const endStr = document.getElementById("ai-end-date").value;
+          if (!startStr || !endStr) {
+            alert("Please select both dates.");
+            return;
+          }
+          if (startStr > endStr) {
+            alert("Start date cannot be after end date.");
+            return;
+          }
+
+          document.getElementById("ai-date-picker-modal").style.display =
+            "none";
+          // Trigger UI update to show processing
+          const t = document.getElementById("ai-progress-dashboard");
+          if (t && t.innerHTML.includes("AI COACH READY")) {
+            t.innerHTML =
+              "<div style='color:var(--text-secondary); text-align:center; padding: 24px;'>Generating Custom Insights...</div>";
+          }
+          window.refreshAIAssistantData(startStr, endStr);
+        };
+
+        window.refreshAIAssistantData = async function (startStr, endStr) {
+          const apiKey = localStorage.getItem("kinetic_ai_key");
+          if (!apiKey) {
+            alert("Please config Gemini API Key in the Settings first!");
+            if (window.openAISettingsModal) window.openAISettingsModal();
+            return;
+          }
+
+          let history = [];
+          for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key.startsWith("kinetic_workout_")) {
+              try {
+                const dateStr = key.split("_")[2];
+                if (
+                  !startStr ||
+                  !endStr ||
+                  (dateStr >= startStr && dateStr <= endStr)
+                ) {
+                  history.push({
+                    date: dateStr,
+                    data: JSON.parse(localStorage.getItem(key)),
+                  });
                 }
+              } catch (e) {}
             }
-            history.sort((a,b) => a.date.localeCompare(b.date));
-            const recent = history; 
-            
-            if (recent.length === 0) {
-               alert("No workout data logged yet! Go log some sets to generate AI insights.");
-               return;
-            }
-            
-            const historyStr = JSON.stringify(recent);
-            const prompt = `You are an elite bodybuilding AI coach. Analyze this raw workout history: ${historyStr}.
+          }
+          history.sort((a, b) => a.date.localeCompare(b.date));
+          const recent = history;
+
+          if (recent.length === 0) {
+            alert(
+              "No workout data logged yet! Go log some sets to generate AI insights.",
+            );
+            return;
+          }
+
+          const historyStr = JSON.stringify(recent);
+          const prompt = `You are an elite bodybuilding AI coach. Analyze this raw workout history: ${historyStr}.
             Calculate and predict a future milestone based on the trajectory. Find the fastest improving exercises versus stagnant ones to give a sharp, brutally honest monthly synthesis.
             Extract the strength progression (top 2 exercises' estimated 1RM progression across the weeks) and volume per week. Format this data perfectly for a line chart and a bar chart in the strict JSON schema.
             Calculate simulated Central & Local fatigue for the Heatmap colors based on recent exercises. Use hex colors (#2ebd59 for fully recovered, #ffd541 for moderate fatigue, #ff453a for highly fatigued/sore). Set unused muscles to #2ebd59.
@@ -6094,50 +6626,106 @@ Return STRICTLY valid JSON:
                   "hm-abs": "#2ebd59"
                }
             }`;
-            
-            const result = await window.callGeminiAPI(prompt, null);
-            if (result) {
-                localStorage.setItem("kinetic_ai_dashboard", JSON.stringify(result));
-                window.renderAIAssistant();
-            }
+
+          const result = await window.callGeminiAPI(prompt, null);
+          if (result) {
+            localStorage.setItem(
+              "kinetic_ai_dashboard",
+              JSON.stringify(result),
+            );
+            window.renderAIAssistant();
+          }
         };
-        
+
         // Hijack renderWorkoutView to render AI Assistant below the calendar when viewed
         const oldRenderWV = window.renderWorkoutView;
-        window.renderWorkoutView = function(dateStr) {
-            if (oldRenderWV) oldRenderWV(dateStr);
-            window.renderAIAssistant(dateStr);
+        window.renderWorkoutView = function (dateStr) {
+          if (oldRenderWV) oldRenderWV(dateStr);
+          window.renderAIAssistant(dateStr);
         };
-        
+
         // Trigger initial render for AI Assistant since it missed the DOMContentLoaded early trigger
         if (window.currentSelectedDate) {
-            window.renderAIAssistant(window.currentSelectedDate);
+          window.renderAIAssistant(window.currentSelectedDate);
         }
-
       });
     </script>
     <!-- AI Loading Overlay -->
-    <div id="ai-loading-overlay" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.45); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); justify-content:center; align-items:center;">
-      <div style="background:rgba(40,40,42,0.82); border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:32px 40px; display:flex; flex-direction:column; align-items:center; gap:16px; box-shadow:0 24px 60px rgba(0,0,0,0.5);">
-        <div class="apple-spinner" style="width:36px; height:36px; position:relative;">
-          <div class="apple-tick"></div><div class="apple-tick"></div><div class="apple-tick"></div>
-          <div class="apple-tick"></div><div class="apple-tick"></div><div class="apple-tick"></div>
-          <div class="apple-tick"></div><div class="apple-tick"></div><div class="apple-tick"></div>
-          <div class="apple-tick"></div><div class="apple-tick"></div><div class="apple-tick"></div>
+    <div
+      id="ai-loading-overlay"
+      style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div
+        style="
+          background: rgba(40, 40, 42, 0.82);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 20px;
+          padding: 32px 40px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
+          box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+        "
+      >
+        <div
+          class="apple-spinner"
+          style="width: 36px; height: 36px; position: relative"
+        >
+          <div class="apple-tick"></div>
+          <div class="apple-tick"></div>
+          <div class="apple-tick"></div>
+          <div class="apple-tick"></div>
+          <div class="apple-tick"></div>
+          <div class="apple-tick"></div>
+          <div class="apple-tick"></div>
+          <div class="apple-tick"></div>
+          <div class="apple-tick"></div>
+          <div class="apple-tick"></div>
+          <div class="apple-tick"></div>
+          <div class="apple-tick"></div>
         </div>
-        <div style="font-size:0.95rem; font-weight:590; color:rgba(255,255,255,0.9); letter-spacing:0.01em; font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;">Analyzing nutrition...</div>
+        <div
+          style="
+            font-size: 0.95rem;
+            font-weight: 590;
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 0.01em;
+            font-family:
+              -apple-system, BlinkMacSystemFont, &quot;SF Pro Text&quot;,
+              sans-serif;
+          "
+        >
+          Analyzing nutrition...
+        </div>
       </div>
       <style>
-        #ai-loading-overlay.active { display:flex !important; }
+        #ai-loading-overlay.active {
+          display: flex !important;
+        }
 
-        .apple-spinner { position:relative; }
-        .apple-spinner::before { content:''; }
+        .apple-spinner {
+          position: relative;
+        }
+        .apple-spinner::before {
+          content: "";
+        }
         .apple-tick {
-          position:absolute;
-          width:3px;
-          height:9px;
-          border-radius:2px;
-          background: rgba(255,255,255,0.9);
+          position: absolute;
+          width: 3px;
+          height: 9px;
+          border-radius: 2px;
+          background: rgba(255, 255, 255, 0.9);
           left: 50%;
           top: 50%;
           transform-origin: 0px 14px;
@@ -6145,109 +6733,415 @@ Return STRICTLY valid JSON:
           margin-top: -14px;
           animation: apple-fade 1.1s linear infinite;
         }
-        .apple-tick:nth-child(1)  { transform: rotate(0deg);    animation-delay: 0s; }
-        .apple-tick:nth-child(2)  { transform: rotate(30deg);   animation-delay: -1.008s; }
-        .apple-tick:nth-child(3)  { transform: rotate(60deg);   animation-delay: -0.917s; }
-        .apple-tick:nth-child(4)  { transform: rotate(90deg);   animation-delay: -0.825s; }
-        .apple-tick:nth-child(5)  { transform: rotate(120deg);  animation-delay: -0.733s; }
-        .apple-tick:nth-child(6)  { transform: rotate(150deg);  animation-delay: -0.642s; }
-        .apple-tick:nth-child(7)  { transform: rotate(180deg);  animation-delay: -0.55s; }
-        .apple-tick:nth-child(8)  { transform: rotate(210deg);  animation-delay: -0.458s; }
-        .apple-tick:nth-child(9)  { transform: rotate(240deg);  animation-delay: -0.367s; }
-        .apple-tick:nth-child(10) { transform: rotate(270deg);  animation-delay: -0.275s; }
-        .apple-tick:nth-child(11) { transform: rotate(300deg);  animation-delay: -0.183s; }
-        .apple-tick:nth-child(12) { transform: rotate(330deg);  animation-delay: -0.092s; }
+        .apple-tick:nth-child(1) {
+          transform: rotate(0deg);
+          animation-delay: 0s;
+        }
+        .apple-tick:nth-child(2) {
+          transform: rotate(30deg);
+          animation-delay: -1.008s;
+        }
+        .apple-tick:nth-child(3) {
+          transform: rotate(60deg);
+          animation-delay: -0.917s;
+        }
+        .apple-tick:nth-child(4) {
+          transform: rotate(90deg);
+          animation-delay: -0.825s;
+        }
+        .apple-tick:nth-child(5) {
+          transform: rotate(120deg);
+          animation-delay: -0.733s;
+        }
+        .apple-tick:nth-child(6) {
+          transform: rotate(150deg);
+          animation-delay: -0.642s;
+        }
+        .apple-tick:nth-child(7) {
+          transform: rotate(180deg);
+          animation-delay: -0.55s;
+        }
+        .apple-tick:nth-child(8) {
+          transform: rotate(210deg);
+          animation-delay: -0.458s;
+        }
+        .apple-tick:nth-child(9) {
+          transform: rotate(240deg);
+          animation-delay: -0.367s;
+        }
+        .apple-tick:nth-child(10) {
+          transform: rotate(270deg);
+          animation-delay: -0.275s;
+        }
+        .apple-tick:nth-child(11) {
+          transform: rotate(300deg);
+          animation-delay: -0.183s;
+        }
+        .apple-tick:nth-child(12) {
+          transform: rotate(330deg);
+          animation-delay: -0.092s;
+        }
         @keyframes apple-fade {
-          0%   { opacity: 1; }
-          100% { opacity: 0.1; }
+          0% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0.1;
+          }
         }
       </style>
     </div>
     <!-- AI Date Picker Modal -->
-    <div id="ai-date-picker-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999; background: rgba(0,0,0,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); align-items: center; justify-content: center; padding: 20px; animation: aiModalFadeIn 0.3s ease forwards;">
+    <div
+      id="ai-date-picker-modal"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 9999;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        animation: aiModalFadeIn 0.3s ease forwards;
+      "
+    >
       <style>
-        @keyframes aiModalFadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes aiModalScaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes aiModalFadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        @keyframes aiModalScaleUp {
+          from {
+            transform: scale(0.95);
+            opacity: 0;
+          }
+          to {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
         .ai-apple-modal {
-            background: linear-gradient(145deg, rgba(30,30,30,0.85) 0%, rgba(15,15,15,0.95) 100%);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 28px; /* Ultra-smooth Apple corners */
-            padding: 32px 24px;
-            width: 100%;
-            max-width: 380px;
-            position: relative;
-            text-align: center;
-            box-shadow: 0 24px 48px rgba(0,0,0,0.6);
-            animation: aiModalScaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          background: linear-gradient(
+            145deg,
+            rgba(30, 30, 30, 0.85) 0%,
+            rgba(15, 15, 15, 0.95) 100%
+          );
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 28px; /* Ultra-smooth Apple corners */
+          padding: 32px 24px;
+          width: 100%;
+          max-width: 380px;
+          position: relative;
+          text-align: center;
+          box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
+          animation: aiModalScaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         .ai-apple-close {
-            position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 16px; background: rgba(255,255,255,0.06); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s ease;
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          width: 32px;
+          height: 32px;
+          border-radius: 16px;
+          background: rgba(255, 255, 255, 0.06);
+          border: none;
+          color: var(--text-primary);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: background 0.2s ease;
         }
-        .ai-apple-close:hover { background: rgba(255,255,255,0.15); }
+        .ai-apple-close:hover {
+          background: rgba(255, 255, 255, 0.15);
+        }
         .ai-apple-input {
-            width: 100%; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); padding: 14px 16px; border-radius: 14px; color: white; font-family: var(--font-body); font-size: 1rem; appearance: none; -webkit-appearance: none; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; color-scheme: dark;
+          width: 100%;
+          background: rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          padding: 14px 16px;
+          border-radius: 14px;
+          color: white;
+          font-family: var(--font-body);
+          font-size: 1rem;
+          appearance: none;
+          -webkit-appearance: none;
+          outline: none;
+          transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+          color-scheme: dark;
         }
-        .ai-apple-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(202,253,0,0.2); }
+        .ai-apple-input:focus {
+          border-color: var(--primary);
+          box-shadow: 0 0 0 3px rgba(202, 253, 0, 0.2);
+        }
         .ai-apple-btn {
-            width: 100%; padding: 16px; background: var(--primary); color: #000; font-weight: 800; font-size: 0.95rem; border: none; border-radius: 16px; text-transform: uppercase; cursor: pointer; transition: transform 0.2s ease, opacity 0.2s ease;
+          width: 100%;
+          padding: 16px;
+          background: var(--primary);
+          color: #000;
+          font-weight: 800;
+          font-size: 0.95rem;
+          border: none;
+          border-radius: 16px;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition:
+            transform 0.2s ease,
+            opacity 0.2s ease;
         }
-        .ai-apple-btn:active { transform: scale(0.96); opacity: 0.9; }
+        .ai-apple-btn:active {
+          transform: scale(0.96);
+          opacity: 0.9;
+        }
       </style>
       <div class="ai-apple-modal">
-        <button class="ai-apple-close" onclick="document.getElementById('ai-date-picker-modal').style.display='none'">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        <button
+          class="ai-apple-close"
+          onclick="
+            document.getElementById('ai-date-picker-modal').style.display =
+              'none'
+          "
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          >
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
         </button>
-        <h2 style="font-family: var(--font-display); font-weight:800; font-size:1.5rem; margin-bottom: 8px; color:var(--text-primary); letter-spacing:-0.5px;">Time Horizon</h2>
-        <p style="color:var(--text-secondary); font-size: 0.85rem; margin-bottom: 28px; line-height:1.4;">Select the precise chronological window for your AI coaching synthesis.</p>
-        
-        <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:32px; text-align:left;">
-            <div>
-                <label style="font-size:0.7rem; color:var(--text-secondary); font-weight:700; margin-bottom:8px; display:block; letter-spacing:0.5px;">START DATE</label>
-                <input type="date" id="ai-start-date" class="ai-apple-input">
-            </div>
-            <div>
-                <label style="font-size:0.7rem; color:var(--text-secondary); font-weight:700; margin-bottom:8px; display:block; letter-spacing:0.5px;">END DATE</label>
-                <input type="date" id="ai-end-date" class="ai-apple-input">
-            </div>
+        <h2
+          style="
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+          "
+        >
+          Time Horizon
+        </h2>
+        <p
+          style="
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 28px;
+            line-height: 1.4;
+          "
+        >
+          Select the precise chronological window for your AI coaching
+          synthesis.
+        </p>
+
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 32px;
+            text-align: left;
+          "
+        >
+          <div>
+            <label
+              style="
+                font-size: 0.7rem;
+                color: var(--text-secondary);
+                font-weight: 700;
+                margin-bottom: 8px;
+                display: block;
+                letter-spacing: 0.5px;
+              "
+              >START DATE</label
+            >
+            <input type="date" id="ai-start-date" class="ai-apple-input" />
+          </div>
+          <div>
+            <label
+              style="
+                font-size: 0.7rem;
+                color: var(--text-secondary);
+                font-weight: 700;
+                margin-bottom: 8px;
+                display: block;
+                letter-spacing: 0.5px;
+              "
+              >END DATE</label
+            >
+            <input type="date" id="ai-end-date" class="ai-apple-input" />
+          </div>
         </div>
-        <button class="ai-apple-btn" onclick="window.submitAIDatePicker()">Synthesize Data</button>
+        <button class="ai-apple-btn" onclick="window.submitAIDatePicker()">
+          Synthesize Data
+        </button>
       </div>
     </div>
 
     <!-- Diet AI Range Picker Bottom Sheet -->
-    <div class="diet-ai-overlay" id="diet-ai-overlay" onclick="closeDietAIRangePicker()"></div>
+    <div
+      class="diet-ai-overlay"
+      id="diet-ai-overlay"
+      onclick="closeDietAIRangePicker()"
+    ></div>
     <div class="diet-ai-range-sheet" id="diet-ai-range-sheet">
       <div class="sheet-drag-handle"></div>
-      <div style="padding: 0 0 20px;">
-        <div style="font-family:var(--font-display); font-size:1.3rem; font-weight:800; color:var(--text-primary); margin-bottom:4px;">Analysis Range</div>
-        <div style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:22px;">Choose a time window for AI nutrition analysis</div>
+      <div style="padding: 0 0 20px">
+        <div
+          style="
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+          "
+        >
+          Analysis Range
+        </div>
+        <div
+          style="
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 22px;
+          "
+        >
+          Choose a time window for AI nutrition analysis
+        </div>
 
-        <button class="dai-quick-btn" onclick="setDietAIQuickRange(1); runDietAICustomRange();">
+        <button
+          class="dai-quick-btn"
+          onclick="
+            setDietAIQuickRange(1);
+            runDietAICustomRange();
+          "
+        >
           <span>Today Only</span><span class="dai-quick-icon">→</span>
         </button>
-        <button class="dai-quick-btn" onclick="setDietAIQuickRange(3); runDietAICustomRange();">
+        <button
+          class="dai-quick-btn"
+          onclick="
+            setDietAIQuickRange(3);
+            runDietAICustomRange();
+          "
+        >
           <span>Last 3 Days</span><span class="dai-quick-icon">→</span>
         </button>
-        <button class="dai-quick-btn" onclick="setDietAIQuickRange(7); runDietAICustomRange();">
+        <button
+          class="dai-quick-btn"
+          onclick="
+            setDietAIQuickRange(7);
+            runDietAICustomRange();
+          "
+        >
           <span>Last 7 Days</span><span class="dai-quick-icon">→</span>
         </button>
-        <button class="dai-quick-btn" onclick="setDietAIQuickRange(30); runDietAICustomRange();">
+        <button
+          class="dai-quick-btn"
+          onclick="
+            setDietAIQuickRange(30);
+            runDietAICustomRange();
+          "
+        >
           <span>Last 30 Days</span><span class="dai-quick-icon">→</span>
         </button>
 
-        <div style="height:1px; background:rgba(255,255,255,0.07); margin:16px 0;"></div>
-        <div style="font-size:0.68rem; font-weight:800; text-transform:uppercase; color:var(--text-secondary); letter-spacing:0.5px; margin-bottom:12px;">Custom Range</div>
-        <div style="display:flex; gap:12px; margin-bottom:16px;">
-          <div class="input-group" style="flex:1;">
+        <div
+          style="
+            height: 1px;
+            background: rgba(255, 255, 255, 0.07);
+            margin: 16px 0;
+          "
+        ></div>
+        <div
+          style="
+            font-size: 0.68rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+          "
+        >
+          Custom Range
+        </div>
+        <div style="display: flex; gap: 12px; margin-bottom: 16px">
+          <div class="input-group" style="flex: 1">
             <label>From</label>
-            <input type="date" id="dai-custom-start" style="background:var(--surface-container-highest); border:1px solid transparent; border-radius:14px; padding:14px; color:var(--text-primary); font-family:var(--font-body); font-size:0.95rem; outline:none; width:100%; color-scheme:dark; -webkit-appearance:none; appearance:none;">
+            <input
+              type="date"
+              id="dai-custom-start"
+              style="
+                background: var(--surface-container-highest);
+                border: 1px solid transparent;
+                border-radius: 14px;
+                padding: 14px;
+                color: var(--text-primary);
+                font-family: var(--font-body);
+                font-size: 0.95rem;
+                outline: none;
+                width: 100%;
+                color-scheme: dark;
+                -webkit-appearance: none;
+                appearance: none;
+              "
+            />
           </div>
-          <div class="input-group" style="flex:1;">
+          <div class="input-group" style="flex: 1">
             <label>To</label>
-            <input type="date" id="dai-custom-end" style="background:var(--surface-container-highest); border:1px solid transparent; border-radius:14px; padding:14px; color:var(--text-primary); font-family:var(--font-body); font-size:0.95rem; outline:none; width:100%; color-scheme:dark; -webkit-appearance:none; appearance:none;">
+            <input
+              type="date"
+              id="dai-custom-end"
+              style="
+                background: var(--surface-container-highest);
+                border: 1px solid transparent;
+                border-radius: 14px;
+                padding: 14px;
+                color: var(--text-primary);
+                font-family: var(--font-body);
+                font-size: 0.95rem;
+                outline: none;
+                width: 100%;
+                color-scheme: dark;
+                -webkit-appearance: none;
+                appearance: none;
+              "
+            />
           </div>
         </div>
-        <button onclick="runDietAICustomRange()" style="width:100%; padding:16px; background:var(--primary); color:#000; font-family:var(--font-display); font-size:0.92rem; font-weight:800; text-transform:uppercase; border:none; border-radius:16px; cursor:pointer; transition:all 0.2s; box-shadow:0 6px 20px rgba(202,253,0,0.2);">
+        <button
+          onclick="runDietAICustomRange()"
+          style="
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: #000;
+            font-family: var(--font-display);
+            font-size: 0.92rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 6px 20px rgba(202, 253, 0, 0.2);
+          "
+        >
           Generate Analysis
         </button>
       </div>
