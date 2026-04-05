@@ -1979,6 +1979,175 @@
         height: 12px;
         border-radius: 3px;
       }
+
+      /* ===== AI DIET ANALYSIS WIDGET ===== */
+      .diet-ai-panel {
+        background: linear-gradient(145deg, var(--surface-container-high) 0%, rgba(202,253,0,0.025) 100%);
+        border: 1px solid rgba(202,253,0,0.18);
+        border-radius: 24px;
+        margin-bottom: 24px;
+        overflow: hidden;
+      }
+      .diet-ai-panel-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 18px;
+      }
+      .diet-ai-icon {
+        width: 38px; height: 38px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, rgba(202,253,0,0.18), rgba(0,229,160,0.12));
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.1rem; flex-shrink: 0;
+      }
+      .diet-ai-header-text { flex: 1; min-width: 0; }
+      .diet-ai-title {
+        font-family: var(--font-display);
+        font-size: 0.9rem; font-weight: 800;
+        color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px;
+      }
+      .diet-ai-subtitle { font-size: 0.68rem; color: var(--text-secondary); font-weight: 600; margin-top: 1px; }
+      .diet-ai-analyze-btn {
+        background: var(--primary); color: #000;
+        border: none; border-radius: 14px;
+        padding: 9px 16px;
+        font-family: var(--font-display); font-size: 0.68rem; font-weight: 800;
+        text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+        white-space: nowrap; flex-shrink: 0;
+      }
+      .diet-ai-analyze-btn:active { transform: scale(0.93); }
+      .diet-ai-body { padding: 0 18px 18px; }
+      .dai-range-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+      .dai-range-tab {
+        flex: 1; padding: 8px 10px;
+        border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
+        background: transparent; color: var(--text-secondary);
+        font-family: var(--font-display); font-size: 0.68rem; font-weight: 800;
+        text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+      }
+      .dai-range-tab.active {
+        background: rgba(202,253,0,0.1); border-color: rgba(202,253,0,0.4); color: var(--primary);
+      }
+      /* Score */
+      .dai-score-wrap {
+        display: flex; align-items: center; gap: 16px;
+        background: rgba(0,0,0,0.2); border-radius: 18px;
+        padding: 14px 16px; margin-bottom: 16px;
+      }
+      .dai-ring-outer { position: relative; width: 86px; height: 86px; flex-shrink: 0; }
+      .dai-ring-svg { width: 86px; height: 86px; transform: rotate(-90deg); }
+      .dai-ring-bg { fill: none; stroke: rgba(255,255,255,0.07); stroke-width: 6; }
+      .dai-ring-fill {
+        fill: none; stroke-width: 6; stroke-linecap: round;
+        stroke-dasharray: 214; stroke-dashoffset: 214;
+        transition: stroke-dashoffset 1.2s cubic-bezier(0.25,1,0.5,1), stroke 0.4s;
+      }
+      .dai-ring-center {
+        position: absolute; inset: 0;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+      }
+      .dai-score-val {
+        font-family: var(--font-display); font-size: 1.5rem; font-weight: 900; line-height: 1;
+      }
+      .dai-score-denom { font-size: 0.58rem; color: var(--text-secondary); font-weight: 700; }
+      .dai-score-info { flex: 1; }
+      .dai-score-label { font-family: var(--font-display); font-size: 1.2rem; font-weight: 800; margin-bottom: 4px; }
+      .dai-score-date { font-size: 0.7rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 8px; }
+      .dai-closing { font-size: 0.76rem; color: var(--text-secondary); line-height: 1.45; font-style: italic; }
+      /* Macro bars */
+      .dai-macro-bars { display: flex; flex-direction: column; gap: 9px; margin-bottom: 16px; }
+      .dai-macro-row { display: flex; align-items: center; gap: 10px; }
+      .dai-macro-lbl { width: 56px; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; color: var(--text-secondary); flex-shrink: 0; }
+      .dai-macro-track { flex: 1; height: 5px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden; }
+      .dai-macro-bar { height: 100%; border-radius: 3px; width: 0%; transition: width 1s cubic-bezier(0.25,1,0.5,1); }
+      .dai-macro-bar.lime { background: var(--primary-container); box-shadow: 0 0 6px rgba(202,253,0,0.35); }
+      .dai-macro-bar.pale { background: #f3ffca; }
+      .dai-macro-bar.orange { background: var(--secondary); }
+      .dai-macro-bar.yellow { background: #ffd541; }
+      .dai-macro-pct { width: 34px; text-align: right; font-size: 0.7rem; font-weight: 800; flex-shrink: 0; }
+      /* Sections */
+      .dai-sections { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+      .dai-section-card { border-radius: 14px; padding: 12px 14px; border: 1px solid transparent; }
+      .dai-section-card.green { background: rgba(46,189,89,0.07); border-color: rgba(46,189,89,0.2); }
+      .dai-section-card.yellow { background: rgba(255,213,65,0.07); border-color: rgba(255,213,65,0.2); }
+      .dai-section-card.red { background: rgba(255,69,58,0.07); border-color: rgba(255,69,58,0.2); }
+      .dai-section-title {
+        font-family: var(--font-display); font-size: 0.7rem; font-weight: 800;
+        text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 9px;
+      }
+      .dai-section-title.green { color: #2ebd59; }
+      .dai-section-title.yellow { color: #ffd541; }
+      .dai-section-title.red { color: #ff453a; }
+      .dai-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+      .dai-chip { font-size: 0.77rem; font-weight: 600; padding: 5px 11px; border-radius: 20px; background: rgba(255,255,255,0.06); color: var(--text-primary); line-height: 1.3; }
+      /* Patterns */
+      .dai-patterns { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 13px; }
+      .dai-pattern-chip {
+        font-size: 0.7rem; font-weight: 700; padding: 5px 10px; border-radius: 8px;
+        background: rgba(255,116,65,0.12); border: 1px solid rgba(255,116,65,0.25);
+        color: var(--secondary);
+      }
+      /* Predictive */
+      .dai-predictive {
+        background: linear-gradient(135deg, rgba(0,229,160,0.1) 0%, rgba(202,253,0,0.05) 100%);
+        border: 1px solid rgba(0,229,160,0.22); border-radius: 13px;
+        padding: 11px 14px; font-size: 0.79rem; color: #00e5a0;
+        font-weight: 600; line-height: 1.45; margin-bottom: 14px;
+        display: flex; gap: 10px; align-items: flex-start;
+      }
+      /* Recommendations */
+      .dai-recs-header {
+        font-family: var(--font-display); font-size: 0.7rem; font-weight: 800;
+        text-transform: uppercase; color: var(--primary); letter-spacing: 0.5px;
+        margin-bottom: 9px; display: flex; align-items: center; gap: 6px;
+      }
+      .dai-recs-list { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
+      .dai-rec-item {
+        background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 11px; padding: 11px 13px;
+        font-size: 0.8rem; color: var(--text-primary); line-height: 1.4;
+        display: flex; gap: 10px; align-items: flex-start;
+      }
+      .dai-rec-dot {
+        width: 6px; height: 6px; border-radius: 3px;
+        background: var(--primary-container); flex-shrink: 0; margin-top: 6px;
+        box-shadow: 0 0 5px rgba(202,253,0,0.4);
+      }
+      /* Loading shimmer */
+      .dai-shimmer { height: 13px; border-radius: 7px; margin-bottom: 10px;
+        background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.09) 50%, rgba(255,255,255,0.04) 75%);
+        background-size: 200% 100%; animation: dai-shimmer 1.5s infinite; }
+      @keyframes dai-shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+      /* Range Bottom Sheet */
+      .diet-ai-overlay {
+        position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+        backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+        z-index: 2999; opacity: 0; visibility: hidden; transition: all 0.3s;
+      }
+      .diet-ai-overlay.active { opacity: 1; visibility: visible; }
+      .diet-ai-range-sheet {
+        position: fixed; bottom: 0; left: 0; width: 100%;
+        background: var(--surface-container-low);
+        border-radius: 28px 28px 0 0; z-index: 3000;
+        padding: 0 24px 40px; max-height: 88vh; overflow-y: auto;
+        transform: translateY(100%);
+        transition: transform 0.4s cubic-bezier(0.32,0.72,0,1);
+        box-shadow: 0 -8px 40px rgba(0,0,0,0.5);
+        border-top: 1px solid rgba(255,255,255,0.06);
+      }
+      .diet-ai-range-sheet.active { transform: translateY(0); }
+      .dai-quick-btn {
+        width: 100%; padding: 15px 16px;
+        background: var(--surface-container-high);
+        border: 1px solid rgba(255,255,255,0.07); border-radius: 14px;
+        color: var(--text-primary); font-family: var(--font-display);
+        font-size: 0.88rem; font-weight: 800; text-transform: uppercase;
+        cursor: pointer; display: flex; align-items: center;
+        justify-content: space-between; transition: all 0.2s; margin-bottom: 10px;
+      }
+      .dai-quick-btn:active { background: rgba(202,253,0,0.08); border-color: rgba(202,253,0,0.3); color: var(--primary); }
+      .dai-quick-icon { color: var(--text-secondary); font-size: 1rem; }
     </style>
   </head>
   <body>
@@ -4900,6 +5069,27 @@
                   }
                 </style>
 
+                <!-- Diet AI Coach Panel -->
+                <div class="diet-ai-panel">
+                    <div class="diet-ai-panel-header">
+                        <div class="diet-ai-icon">✦</div>
+                        <div class="diet-ai-header-text">
+                            <div class="diet-ai-title">AI Diet Coach</div>
+                            <div class="diet-ai-subtitle">Nutrition analysis & smart recommendations</div>
+                        </div>
+                        <button class="diet-ai-analyze-btn" onclick="runDietAIAnalysis('daily')">Analyze</button>
+                    </div>
+                    <div class="diet-ai-body">
+                        <div class="dai-range-tabs">
+                            <button class="dai-range-tab active" id="dai-tab-today" onclick="switchDietAITab('today')">Today</button>
+                            <button class="dai-range-tab" id="dai-tab-custom" onclick="openDietAIRangePicker()">⊕ Range</button>
+                        </div>
+                        <div id="diet-ai-report" style="color:var(--text-secondary); font-size:0.8rem; text-align:center; padding:12px 0 4px;">
+                            Tap <strong style="color:var(--primary)">Analyze</strong> to generate your AI nutrition report.
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Meal Log -->
                 <div class="meal-log-header">
                     <div>
@@ -5239,6 +5429,211 @@
             window.renderTempMealFoods();
             document.getElementById("ai-file-input").value = ""; 
         }
+
+        // ===== AI DIET ANALYSIS =====
+        window.switchDietAITab = function(tab) {
+          document.querySelectorAll('.dai-range-tab').forEach(t => t.classList.remove('active'));
+          const el = document.getElementById('dai-tab-' + tab);
+          if (el) el.classList.add('active');
+          if (tab === 'today') runDietAIAnalysis('daily');
+        };
+
+        window.openDietAIRangePicker = function() {
+          const today = new Date();
+          const wkAgo = new Date(today); wkAgo.setDate(wkAgo.getDate() - 6);
+          const s = document.getElementById('dai-custom-start');
+          const e = document.getElementById('dai-custom-end');
+          if (s) s.value = wkAgo.toISOString().split('T')[0];
+          if (e) e.value = today.toISOString().split('T')[0];
+          document.getElementById('diet-ai-overlay').classList.add('active');
+          document.getElementById('diet-ai-range-sheet').classList.add('active');
+        };
+
+        window.closeDietAIRangePicker = function() {
+          document.getElementById('diet-ai-overlay').classList.remove('active');
+          document.getElementById('diet-ai-range-sheet').classList.remove('active');
+        };
+
+        window.setDietAIQuickRange = function(days) {
+          const today = new Date();
+          const start = new Date(today); start.setDate(start.getDate() - (days - 1));
+          const s = document.getElementById('dai-custom-start');
+          const e = document.getElementById('dai-custom-end');
+          if (s) s.value = start.toISOString().split('T')[0];
+          if (e) e.value = today.toISOString().split('T')[0];
+        };
+
+        window.runDietAICustomRange = function() {
+          const startStr = document.getElementById('dai-custom-start').value;
+          const endStr = document.getElementById('dai-custom-end').value;
+          if (!startStr || !endStr) { alert('Please select both dates.'); return; }
+          if (startStr > endStr) { alert('Start date cannot be after end date.'); return; }
+          closeDietAIRangePicker();
+          document.querySelectorAll('.dai-range-tab').forEach(t => t.classList.remove('active'));
+          const ct = document.getElementById('dai-tab-custom');
+          if (ct) ct.classList.add('active');
+          runDietAIAnalysis('custom', startStr, endStr);
+        };
+
+        window.runDietAIAnalysis = async function(mode, startStr, endStr) {
+          const apiKey = localStorage.getItem('kinetic_ai_key');
+          if (!apiKey) {
+            alert('Please configure your Gemini API Key in Settings first.');
+            if (window.openAISettingsModal) window.openAISettingsModal();
+            return;
+          }
+          const todayStr = new Date().toISOString().split('T')[0];
+          if (mode === 'daily') { startStr = window.currentSelectedDate || todayStr; endStr = startStr; }
+
+          const selDate = window.currentSelectedDate || todayStr;
+          const isToday = startStr === todayStr && endStr === todayStr;
+          const dateLabel = startStr === endStr
+            ? (isToday ? 'Today' : startStr)
+            : startStr + ' → ' + endStr;
+
+          const reportEl = document.getElementById('diet-ai-report');
+          if (reportEl) reportEl.innerHTML = `
+            <div style="padding:8px 0;">
+              <div class="dai-shimmer" style="width:40%;height:16px;margin-bottom:14px;"></div>
+              <div class="dai-shimmer" style="width:80%;"></div>
+              <div class="dai-shimmer" style="width:60%;"></div>
+              <div class="dai-shimmer" style="width:75%;"></div>
+              <div class="dai-shimmer" style="width:90%;margin-top:14px;"></div>
+              <div class="dai-shimmer" style="width:55%;"></div>
+            </div>`;
+
+          // Collect meal data
+          const mealDataByDay = [];
+          let d = new Date(startStr + 'T00:00:00');
+          const ed = new Date(endStr + 'T00:00:00');
+          const legacyStaticIds = ["breakfast", "lunch", "dinner", "snacks"];
+
+          while (d <= ed) {
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            const ds = `${y}-${m}-${day}`;
+
+            const raw = localStorage.getItem('kinetic_diet_' + ds);
+            const tgt = window.getDietConfigForDate ? window.getDietConfigForDate(ds) : {};
+            
+            let meals = raw ? (JSON.parse(raw).meals || []) : [];
+            meals = meals.filter(meal => !legacyStaticIds.includes(meal.id) || meal.logged);
+
+            mealDataByDay.push({ date: ds, meals: meals, targets: tgt });
+            d.setDate(d.getDate() + 1);
+          }
+
+          const totalMeals = mealDataByDay.reduce((s, x) => s + x.meals.length, 0);
+          if (totalMeals === 0) {
+            if (reportEl) reportEl.innerHTML = `<div style="text-align:center;padding:20px 0 8px;color:var(--text-secondary);"><div style="font-size:1.8rem;margin-bottom:10px;">🍽️</div><div style="font-weight:700;color:var(--text-primary);margin-bottom:4px;">No meals logged</div><div style="font-size:0.78rem;">Log at least one meal to get AI analysis.</div></div>`;
+            return;
+          }
+
+          const cfg = JSON.parse(localStorage.getItem('kinetic_diet_config') || '{}');
+          const tgt = (cfg.defaultTargets) || { totalCalories:3000, proteinTarget:160, carbTarget:350, fatTarget:80 };
+          let goal = 'maintenance';
+          if (tgt.totalCalories <= 2000) goal = 'fat loss / caloric deficit';
+          else if (tgt.totalCalories >= 3200) goal = 'muscle gain / caloric surplus';
+          else if (tgt.proteinTarget >= 180) goal = 'body recomposition / muscle gain';
+
+          const prompt = `You are an elite sports nutrition AI coach. Analyze this user's diet data.
+USER GOAL: ${goal}
+DAILY TARGETS: ${tgt.totalCalories} kcal | Protein: ${tgt.proteinTarget}g | Carbs: ${tgt.carbTarget}g | Fats: ${tgt.fatTarget}g
+ANALYSIS PERIOD: ${dateLabel} (${mealDataByDay.length} day(s))
+MEAL DATA: ${JSON.stringify(mealDataByDay)}
+
+Provide a supportive, coach-like analysis. Score diet quality 0-10. Be specific and actionable.
+Return STRICTLY valid JSON:
+{
+  "score": 7.5,
+  "score_label": "Good",
+  "score_color": "#cafd00",
+  "summary_calories_pct": 82,
+  "summary_protein_pct": 65,
+  "summary_carb_pct": 91,
+  "summary_fat_pct": 78,
+  "strengths": ["Consistent breakfast timing", "High protein at lunch"],
+  "improvements": ["Protein drops after 6PM", "Missing post-workout nutrition window"],
+  "immediate_changes": ["Add protein shake within 30min of training", "Swap late-night carbs for vegetables"],
+  "recommendations": ["Add 20g protein to dinner for overnight recovery", "Front-load 60% of carbs before 3PM"],
+  "patterns": ["Late-night eating detected", "Protein low in evenings"],
+  "predictive": "At this rate you may fall 12% short of weekly protein target. One extra high-protein meal daily closes this gap.",
+  "tone_closing": "Solid consistency. One targeted change to evening nutrition will accelerate your results significantly."
+}`;
+
+          const result = await window.callGeminiAPI(prompt, null);
+          if (result) {
+            renderDietAIReport(result, dateLabel);
+          } else {
+            if (reportEl) reportEl.innerHTML = `<div style="text-align:center;padding:16px;color:#ff453a;font-size:0.82rem;">Analysis failed. Please check your API key and try again.</div>`;
+          }
+        };
+
+        window.renderDietAIReport = function(data, dateLabel) {
+          const reportEl = document.getElementById('diet-ai-report');
+          if (!reportEl) return;
+
+          const score = parseFloat(data.score) || 0;
+          const circumference = 214;
+          const offset = circumference - (score / 10) * circumference;
+          let sc = data.score_color || '#cafd00';
+          if (score < 4) sc = '#ff453a';
+          else if (score < 6) sc = '#ffd541';
+          else if (score >= 8) sc = '#2ebd59';
+
+          const label = data.score_label || (score>=8?'Excellent':score>=6?'Good':score>=4?'Fair':'Needs Work');
+          const cp = v => Math.min(100, Math.max(0, parseInt(v)||0));
+          const chips = arr => (arr||[]).map(s=>`<span class="dai-chip">${s}</span>`).join('');
+
+          const secHTML = (cls, title, arr) => arr&&arr.length ? `<div class="dai-section-card ${cls}"><div class="dai-section-title ${cls}">${title}</div><div class="dai-chips">${chips(arr)}</div></div>` : '';
+          const patternsHTML = (data.patterns||[]).length ? `<div style="margin-bottom:12px;"><div style="font-size:0.68rem;font-weight:800;text-transform:uppercase;color:var(--text-secondary);letter-spacing:0.5px;margin-bottom:7px;">🔍 Detected Patterns</div><div class="dai-patterns">${(data.patterns||[]).map(p=>`<span class="dai-pattern-chip">${p}</span>`).join('')}</div></div>` : '';
+          const predictHTML = data.predictive ? `<div class="dai-predictive"><div style="flex-shrink:0;font-size:1rem;">🔮</div><div>${data.predictive}</div></div>` : '';
+          const recsHTML = (data.recommendations||[]).map(r=>`<div class="dai-rec-item"><div class="dai-rec-dot"></div><div>${r}</div></div>`).join('');
+
+          reportEl.innerHTML = `
+            <div class="dai-score-wrap">
+              <div class="dai-ring-outer">
+                <svg class="dai-ring-svg" viewBox="0 0 86 86">
+                  <circle class="dai-ring-bg" cx="43" cy="43" r="34"/>
+                  <circle class="dai-ring-fill" id="dai-ring" cx="43" cy="43" r="34" stroke="${sc}" style="stroke-dashoffset:${circumference};"/>
+                </svg>
+                <div class="dai-ring-center">
+                  <div class="dai-score-val" style="color:${sc};">${score.toFixed(1)}</div>
+                  <div class="dai-score-denom">/ 10</div>
+                </div>
+              </div>
+              <div class="dai-score-info">
+                <div class="dai-score-label" style="color:${sc};">${label}</div>
+                <div class="dai-score-date">${dateLabel||'Today'}</div>
+                <div class="dai-closing">${data.tone_closing||'Keep pushing. Consistency is everything.'}</div>
+              </div>
+            </div>
+            <div class="dai-macro-bars">
+              <div class="dai-macro-row"><div class="dai-macro-lbl">Calories</div><div class="dai-macro-track"><div class="dai-macro-bar lime" id="dai-bk" style="width:0%"></div></div><div class="dai-macro-pct" style="color:var(--primary-container);">${cp(data.summary_calories_pct)}%</div></div>
+              <div class="dai-macro-row"><div class="dai-macro-lbl">Protein</div><div class="dai-macro-track"><div class="dai-macro-bar pale" id="dai-bp" style="width:0%"></div></div><div class="dai-macro-pct" style="color:#f3ffca;">${cp(data.summary_protein_pct)}%</div></div>
+              <div class="dai-macro-row"><div class="dai-macro-lbl">Carbs</div><div class="dai-macro-track"><div class="dai-macro-bar orange" id="dai-bc" style="width:0%"></div></div><div class="dai-macro-pct" style="color:var(--secondary);">${cp(data.summary_carb_pct)}%</div></div>
+              <div class="dai-macro-row"><div class="dai-macro-lbl">Fats</div><div class="dai-macro-track"><div class="dai-macro-bar yellow" id="dai-bf" style="width:0%"></div></div><div class="dai-macro-pct" style="color:#ffd541;">${cp(data.summary_fat_pct)}%</div></div>
+            </div>
+            <div class="dai-sections">
+              ${secHTML('green','✅ Your Strengths',data.strengths)}
+              ${secHTML('yellow','⚠️ Areas to Improve',data.improvements)}
+              ${secHTML('red','🔄 Change Now',data.immediate_changes)}
+            </div>
+            ${patternsHTML}
+            ${predictHTML}
+            ${recsHTML.length?`<div class="dai-recs-header"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17.1 5.8 21.3l2.4-7.4L2 9.4h7.6L12 2z"/></svg> Smart Recommendations</div><div class="dai-recs-list">${recsHTML}</div>`:''}
+            <button onclick="runDietAIAnalysis('daily')" style="width:100%;padding:13px;background:rgba(202,253,0,0.07);border:1px solid rgba(202,253,0,0.18);border-radius:13px;color:var(--primary);font-family:var(--font-display);font-size:0.7rem;font-weight:800;text-transform:uppercase;cursor:pointer;margin-top:6px;">⭮ Re-Analyze</button>`;
+
+          requestAnimationFrame(() => { setTimeout(() => {
+            const r = document.getElementById('dai-ring');
+            if (r) r.style.strokeDashoffset = offset;
+            const bk = document.getElementById('dai-bk'); if (bk) bk.style.width = cp(data.summary_calories_pct)+'%';
+            const bp = document.getElementById('dai-bp'); if (bp) bp.style.width = cp(data.summary_protein_pct)+'%';
+            const bc = document.getElementById('dai-bc'); if (bc) bc.style.width = cp(data.summary_carb_pct)+'%';
+            const bf = document.getElementById('dai-bf'); if (bf) bf.style.width = cp(data.summary_fat_pct)+'%';
+          }, 80); });
+        };
 
         window.handleAILogText = async function(text) {
           if (!text.trim()) return;
@@ -5804,6 +6199,45 @@
             </div>
         </div>
         <button class="ai-apple-btn" onclick="window.submitAIDatePicker()">Synthesize Data</button>
+      </div>
+    </div>
+
+    <!-- Diet AI Range Picker Bottom Sheet -->
+    <div class="diet-ai-overlay" id="diet-ai-overlay" onclick="closeDietAIRangePicker()"></div>
+    <div class="diet-ai-range-sheet" id="diet-ai-range-sheet">
+      <div class="sheet-drag-handle"></div>
+      <div style="padding: 0 0 20px;">
+        <div style="font-family:var(--font-display); font-size:1.3rem; font-weight:800; color:var(--text-primary); margin-bottom:4px;">Analysis Range</div>
+        <div style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:22px;">Choose a time window for AI nutrition analysis</div>
+
+        <button class="dai-quick-btn" onclick="setDietAIQuickRange(1); runDietAICustomRange();">
+          <span>Today Only</span><span class="dai-quick-icon">→</span>
+        </button>
+        <button class="dai-quick-btn" onclick="setDietAIQuickRange(3); runDietAICustomRange();">
+          <span>Last 3 Days</span><span class="dai-quick-icon">→</span>
+        </button>
+        <button class="dai-quick-btn" onclick="setDietAIQuickRange(7); runDietAICustomRange();">
+          <span>Last 7 Days</span><span class="dai-quick-icon">→</span>
+        </button>
+        <button class="dai-quick-btn" onclick="setDietAIQuickRange(30); runDietAICustomRange();">
+          <span>Last 30 Days</span><span class="dai-quick-icon">→</span>
+        </button>
+
+        <div style="height:1px; background:rgba(255,255,255,0.07); margin:16px 0;"></div>
+        <div style="font-size:0.68rem; font-weight:800; text-transform:uppercase; color:var(--text-secondary); letter-spacing:0.5px; margin-bottom:12px;">Custom Range</div>
+        <div style="display:flex; gap:12px; margin-bottom:16px;">
+          <div class="input-group" style="flex:1;">
+            <label>From</label>
+            <input type="date" id="dai-custom-start" style="background:var(--surface-container-highest); border:1px solid transparent; border-radius:14px; padding:14px; color:var(--text-primary); font-family:var(--font-body); font-size:0.95rem; outline:none; width:100%; color-scheme:dark; -webkit-appearance:none; appearance:none;">
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>To</label>
+            <input type="date" id="dai-custom-end" style="background:var(--surface-container-highest); border:1px solid transparent; border-radius:14px; padding:14px; color:var(--text-primary); font-family:var(--font-body); font-size:0.95rem; outline:none; width:100%; color-scheme:dark; -webkit-appearance:none; appearance:none;">
+          </div>
+        </div>
+        <button onclick="runDietAICustomRange()" style="width:100%; padding:16px; background:var(--primary); color:#000; font-family:var(--font-display); font-size:0.92rem; font-weight:800; text-transform:uppercase; border:none; border-radius:16px; cursor:pointer; transition:all 0.2s; box-shadow:0 6px 20px rgba(202,253,0,0.2);">
+          Generate Analysis
+        </button>
       </div>
     </div>
   </body>
