@@ -1987,7 +1987,10 @@
         border-radius: 24px;
         margin-bottom: 24px;
         overflow: hidden;
+        transition: max-height 0.3s ease;
       }
+      .diet-ai-panel.collapsed .diet-ai-body { display: none; }
+      .diet-ai-panel.collapsed .diet-ai-toggle-btn { transform: rotate(-90deg) !important; }
       .diet-ai-panel-header {
         display: flex;
         align-items: center;
@@ -5070,22 +5073,24 @@
                 </style>
 
                 <!-- Diet AI Coach Panel -->
-                <div class="diet-ai-panel">
-                    <div class="diet-ai-panel-header">
+                <div class="diet-ai-panel collapsed" id="diet-ai-panel">
+                    <div class="diet-ai-panel-header" onclick="toggleDietAIPanel()" style="cursor: pointer;">
                         <div class="diet-ai-icon">✦</div>
                         <div class="diet-ai-header-text">
                             <div class="diet-ai-title">AI Diet Coach</div>
                             <div class="diet-ai-subtitle">Nutrition analysis & smart recommendations</div>
                         </div>
-                        <button class="diet-ai-analyze-btn" onclick="runDietAIAnalysis('daily')">Analyze</button>
+                        <button class="diet-ai-toggle-btn" style="background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s;">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
                     </div>
                     <div class="diet-ai-body">
-                        <div class="dai-range-tabs">
-                            <button class="dai-range-tab active" id="dai-tab-today" onclick="switchDietAITab('today')">Today</button>
-                            <button class="dai-range-tab" id="dai-tab-custom" onclick="openDietAIRangePicker()">⊕ Range</button>
+                        <div style="display: flex; gap: 8px; margin-bottom: 14px; align-items: center;">
+                            <button class="diet-ai-analyze-btn" onclick="runDietAIAnalysis('daily')" style="flex: 1;">Analyze Today</button>
+                            <button class="diet-ai-analyze-btn" onclick="openDietAIRangePicker()" style="background: rgba(202, 253, 0, 0.1); color: var(--primary);"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: -3px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></button>
                         </div>
                         <div id="diet-ai-report" style="color:var(--text-secondary); font-size:0.8rem; text-align:center; padding:12px 0 4px;">
-                            Tap <strong style="color:var(--primary)">Analyze</strong> to generate your AI nutrition report.
+                            Tap <strong style="color:var(--primary)">Analyze</strong> to generate your personalized nutrition report based on logged meals.
                         </div>
                     </div>
                 </div>
@@ -5431,6 +5436,11 @@
         }
 
         // ===== AI DIET ANALYSIS =====
+        window.toggleDietAIPanel = function() {
+            const panel = document.getElementById("diet-ai-panel");
+            if (panel) panel.classList.toggle("collapsed");
+        };
+
         window.switchDietAITab = function(tab) {
           document.querySelectorAll('.dai-range-tab').forEach(t => t.classList.remove('active'));
           const el = document.getElementById('dai-tab-' + tab);
