@@ -5652,8 +5652,10 @@ Return STRICTLY valid JSON:
           Format: { "name": "A short, clean name for the meal", "kcals": (Total calories as number), "p": (Total protein grams as number), "c": (Total carb grams), "f": (Total fat grams), "items": [{ "name": "Item 1", "kcals": 100, "p": 10, "c": 0, "f": 5 }] }.`;
           
           const result = await callGeminiAPI(prompt, null);
-          if (result) processAIResult(result);
-          document.getElementById('ai-text-input').value = "";
+          if (result) {
+              processAIResult(result);
+              document.getElementById('ai-text-input').value = "";
+          }
         }
 
         window.handleAILogImage = function(event) {
