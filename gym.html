@@ -569,7 +569,8 @@
         font-weight: 800;
       }
       .input-group input,
-      .input-group select {
+      .input-group select,
+      .input-group textarea {
         background: var(--surface-container-highest);
         border: 1px solid transparent;
         border-radius: 16px;
@@ -590,9 +591,14 @@
         background-size: 16px;
       }
       .input-group input:focus,
-      .input-group select:focus {
+      .input-group select:focus,
+      .input-group textarea:focus {
         border-color: var(--primary);
         background: rgba(243, 255, 202, 0.05);
+      }
+      .input-group textarea {
+        resize: vertical;
+        min-height: 80px;
       }
 
       .primary-btn {
@@ -3184,15 +3190,17 @@
           "
         >
           To enable Smart Text-to-Macros and Snap-and-Log, please provide your
-          Google Gemini API key. This key is saved locally on your device.
+          Google Gemini API keys. These keys are saved locally on your device.
         </p>
-        <div class="input-group" style="margin-bottom: 24px">
-          <label style="color: var(--primary-container)">Gemini API Key</label>
-          <input type="password" id="ai-api-key" placeholder="AIzaSy..." />
+        <div id="ai-api-keys-container" style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px;">
+          <!-- dynamic key inputs -->
         </div>
+        <button class="primary-btn secondary" onclick="addAPIKeyInput()" style="margin-bottom: 24px; padding: 12px; font-size: 0.85rem; width: 100%;">
+          + Add New Key
+        </button>
 
         <button class="primary-btn" onclick="saveAISettings()">
-          Save API Key
+          Save API Keys
         </button>
       </div>
     </div>
@@ -5700,13 +5708,157 @@
         // --- AI API Integrations ---
         window.tempMealFoods = window.tempMealFoods || [];
 
+        // Migrate legacy single key if exists
+        (function migrateLegacyAIKey() {
+          const legacyKey = localStorage.getItem("kinetic_ai_key");
+          if (legacyKey && !localStorage.getItem("kinetic_ai_keys")) {
+            localStorage.setItem("kinetic_ai_keys", JSON.stringify([legacyKey]));
+          }
+        })();
+
+        class KeyManager {
+          constructor() {
+            this.keys = [];
+            this.exhaustedKeys = {}; // key -> timestamp of exhaustion
+            this.COOLDOWN_MS = 10 * 60 * 1000; // 10 minutes
+            this.loadKeys();
+          }
+          
+          loadKeys() {
+            try {
+              const raw = JSON.parse(localStorage.getItem("kinetic_ai_keys") || "[]");
+              this.keys = raw.map(k => typeof k === 'string' ? k : k.key).filter(k => k);
+            } catch(e) {
+              this.keys = [];
+            }
+          }
+          
+          getNextKey() {
+            if (this.keys.length === 0) return null;
+            
+            const now = Date.now();
+            let availableKeys = this.keys.filter(k => {
+              if (this.exhaustedKeys[k]) {
+                if (now - this.exhaustedKeys[k] > this.COOLDOWN_MS) {
+                  delete this.exhaustedKeys[k];
+                  return true;
+                }
+                return false;
+              }
+              return true;
+            });
+            
+            // If all keys are in cooldown, reset cooldowns and try again
+            if (availableKeys.length === 0) {
+              console.warn("All Gemini API keys exhausted. Bypassing cooldowns.");
+              this.exhaustedKeys = {};
+              availableKeys = this.keys;
+            }
+            
+            return availableKeys[Math.floor(Math.random() * availableKeys.length)];
+          }
+          
+          reportFailure(key) {
+            console.warn(`Marking API key ...${key.slice(-4)} as temporarily exhausted.`);
+            this.exhaustedKeys[key] = Date.now();
+          }
+        }
+        
+        window.GeminiKeyManager = new KeyManager();
+
+        window.showToast = function(message, type = 'info') {
+          let container = document.getElementById('toast-container');
+          if (!container) {
+            container = document.createElement('div');
+            container.id = 'toast-container';
+            container.style.cssText = 'position: fixed; top: max(env(safe-area-inset-top, 40px), 40px); left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; gap: 10px; z-index: 9999; pointer-events: none; align-items: center; width: 90%; max-width: 400px;';
+            document.body.appendChild(container);
+          }
+          
+          const toast = document.createElement('div');
+          toast.style.cssText = `
+            background: var(--surface-container-highest);
+            color: var(--text-primary);
+            padding: 14px 24px;
+            border-radius: 20px;
+            border: 1px solid ${type === 'warning' ? 'var(--secondary)' : type === 'error' ? '#ff453a' : 'var(--outline-variant)'};
+            box-shadow: 0 12px 40px rgba(0,0,0,0.8);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(-20px) scale(0.95);
+          `;
+          toast.innerHTML = message;
+          container.appendChild(toast);
+          
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              toast.style.opacity = '1';
+              toast.style.transform = 'translateY(0) scale(1)';
+            });
+          });
+          
+          setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(-20px) scale(0.95)';
+            setTimeout(() => toast.remove(), 400);
+          }, 4000);
+        };
+
         window.openAISettingsModal = function () {
-          document.getElementById("ai-api-key").value =
-            localStorage.getItem("kinetic_ai_key") || "";
+          let keys = [];
+          try {
+            keys = JSON.parse(localStorage.getItem("kinetic_ai_keys") || "[]");
+          } catch(e){}
+          if (!Array.isArray(keys)) keys = [];
+          
+          const container = document.getElementById("ai-api-keys-container");
+          container.innerHTML = "";
+          
+          if (keys.length === 0) {
+            window.addAPIKeyInput(); // Add at least one empty
+          } else {
+            keys.forEach(k => {
+              let title = "";
+              let val = "";
+              if (typeof k === "string") {
+                val = k;
+              } else {
+                val = k.key || "";
+                title = k.title || "";
+              }
+              window.addAPIKeyInput(title, val);
+            });
+          }
+          
           document
             .getElementById("ai-settings-overlay")
             .classList.add("active");
           document.getElementById("ai-settings-modal").classList.add("active");
+        };
+        
+        window.addAPIKeyInput = function(title = "", value = "") {
+          const container = document.getElementById("ai-api-keys-container");
+          const div = document.createElement("div");
+          div.className = "api-key-block";
+          div.style.cssText = "background: rgba(255,255,255,0.02); border: 1px solid var(--outline-variant); border-radius: 16px; padding: 16px; position: relative;";
+          div.innerHTML = `
+            <button onclick="this.parentElement.remove()" style="position: absolute; right: 12px; top: 12px; background: var(--surface-container-highest); width: 28px; height: 28px; border-radius: 14px; border: none; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+            </button>
+            <div class="input-group" style="margin-bottom: 12px;">
+              <label>Key Title (Optional)</label>
+              <input type="text" class="api-key-title" placeholder="e.g. Personal Key" value="${title.replace(/"/g, '&quot;')}" style="padding: 12px;" />
+            </div>
+            <div class="input-group">
+              <label style="color: var(--primary-container);">API Key required</label>
+              <input type="password" class="api-key-value" placeholder="AIzaSy..." value="${value.replace(/"/g, '&quot;')}" style="padding: 12px;" />
+            </div>
+          `;
+          container.appendChild(div);
         };
 
         window.closeAISettingsModal = function () {
@@ -5719,20 +5871,27 @@
         };
 
         window.saveAISettings = function () {
-          const key = document.getElementById("ai-api-key").value.trim();
-          if (key) localStorage.setItem("kinetic_ai_key", key);
+          const blocks = document.querySelectorAll("#ai-api-keys-container .api-key-block");
+          const keys = [];
+          blocks.forEach(b => {
+             const title = b.querySelector(".api-key-title").value.trim();
+             const val = b.querySelector(".api-key-value").value.trim();
+             if (val) {
+               keys.push({ title, key: val });
+             }
+          });
+          
+          localStorage.setItem("kinetic_ai_keys", JSON.stringify(keys));
+          window.GeminiKeyManager.loadKeys();
           closeAISettingsModal();
         };
 
         window.callGeminiAPI = async function (prompt, base64Image = null) {
-          const apiKey = localStorage.getItem("kinetic_ai_key");
-          if (!apiKey) {
-            alert("Please config Gemini API Key in the settings.");
+          if (window.GeminiKeyManager.keys.length === 0) {
+            alert("Please configure at least one Gemini API Key in the settings.");
             openAISettingsModal();
             return null;
           }
-
-          const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`;
 
           let contents = [];
           if (base64Image) {
@@ -5749,58 +5908,76 @@
             });
           }
 
-          try {
-            document
-              .getElementById("ai-loading-overlay")
-              .classList.add("active");
-            const btn = document.getElementById("ai-text-input");
-            let oldPlaceholder = "";
-            if (btn) {
-              oldPlaceholder = btn.placeholder;
-              btn.placeholder = "AI is thinking...";
-              btn.disabled = true;
-            }
+          const MAX_RETRIES = 4;
+          let attempt = 0;
+          let delay = 1000;
 
-            const response = await fetch(endpoint, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                contents: contents,
-              }),
-            });
-
-            if (btn) {
-              btn.placeholder = oldPlaceholder;
-              btn.disabled = false;
-            }
-
-            const data = await response.json();
-            if (data.error) {
-              alert("API Error: " + data.error.message);
-              document
-                .getElementById("ai-loading-overlay")
-                .classList.remove("active");
-              return null;
-            }
-
-            let rawText = data.candidates[0].content.parts[0].text;
-            rawText = rawText
-              .replace(/```json/gi, "")
-              .replace(/```/g, "")
-              .trim();
-            document
-              .getElementById("ai-loading-overlay")
-              .classList.remove("active");
-            return JSON.parse(rawText);
-          } catch (e) {
-            console.error(e);
-            alert("Failed to process with AI.");
-            document
-              .getElementById("ai-loading-overlay")
-              .classList.remove("active");
-            document.getElementById("ai-text-input").disabled = false;
-            return null;
+          document.getElementById("ai-loading-overlay").classList.add("active");
+          const btn = document.getElementById("ai-text-input");
+          let oldPlaceholder = "";
+          if (btn) {
+            oldPlaceholder = btn.placeholder;
+            btn.placeholder = "AI is thinking...";
+            btn.disabled = true;
           }
+
+          let lastError = null;
+
+          while (attempt < MAX_RETRIES) {
+            const apiKey = window.GeminiKeyManager.getNextKey();
+            if (!apiKey) break;
+
+            const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`;
+
+            try {
+              const response = await fetch(endpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ contents: contents }),
+              });
+
+              const data = await response.json();
+              
+              if (!response.ok || data.error) {
+                const isRateLimit = response.status === 429 || (data.error && data.error.code === 429);
+                if (isRateLimit) {
+                  window.GeminiKeyManager.reportFailure(apiKey);
+                }
+                
+                throw new Error(data.error ? data.error.message : `HTTP Error ${response.status}`);
+              }
+
+              let rawText = data.candidates[0].content.parts[0].text;
+              rawText = rawText.replace(/```json/gi, "").replace(/```/g, "").trim();
+              
+              if (btn) {
+                btn.placeholder = oldPlaceholder;
+                btn.disabled = false;
+              }
+              document.getElementById("ai-loading-overlay").classList.remove("active");
+              
+              return JSON.parse(rawText);
+            } catch (e) {
+              lastError = e;
+              attempt++;
+              console.warn(`Gemini API attempt ${attempt} failed:`, e.message);
+              
+              if (attempt < MAX_RETRIES) {
+                window.showToast(`API Timeout/Limit Hit.<br/><span style="font-size:0.75rem; font-weight:400; color:var(--text-secondary);">Switching Keys (Attempt ${attempt}/${MAX_RETRIES})...</span>`, 'warning');
+                await new Promise(r => setTimeout(r, delay));
+                delay *= 2; // exponential backoff
+              }
+            }
+          }
+
+          // Total failure after all retries
+          if (btn) {
+            btn.placeholder = oldPlaceholder;
+            btn.disabled = false;
+          }
+          document.getElementById("ai-loading-overlay").classList.remove("active");
+          window.showToast('Failed to process with AI after multiple attempts.<br/><span style="font-size:0.75rem; font-weight:400; color:var(--text-secondary);">Please check your API keys or internet connection.</span>', 'error');
+          return null;
         };
 
         function processAIResult(result) {
