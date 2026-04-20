@@ -723,8 +723,81 @@
       </section>
     </div>
 
+    <!-- Global Cursor (Liquid Masterpiece) -->
+    <div class="global-cursor"></div>
+
     <!-- Scripts for dynamic functionality -->
     <script>
+      // Global Custom Cursor Logic (Liquid Masterpiece)
+      const globalCursor = document.querySelector('.global-cursor');
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let cursorX = mouseX;
+      let cursorY = mouseY;
+      let prevCursorX = cursorX;
+      let prevCursorY = cursorY;
+
+      // Only enable on desktop
+      if (window.innerWidth > 992) {
+        document.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+        });
+
+        // Animation loop for liquid trailing and stretching effect
+        const animateCursor = () => {
+          // Lerp for smooth delay
+          cursorX += (mouseX - cursorX) * 0.15;
+          cursorY += (mouseY - cursorY) * 0.15;
+          
+          // Calculate velocity to create liquid stretch
+          const velX = cursorX - prevCursorX;
+          const velY = cursorY - prevCursorY;
+          prevCursorX = cursorX;
+          prevCursorY = cursorY;
+          
+          // Distance (velocity vector magnitude)
+          const velocity = Math.sqrt(velX * velX + velY * velY);
+          
+          // Squeeze and stretch limits
+          const stretchScale = 1 + Math.min(velocity / 40, 1.2); 
+          const squeezeScale = 1 - Math.min(velocity / 80, 0.4);
+          
+          // Angle of motion
+          const angle = Math.atan2(velY, velX) * (180 / Math.PI);
+          
+          if (globalCursor) {
+            // Apply translation, rotation matching motion angle, and scale stretching
+            globalCursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%) rotate(${angle}deg) scale(${stretchScale}, ${squeezeScale})`;
+          }
+          
+          requestAnimationFrame(animateCursor);
+        };
+        animateCursor();
+
+        // Add hover effect for clickable elements
+        const clickables = document.querySelectorAll('a, button, .social-icon, .card-arrow');
+        clickables.forEach(el => {
+          el.addEventListener('mouseenter', () => globalCursor.classList.add('cursor-hover'));
+          el.addEventListener('mouseleave', () => globalCursor.classList.remove('cursor-hover'));
+        });
+        
+        // Custom scale for images to show the liquid morph prominently
+        const images = document.querySelectorAll('.card-image-wrapper img, .hero-image');
+        images.forEach(img => {
+          img.addEventListener('mouseenter', () => globalCursor.classList.add('cursor-hover-image'));
+          img.addEventListener('mouseleave', () => globalCursor.classList.remove('cursor-hover-image'));
+        });
+
+        // Hide global cursor if it goes completely out of window
+        document.addEventListener('mouseleave', () => {
+          globalCursor.style.opacity = '0';
+        });
+        document.addEventListener('mouseenter', () => {
+          globalCursor.style.opacity = '1';
+        });
+      }
+
       document.addEventListener("DOMContentLoaded", () => {
         const track = document.querySelector(".services-track");
         const prevBtn = document.querySelector(".nav-btn.prev");
